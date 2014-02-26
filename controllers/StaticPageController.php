@@ -17,4 +17,8 @@ class StaticPageController extends Controller {
  protected function setup() {
   (new SetupView())->render();
  }
+ 
+ protected function rawData() {
+  (new RawDataView())->render();
+ }
 }
