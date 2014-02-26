@@ -20,7 +20,9 @@ class RawDataTemplate extends Template {
     </tr>
     <?php foreach($matchData as $row) { ?>
       <tr>
-        <?php foreach($row as $key => $val) { ?>
+        <?php foreach($row as $key => $val) { 
+        if($val === NULL) $val = '--';
+        ?>
           <td><div><?= $val ?></div></td>
         <?php } ?>
       </tr>
@@ -31,14 +33,16 @@ class RawDataTemplate extends Template {
   <?php if(isset($cycles[0])) { ?>
      <table id="cycles" class="raw-table">
     <tr>
-      <?php foreach($cycles[0] as $key => $val) { ?>
+      <?php foreach($cycles[0] as $key => $val) { 
+         if($val === NULL) $val = '--';
+      ?>
         <th><p><?= $key ?></p></th>
       <?php } ?>
     </tr>
     <?php foreach($cycles as $row) { ?>
       <tr>
         <?php foreach($row as $key => $val) { ?>
-          <td><div><?= $val ?></div></td>
+          <td><?= $val ?></td>
         <?php } ?>
       </tr>
     <?php } ?>

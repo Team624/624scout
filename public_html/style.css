@@ -392,22 +392,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 }
 
 .raw-table th {
-  font-size: 11px;
-  height: 50px;
+  font-size: 12px;
+
+  height: 100px;
+  padding: 0 0 10px 5px;
+  margin: 0;
+  vertical-align: bottom;
 }
 
 .raw-table th p, .raw-table td div{
-    width: 15px !important;
-    height: 20px;
-    overflow: hidden;
+    width: 30px !important;
     white-space: nowrap;
 }
 
 .raw-table th p {
-   -moz-transform: rotate(90.0deg);  /* FF3.5+ */
-       -o-transform: rotate(90.0deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(90.0deg);  /* Saf3.1+, Chrome */
-             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=10);  /* IE6,IE7 */
-         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=10)"; /* IE8 */
-  margin-right: 90px;
+   -moz-transform: rotate(-45.0deg);  /* FF3.5+ */
+       -o-transform: rotate(-75.0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-75.0deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-10);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-10)"; /* IE8 */
+         padding: 0;
+         margin:0;
 } 
