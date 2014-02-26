@@ -385,3 +385,32 @@ background: linear-gradient(to bottom,  rgba(44,155,0,1) 0%,rgba(59,211,0,1) 100
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', endColorstr='#3bd300',GradientType=0 ); /* IE6-9 */
 
 }
+
+.raw-table {
+  background: gainsboro;
+  table-layout: fixed;
+}
+
+.raw-table th {
+  font-size: 12px;
+
+  height: 100px;
+  padding: 0 0 10px 5px;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+.raw-table th p, .raw-table td div{
+    width: 30px !important;
+    white-space: nowrap;
+}
+
+.raw-table th p {
+   -moz-transform: rotate(-45.0deg);  /* FF3.5+ */
+       -o-transform: rotate(-75.0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-75.0deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-10);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-10)"; /* IE8 */
+         padding: 0;
+         margin:0;
+} 
