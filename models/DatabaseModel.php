@@ -183,16 +183,34 @@ class DatabaseModel {
       self::$conn->commit();
     }
     
-    public function getTeamData($team) {
-      $matchSql = "
-        SELECT 
-          match_data.*, 
-          count(cycles.id) AS 'cycle_count' 
-        FROM match_data 
-        INNER JOIN cycles on cycles.match_data_id = match_data.id 
-        WHERE team_number=2158;
-      ";
-      $data = [];
-      $data['team'] = $team;
+    public function getTeamData($team) {          
+      $aggSql = file_get_contents($fileRoot . 'aggregate_query.sql');
+      $aggQuery = self::$conn->prepare($aggSql);
+      $aggQuery->execute();
+      $data = $aggQuery->fetch(PDO::FETCH_ASSOC);
+      
+      $matchSql = file_get_contents($fileRoot . 'matches_query.sql');
+      $matchQuery = self::$conn->prepare($matchSql);
+      $matchQuery->execute();
+      $matches = $matchesQuery->fetchAll();
+      
+      $cyclesSql = file_get_contents($fileRoot . 'cycle_query.sql');
+      $cyclesQuery = self::$conn->prepare($cyclesSql);
+      $cyclesQuery->bindValue(':team_number', $team);
+      $cyclesQuery->execute();
+      $cycles = $cyclesQuery->fetchAll();
+      
+      foreach($matches as $match) { //zip cycles into each match
+        $matchCycles = [];
+        foreach($cycles as $cycle) {
+          if($cycle['match_data_id'] = $match['id']) {
+            $matchCycles[] = $cycle;
+          }
+        }
+        $match['num_cycles'] = count($matchCycles);
+        $match['cycles'] = $matchCycles;
+      }
+      $data['num_matches'] = count($matches);
+      $data['matches'] = $matches;
     }
   }
