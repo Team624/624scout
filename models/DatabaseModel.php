@@ -194,6 +194,5 @@ class DatabaseModel {
       ";
       $data = [];
       $data['team'] = $team;
-      
     }
   }
