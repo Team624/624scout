@@ -9,6 +9,7 @@ class TeamInfoView implements View {
     $db = new DatabaseModel();
     $template = new TeamInfoTemplate();
     $template->set('team', $this->team);
+    $template->set('data', $db->getTeamData($this->team));
     $template->render();
   }
 }

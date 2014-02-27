@@ -218,7 +218,7 @@ input.num {
 .num.invalid {
   background: #faa;
 }
-.form-row {
+.form-row, .box {
   margin: 5px;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius:5px;
@@ -414,3 +414,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
          padding: 0;
          margin:0;
 } 
+.team-title {
+  font-size: 24px;
+}
+
+.box {
+
+  display: inline-block;
+}
+
+.box row {
+  white-space:nowrap;
+}

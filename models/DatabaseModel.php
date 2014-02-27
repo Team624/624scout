@@ -183,27 +183,48 @@ class DatabaseModel {
       self::$conn->commit();
     }
     
-    public function getTeamData($team) {          
-      $aggSql = file_get_contents($fileRoot . 'aggregate_query.sql');
+    public function getTeamData($team) {
+      $fileRoot = $GLOBALS['fileRoot'];
+      /*$aggSql = file_get_contents($fileRoot . 'aggregate_query.sql');
       $aggQuery = self::$conn->prepare($aggSql);
+      $aggQuery->bindValue(':team_number', $team);
       $aggQuery->execute();
       $data = $aggQuery->fetch(PDO::FETCH_ASSOC);
       
       $matchSql = file_get_contents($fileRoot . 'matches_query.sql');
       $matchQuery = self::$conn->prepare($matchSql);
+      $matchQuery->bindValue(':team_number', $team);
       $matchQuery->execute();
-      $matches = $matchesQuery->fetchAll();
+      $matches = $matchQuery->fetchAll(PDO::FETCH_ASSOC);
       
       $cyclesSql = file_get_contents($fileRoot . 'cycle_query.sql');
       $cyclesQuery = self::$conn->prepare($cyclesSql);
       $cyclesQuery->bindValue(':team_number', $team);
       $cyclesQuery->execute();
-      $cycles = $cyclesQuery->fetchAll();
-      
-      foreach($matches as $match) { //zip cycles into each match
+      $cycles = $cyclesQuery->fetchAll(PDO::FETCH_ASSOC);*/
+      self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
+      $sql = file_get_contents($fileRoot . 'UberQuery.sql');
+      $query = self::$conn->prepare($sql);
+     // $query->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+      $query->bindValue(':team_number', $team);
+      $query->execute();
+      $query->nextRowset(); // skip CREATE TABLE
+      $cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select
+      $query->nextRowset(); //move on
+      $query->nextRowset(); //skip CREATE TABLE
+      $matches = $query->fetchAll(PDO::FETCH_ASSOC);
+     // echo var_dump($matches);
+      $query->nextRowset();
+      $query->nextRowset();
+      $data = $query->fetch();
+     // echo var_dump($data);
+      foreach($matches as &$match) { //zip cycles into each match
+        echo " zip ";
         $matchCycles = [];
         foreach($cycles as $cycle) {
-          if($cycle['match_data_id'] = $match['id']) {
+          echo '<i>boink </i>';
+          if($cycle['match_number'] == $match['match_number']) {
+            echo '<b>pling</b> ';
             $matchCycles[] = $cycle;
           }
         }
@@ -212,6 +233,8 @@ class DatabaseModel {
       }
       $data['num_matches'] = count($matches);
       $data['matches'] = $matches;
+      
+      return $data;
     }
     
     public function getRawMatchData() {
