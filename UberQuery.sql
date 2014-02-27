@@ -1,5 +1,5 @@
--- DROP TEMPORARY TABLE IF EXISTS cycles_result;
--- DROP TEMPORARY TABLE IF EXISTS matches_result;
+ DROP TEMPORARY TABLE IF EXISTS cycles_result;
+ DROP TEMPORARY TABLE IF EXISTS matches_result;
 
 CREATE TEMPORARY TABLE IF NOT EXISTS cycles_result ENGINE = MEMORY (
 	SELECT 
@@ -64,7 +64,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     sum(get_back OR get_mid OR get_front) as 'possessions'
 	FROM match_data
 	INNER JOIN scouts ON match_data.scout_id = scouts.id
-	INNER JOIN cycles_result ON cycles_result.match_data_id = match_data.id
+	LEFT JOIN cycles_result ON cycles_result.match_data_id = match_data.id
 	WHERE match_data.team_number = :team_number
 	GROUP BY match_number
 );
@@ -109,15 +109,16 @@ CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY (
   ROUND(SUM(move_back) / sum(case when no_show = 0 then 1 end), 2) as 'move_back', -- per match
   ROUND(SUM(move_mid) / sum(case when no_show = 0 then 1 end), 2) as 'move_mid',
   ROUND(SUM(move_back) / sum(case when no_show = 0 then 1 end), 2) as 'move_front',
-  AVG(possessions) as 'possessions',
-  AVG(cycles_played) as 'cycles',
+  ROUND(AVG(possessions),2) as 'possessions',
+  ROUND(AVG(cycles_played),2) as 'cycles',
   ROUND(SUM(score_high) / sum(case when no_show = 0 then 1 end), 2) as 'score_high',
   ROUND(SUM(miss_high) / sum(case when no_show = 0 then 1 end), 2) as 'miss_high',
   ROUND(SUM(miss_high+score_high) / sum(case when no_show = 0 then 1 end), 2) as 'shots_high',
   ROUND(SUM(score_low) / sum(case when no_show = 0 then 1 end), 2) as 'score_low',
   ROUND(SUM(miss_low) / sum(case when no_show = 0 then 1 end), 2) as 'miss_low',
   ROUND(SUM(miss_low+score_low) / sum(case when no_show = 0 then 1 end), 2) as 'shots_low',
-  ROUND(SUM(truss) / sum(case when no_show = 0 then 1 end), 2) as 'truss'
+  ROUND(SUM(truss) / sum(case when no_show = 0 then 1 end), 2) as 'truss',
+  ROUND(100 * SUM(truss) / SUM(cycles_played), 0) as 'truss_percent'
 FROM matches_result
 INNER JOIN teams ON teams.number = matches_result.team_number
 );

@@ -208,6 +208,8 @@ class DatabaseModel {
      // $query->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
       $query->bindValue(':team_number', $team);
       $query->execute();
+      $query->nextRowset();
+      $query->nextRowset();
       $query->nextRowset(); // skip CREATE TABLE
       $cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select
       $query->nextRowset(); //move on
