@@ -23,12 +23,12 @@ class DataCoverageTemplate extends Template {
     <?php foreach($s as $row) { ?>
       <tr>
       <td class="match_number"><?=$row['match_number']?></td>
-      <td class="<?=$row['has_red_1']?'found':''?>"><?=$row['red_1']?></td>
-      <td class="<?=$row['has_red_2']?'found':''?>"><?=$row['red_2']?></td>
-      <td class="<?=$row['has_red_3']?'found':''?>"><?=$row['red_3']?></td>
-      <td class="<?=$row['has_blue_1']?'found':''?>"><?=$row['blue_1']?></td>
-      <td class="<?=$row['has_blue_2']?'found':''?>"><?=$row['blue_2']?></td>
-      <td class="<?=$row['has_blue_3']?'found':''?>"><?=$row['blue_3']?></td>
+      <td class="<?=$row['has_red_1']?'found':'not-found'?>"><?=$row['red_1']?></td>
+      <td class="<?=$row['has_red_2']?'found':'not-found'?>"><?=$row['red_2']?></td>
+      <td class="<?=$row['has_red_3']?'found':'not-found'?>"><?=$row['red_3']?></td>
+      <td class="<?=$row['has_blue_1']?'found':'not-found'?>"><?=$row['blue_1']?></td>
+      <td class="<?=$row['has_blue_2']?'found':'not-found'?>"><?=$row['blue_2']?></td>
+      <td class="<?=$row['has_blue_3']?'found':'not-found'?>"><?=$row['blue_3']?></td>
     <?php } ?>
     </table>
   </div>

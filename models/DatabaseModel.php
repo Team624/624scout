@@ -233,6 +233,7 @@ class DatabaseModel {
       $query->nextRowset();
       $data = $query->fetch();
      // echo var_dump($data);
+     echo "<!--";
       foreach($matches as &$match) { //zip cycles into each match
         echo " zip ";
         $matchCycles = [];
@@ -248,7 +249,7 @@ class DatabaseModel {
       }
       $data['num_matches'] = count($matches);
       $data['matches'] = $matches;
-      
+      echo "-->";
       return $data;
     }
     

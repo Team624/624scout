@@ -159,6 +159,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfbfbf', end
 td.found {
   background: #afa;
 }
+td.not-found {
+  background:#f99;
+}
 
 
 .schedule-holder {
@@ -193,9 +196,6 @@ td.found {
   background: #eee;
 }
 
-.schedule-preview td.found {
-  background: #afa;
-}
 
 
 #scout-display {
@@ -425,7 +425,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 .team-title {
   font-size: 24px;
 }
-
+#teamDisplay .box {
+  text-align: right;
+}
 .box {
 
   display: inline-block;

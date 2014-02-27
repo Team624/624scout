@@ -42,6 +42,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     defense_rating,
     blocking_rating,
     control_rating,
+    pickup_rating,
     truss_rating,
     catch_rating,
     badness_rating,
@@ -55,6 +56,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     sum(truss) as 'truss',
     sum(catch) as 'catch',
     sum(miss_catch) as 'miss_catch',
+    sum(catch+miss_catch) as 'catch_total',
     sum(human_pass) as 'human_pass',
     sum(score_low) as 'score_low',
     sum(miss_low) as 'miss_low',
@@ -98,6 +100,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY (
   ROUND(avg(case when driving_rating = 0 then null else driving_rating end), 2) as 'driving_rating', -- don't count zeros into these, they mean N/A
   ROUND(avg(case when pushing_rating = 0 then null else pushing_rating end), 2) as 'pushing_rating',
   ROUND(avg(case when defense_rating = 0 then null else defense_rating end), 2) as 'defense_rating',
+  ROUND(avg(case when pickup_rating = 0 then null else pickup_rating end), 2) as 'pickup_rating',
   ROUND(avg(case when blocking_rating = 0 then null else blocking_rating end), 2) as 'blocking_rating',
   ROUND(avg(case when control_rating = 0 then null else control_rating end), 2) as 'control_rating',
   ROUND(avg(case when truss_rating = 0 then null else truss_rating end), 2) as 'truss_rating',
@@ -118,7 +121,10 @@ CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY (
   ROUND(SUM(miss_low) / sum(case when no_show = 0 then 1 end), 2) as 'miss_low',
   ROUND(SUM(miss_low+score_low) / sum(case when no_show = 0 then 1 end), 2) as 'shots_low',
   ROUND(SUM(truss) / sum(case when no_show = 0 then 1 end), 2) as 'truss',
-  ROUND(100 * SUM(truss) / SUM(cycles_played), 0) as 'truss_percent'
+  ROUND(100 * SUM(truss) / SUM(cycles_played), 0) as 'truss_percent',
+  ROUND(SUM(catch) / sum(case when no_show = 0 then 1 end), 2) as 'catch',
+  ROUND(SUM(miss_catch) / sum(case when no_show = 0 then 1 end), 2) as 'miss_catch',
+  ROUND(SUM(catch_total) / sum(case when no_show = 0 then 1 end), 2) as 'catch_total'
 FROM matches_result
 INNER JOIN teams ON teams.number = matches_result.team_number
 );

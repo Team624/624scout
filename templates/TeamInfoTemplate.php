@@ -51,6 +51,9 @@ class TeamInfoTemplate extends Template {
     <div class="row">
     Truss Throw: <b><?=$d['truss']?></b>/match (<b><?=$d['truss_percent']?></b>% of cycles)
     </div>
+    <div class="row">
+    Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch_total']?></b> attempts
+    </div>
    </div>
    <div class="defense box">
       Teleop Defense
@@ -71,6 +74,39 @@ class TeamInfoTemplate extends Template {
       </div>
       <div clas="row">
         Lost Comms: <b><?=$d['lost_comms']?></b> of <?=$d['matches_played']?> matches
+      </div>
+      <div class="row">
+        <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
+      </div>
+   </div>
+   <div class="subjective box">
+    Subjective Ratings
+      <div clas="row">
+        Driving/Maneuverability: <b><?=$d['driving_rating']?></b>
+      </div>
+      <div clas="row">
+        Pushing: <b><?=$d['pushing_rating']?></b>
+      </div>
+      <div clas="row">
+        Defense: <b><?=$d['defense_rating']?></b>
+      </div>
+      <div clas="row">
+        Goalie/Blocking: <b><?=$d['blocking_rating']?></b>
+      </div>
+      <div clas="row">
+        Ball Control/Passing: <b><?=$d['control_rating']?></b>
+      </div>
+      <div clas="row">
+        Floor Pickup: <b><?=$d['pickup_rating']?></b>
+      </div>
+      <div clas="row">
+        Truss Throwing: <b><?=$d['truss_rating']?></b>
+      </div>
+      <div clas="row">
+        Truss Catching: <b><?=$d['catch_rating']?></b>
+      </div>
+      <div clas="row">
+        Badness: <b><?=$d['badness_rating']?></b>
       </div>
    </div>
   <?php }

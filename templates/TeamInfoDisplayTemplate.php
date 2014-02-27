@@ -8,7 +8,7 @@ class TeamInfoDisplayTemplate extends Template {
   ?>
   <div>
    <label> Team: <input id="searchTeam" class="num" type="text"></label>
-   <div id="searchTeamBut" class="button" tabindex="0">Stalk</div>
+   <div id="searchTeamBut" class="button" tabindex="0">Search</div>
    <div id="teamDisplay">
    
    </div>
