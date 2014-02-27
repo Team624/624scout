@@ -174,6 +174,7 @@ class DatabaseModel {
       return $ret;
     }
     
+    
     public function setSchedule($schedule) {
       self::$conn->beginTransaction();
       $dropState = self::$conn->prepare('DELETE FROM schedule');
@@ -231,8 +232,9 @@ class DatabaseModel {
      // echo var_dump($matches);
       $query->nextRowset();
       $query->nextRowset();
-      $data = $query->fetch();
+      $data = $query->fetch(PDO::FETCH_ASSOC);
      // echo var_dump($data);
+     echo "<!--";
       foreach($matches as &$match) { //zip cycles into each match
         echo " zip ";
         $matchCycles = [];
@@ -248,7 +250,7 @@ class DatabaseModel {
       }
       $data['num_matches'] = count($matches);
       $data['matches'] = $matches;
-      
+      echo "-->";
       return $data;
     }
     

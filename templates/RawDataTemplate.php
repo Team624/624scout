@@ -42,7 +42,7 @@ class RawDataTemplate extends Template {
     <?php foreach($cycles as $row) { ?>
       <tr>
         <?php foreach($row as $key => $val) { ?>
-          <td><?= $val ?></td>
+          <td><div><?= $val ?></div></td>
         <?php } ?>
       </tr>
     <?php } ?>

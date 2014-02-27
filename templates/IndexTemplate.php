@@ -6,7 +6,7 @@ class IndexTemplate extends Template {
     $this->keys[]='';
   }
   public function render() { ?>
-   HEEEYYY
+   
 
   <?php }
 }

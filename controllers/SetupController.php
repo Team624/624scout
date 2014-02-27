@@ -7,7 +7,7 @@ class SetupController extends Controller {
   public function loadSchedule() {
     $eventCode = $_POST['eventCode'];
     
-    $html = @file_get_contents("http://www2.usfirst.org/2013comp/Events/$eventCode/matchresults.html");
+    $html = @file_get_contents("http://www2.usfirst.org/2014comp/Events/$eventCode/schedulequal.html");
     if ($html === false) {
       (new ErrorView(422, 'Unprocessable Entity', 'Match Data page loaded not goodly'))->render();
     } else {

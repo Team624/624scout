@@ -24,4 +24,10 @@ class StaticPageController extends Controller {
  protected function dataCoverage() {
   (new DataCoverageView())->render();
  }
+ protected function teamList() {
+  (new TeamListView())->render();
+ }
+ protected function scoutList() {
+  (new ScoutListView())->render();
+ }
 }

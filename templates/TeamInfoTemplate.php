@@ -51,6 +51,9 @@ class TeamInfoTemplate extends Template {
     <div class="row">
     Truss Throw: <b><?=$d['truss']?></b>/match (<b><?=$d['truss_percent']?></b>% of cycles)
     </div>
+    <div class="row">
+    Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch_total']?></b> attempts
+    </div>
    </div>
    <div class="defense box">
       Teleop Defense
@@ -72,6 +75,80 @@ class TeamInfoTemplate extends Template {
       <div clas="row">
         Lost Comms: <b><?=$d['lost_comms']?></b> of <?=$d['matches_played']?> matches
       </div>
+      <div class="row">
+        <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
+      </div>
+   </div>
+   <div class="subjective box">
+    Subjective Ratings
+      <div clas="row">
+        Driving/Maneuverability: <b><?=$d['driving_rating']?></b>
+      </div>
+      <div clas="row">
+        Pushing: <b><?=$d['pushing_rating']?></b>
+      </div>
+      <div clas="row">
+        Defense: <b><?=$d['defense_rating']?></b>
+      </div>
+      <div clas="row">
+        Goalie/Blocking: <b><?=$d['blocking_rating']?></b>
+      </div>
+      <div clas="row">
+        Ball Control/Passing: <b><?=$d['control_rating']?></b>
+      </div>
+      <div clas="row">
+        Floor Pickup: <b><?=$d['pickup_rating']?></b>
+      </div>
+      <div clas="row">
+        Truss Throwing: <b><?=$d['truss_rating']?></b>
+      </div>
+      <div clas="row">
+        Truss Catching: <b><?=$d['catch_rating']?></b>
+      </div>
+      <div clas="row">
+        Badness: <b><?=$d['badness_rating']?></b>
+      </div>
+   </div>
+   <div> Raw Data </div>
+   <div class="table-holder">
+    <table class="raw-table">
+      <tr>
+        <?php foreach ($d as $key => $val) { 
+          if($key !== 'matches' && $key !== 'cycles' && $key !== 'name') {
+        ?>
+          <th><p><?= $key?></p></th>
+        <?php }} ?>
+      </tr>
+      <tr>
+        <?php foreach ($d as $key=>$val) {
+          if($key !== 'matches' && $key !== 'cycles' && $key !== 'name') {
+         ?>
+          <td><div><?= $val===null?'--':$val ?></div></td>
+        <?php }} ?>
+      </tr>
+    </table>
+   </div>
+   <div> Match Breakdown </div>
+   <div class="table-holder">
+    <?php foreach($d['matches'] as $m) { ?>
+      <div> Match <?=$m['match_number']?></div>
+      <table class="raw-table">
+        <tr>
+          <?php foreach ($m as $key => $val) { 
+            if($key !== 'matches' && $key !== 'cycles') {
+          ?>
+            <th><p><?= $key?></p></th>
+          <?php }} ?>
+        </tr>
+        <tr>
+          <?php foreach ($m as $key=>$val) {
+            if($key !== 'matches' && $key !== 'cycles') {
+           ?>
+            <td><div <?=$key==='scout_name'?'class="name"':'a'?>><?= $val===null?'--':$val ?></div></td>
+          <?php }} ?>
+        </tr>
+      </table>
+    <?php } ?>
    </div>
   <?php }
 }
