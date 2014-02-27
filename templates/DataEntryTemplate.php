@@ -49,12 +49,12 @@ class DataEntryTemplate extends Template {
       <label><input type="radio" name="start" id="goalie">Goalie</label>
       <label><input type="radio" name="start" id="no-show">No Show</label>
       <div class="goalie-auton form-row" style="display:none;">
+        <label>Start Location (just the #)<input type="text" class="num" id="auton-goalie-start"></label>
         <label>Shots Blocked<input type="text" class="num" id="auton-shots-blocked"></label>
         <label>Shots Not Blocked<input type="text" class="num" id="auton-shots-not-blocked"></label>
-        <label>Start Location<input type="text" class="num" id="auton-goalie-start"></label>
       </div>
       <div class="normal-auton form-row">
-        <label>Start Location<input type="text" class="num" id="auton-normal-start"></label>
+        <label>Start Location (just the #)<input type="text" class="num" id="auton-normal-start"></label>
         <label>High Hot<input type="text" class="num" id="auton-high-hot"></label>
         <label>High Cold<input type="text" class="num" id="auton-high-cold"></label>
         <label>High Miss<input type="text" class="num" id="auton-high-miss"></label>
@@ -112,7 +112,8 @@ class DataEntryTemplate extends Template {
       <label>Pushing<input type="text" class="num" id="pushing"></label>
       <label>Defense<input type="text" class="num" id="defense"></label>
       <label>Goalie/Blocking<input type="text" class="num" id="blocking"></label>
-      <label>Posessing/Assisting<input type="text" class="num" id="posessing"></label>
+      <label>Ball Control/Passing<input type="text" class="num" id="posessing"></label>
+      <label>Floor Pickup<input type="text" class="num" id="floor-pickup"></label>
       <label>Truss Throwing<input type="text" class="num" id="trussing"></label>
       <label>Catching<input type="text" class="num" id="catching"></label>
       <label>Bad Things<input type="text" class="num" id="bad-things"></label>

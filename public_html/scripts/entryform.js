@@ -18,15 +18,23 @@
       $('.schedule-preview td').html('');
     } else {
       $('#match').removeClass('invalid');
+      $('.schedule-preview td').removeClass('found');
       if($('#match').val().length === 0) {
         $('.schedule-preview td').html('');
       } else {
+        console.log(matchData);
         $('#r1p').html(matchData.red_1);
+        if(matchData.has_red_1 === '1') $('#r1p').addClass('found');
         $('#r2p').html(matchData.red_2);
+        if(matchData.has_red_2 === '1') $('#r2p').addClass('found');
         $('#r3p').html(matchData.red_3);
+        if(matchData.has_red_3 === '1') $('#r3p').addClass('found');
         $('#b1p').html(matchData.blue_1);
+        if(matchData.has_blue_1 === '1') $('#b1p').addClass('found');
         $('#b2p').html(matchData.blue_2);
+        if(matchData.has_blue_1 === '1') $('#b2p').addClass('found');
         $('#b3p').html(matchData.blue_3);
+        if(matchData.has_blue_1 === '1') $('#b3p').addClass('found');
       }
     } 
   }

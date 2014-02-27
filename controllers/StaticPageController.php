@@ -21,4 +21,7 @@ class StaticPageController extends Controller {
  protected function rawData() {
   (new RawDataView())->render();
  }
+ protected function dataCoverage() {
+  (new DataCoverageView())->render();
+ }
 }

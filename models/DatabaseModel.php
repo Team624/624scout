@@ -29,6 +29,7 @@ class DatabaseModel {
     'defense_rating',
     'blocking_rating',
     'control_rating',
+    'pickup_rating',
     'truss_rating',
     'catch_rating',
     'badness_rating'
@@ -129,20 +130,32 @@ class DatabaseModel {
     }
     
     public function getSchedule() {
-      $stmt = self::$conn->prepare('SELECT * FROM schedule');
+      $sql = "SELECT 
+        schedule.*,
+        SUM(IF(IFNULL(match_data.id AND match_data.team_number = schedule.red_1, 0)>0, 1,0)) as 'has_red_1',
+        SUM(IF(IFNULL(match_data.id AND match_data.team_number = schedule.red_2, 0)>0, 1,0)) as 'has_red_2',
+        SUM(IF(IFNULL(match_data.id AND match_data.team_number = schedule.red_3, 0)>0, 1,0)) as 'has_red_3',
+        SUM(IF(IFNULL(match_data.id AND match_data.team_number = schedule.blue_1, 0)>0, 1,0)) as 'has_blue_1',
+        SUM(IF(IFNULL(match_data.id AND match_data.team_number = schedule.blue_2, 0)>0, 1,0)) as 'has_blue_2',
+        SUM(IF(IFNULL(match_data.id AND match_data.team_number = schedule.blue_3, 0)>0, 1,0)) as 'has_blue_3'
+      FROM schedule
+      LEFT JOIN match_data ON match_data.match_number = schedule.match_number
+      GROUP BY schedule.match_number";
+      $stmt = self::$conn->prepare($sql);
       $stmt->execute();
-      $res = $stmt->fetchAll();
+      $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $ret = [];
       foreach($res as $row) {
         $ret[$row['match_number']] = $row;
       }
+      
       return $ret;
     }
     
     public function getTeams() {
       $stmt = self::$conn->prepare('SELECT * FROM teams');
       $stmt->execute();
-      $res = $stmt->fetchAll();
+      $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $ret = [];
       foreach($res as $row) {
         $ret[$row['number']] = $row['name'];
@@ -153,7 +166,7 @@ class DatabaseModel {
     public function getScouts() {
       $stmt = self::$conn->prepare('SELECT * FROM scouts');
       $stmt->execute();
-      $res = $stmt->fetchAll();
+      $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $ret = [];
       foreach ($res as $row) {
         $ret[$row['id']] = $row['name'];

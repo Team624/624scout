@@ -152,6 +152,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfbfbf', end
   background:#6D6;
 }
 
+.schedule.nohi td.match_number {
+  background:#aaa;
+}
+
+td.found {
+  background: #afa;
+}
+
 
 .schedule-holder {
 

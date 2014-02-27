@@ -35,8 +35,8 @@
     return regex.test(item.val());
   }
   function valLocation(item) {
-    return true;
-    //IASFHFJALFHKLF
+    var regex = /^[1-3]$/;
+    return regex.test(item.val());
   }
   var zeroList = [
     '#auton-shots-blocked',
@@ -58,6 +58,7 @@
     '#defense',
     '#blocking',
     '#posessing',
+    '#floor-pickup',
     '#trussing',
     '#catching',
     '#bad-things'
@@ -97,7 +98,7 @@
     '#balls-blocked': valNum,
     '#fouls': valNum,
     '#tech-fouls': valNum,
-    '#driving,#pushing,#defense,#blocking,#posessing,#trussing,#catching,#bad-things' : valSubj
+    '#driving,#pushing,#defense,#blocking,#posessing,#trussing,#catching,#bad-things,#floor-pickup' : valSubj
   };
   var normalAutonMap = {
     '#auton-normal-start' : valLocation,
@@ -180,6 +181,7 @@ function prepSubmit() {
     post.defense_rating = parseInt($('#defense').val());
     post.blocking_rating = parseInt($('#blocking').val());
     post.control_rating = parseInt($('#posessing').val());
+    post.pickup_rating = parseInt($('#floor-pickup').val());
     post.truss_rating = parseInt($('#trussing').val());
     post.catch_rating = parseInt($('#catching').val());
     post.badness_rating = parseInt($('#bad-things').val());
@@ -221,11 +223,15 @@ function prepSubmit() {
 } 
   
 $(document).ready(function() {
+  $('#match').focus();
   $('#submit').click(function() {
     var post = prepSubmit();
     if(!post) return;
     $.post('/?controller=submit&action=submit', JSON.stringify(post), function(dat) {
       alertify.success('Data submitted :)');
+      window.setTimeout(function() {
+        location.reload(true); 
+      }, 1000);
     }).fail(function(dat) {
       alertify.error(dat.responseText);
       console.log(dat.responseText);
@@ -236,6 +242,9 @@ $(document).ready(function() {
     if(!post) return;
     $.post('/?controller=submit&action=update', JSON.stringify(post), function(dat) {
       alertify.success('Data updated :/');
+      window.setTimeout(function() {
+        location.reload(true); 
+      }, 1000);
     }).fail(function(dat) {
       alertify.error(dat.responseText);
       console.log(dat.responseText);
