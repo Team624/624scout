@@ -396,7 +396,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 
 .raw-table {
   background: gainsboro;
-  table-layout: fixed;
+ 
 }
 
 .raw-table th {
@@ -409,14 +409,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 }
 
 .raw-table th p, .raw-table td div{
-    width: 30px !important;
+    width: 30px;
     white-space: nowrap;
+}
+
+.raw-table .name {
+  width: 150px !important;
 }
 
 .raw-table th p {
    -moz-transform: rotate(-45.0deg);  /* FF3.5+ */
-       -o-transform: rotate(-75.0deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-75.0deg);  /* Saf3.1+, Chrome */
+       -o-transform: rotate(-45.0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-45.0deg);  /* Saf3.1+, Chrome */
              filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-10);  /* IE6,IE7 */
          -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-10)"; /* IE8 */
          padding: 0;
@@ -435,4 +439,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 
 .box row {
   white-space:nowrap;
+}
+
+.table-holder {
+  overflow: auto;
 }

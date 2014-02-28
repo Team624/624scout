@@ -109,5 +109,46 @@ class TeamInfoTemplate extends Template {
         Badness: <b><?=$d['badness_rating']?></b>
       </div>
    </div>
+   <div> Raw Data </div>
+   <div class="table-holder">
+    <table class="raw-table">
+      <tr>
+        <?php foreach ($d as $key => $val) { 
+          if($key !== 'matches' && $key !== 'cycles' && $key !== 'name') {
+        ?>
+          <th><p><?= $key?></p></th>
+        <?php }} ?>
+      </tr>
+      <tr>
+        <?php foreach ($d as $key=>$val) {
+          if($key !== 'matches' && $key !== 'cycles' && $key !== 'name') {
+         ?>
+          <td><div><?= $val===null?'--':$val ?></div></td>
+        <?php }} ?>
+      </tr>
+    </table>
+   </div>
+   <div> Match Breakdown </div>
+   <div class="table-holder">
+    <?php foreach($d['matches'] as $m) { ?>
+      <div> Match <?=$m['match_number']?></div>
+      <table class="raw-table">
+        <tr>
+          <?php foreach ($m as $key => $val) { 
+            if($key !== 'matches' && $key !== 'cycles') {
+          ?>
+            <th><p><?= $key?></p></th>
+          <?php }} ?>
+        </tr>
+        <tr>
+          <?php foreach ($m as $key=>$val) {
+            if($key !== 'matches' && $key !== 'cycles') {
+           ?>
+            <td><div <?=$key==='scout_name'?'class="name"':'a'?>><?= $val===null?'--':$val ?></div></td>
+          <?php }} ?>
+        </tr>
+      </table>
+    <?php } ?>
+   </div>
   <?php }
 }

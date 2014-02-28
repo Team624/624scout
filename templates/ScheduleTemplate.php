@@ -8,7 +8,7 @@ class ScheduleTemplate extends Template {
   public function render() {
   $s = $this->data['schedule'];
   ?>
-   SCEDHULE!
+   Match Schedule
    <div class="schedule-holder">
      <table class="schedule">
     <tr>
