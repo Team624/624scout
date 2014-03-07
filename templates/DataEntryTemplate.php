@@ -49,48 +49,49 @@ class DataEntryTemplate extends Template {
       <label><input type="radio" name="start" id="goalie">Goalie</label>
       <label><input type="radio" name="start" id="no-show">No Show</label>
       <div class="goalie-auton form-row" style="display:none;">
-        <label>Start Location (just the #)<input type="text" class="num" id="auton-goalie-start"></label>
         <label>Shots Blocked<input type="text" class="num" id="auton-shots-blocked"></label>
         <label>Shots Not Blocked<input type="text" class="num" id="auton-shots-not-blocked"></label>
-      </div>
+          <label>Start Location (just the #)<input type="text" class="num" id="auton-goalie-start"></label>
+     </div>
       <div class="normal-auton form-row">
         <label>Start Location (just the #)<input type="text" class="num" id="auton-normal-start"></label>
+         <label>Mobility Score<input type="checkbox" id="auton-mobility"></label>
         <label>High Hot<input type="text" class="num" id="auton-high-hot"></label>
         <label>High Cold<input type="text" class="num" id="auton-high-cold"></label>
         <label>High Miss<input type="text" class="num" id="auton-high-miss"></label>
         <label>Low Hot<input type="text" class="num" id="auton-low-hot"></label>
         <label>Low Cold<input type="text" class="num" id="auton-low-cold"></label>
         <label>Low Miss<input type="text" class="num" id="auton-low-miss"></label>
-        <label>Mobility Score<input type="checkbox" id="auton-mobility"></label>
       </div>
     </div>
-    <script type="text/template" id="cycleTemplate">
-      <div class="cycle-holder" data-cycle="{0}">
-        <div class="cycle-num">{0}</div>
-        <div class="cycle form-row">
-          Get Ball
-          <label>B<input type="checkbox" class="get-b"></label>
-          <label>W<input type="checkbox" class="get-w"></label>
-          <label>R<input type="checkbox" class="get-r"></label>
-          Move
-          <label>B<input type="checkbox" class="move-b"></label>
-          <label>W<input type="checkbox" class="move-w"></label>
-          <label>R<input type="checkbox" class="move-r"></label>
-          
-          <label>Truss<input type="checkbox" class="truss"></label>
-          <label>Catch<input type="checkbox" class="catch"></label>
-          <label>Miss Catch<input type="checkbox" class="catch-miss"></label>
-          <label>HP Pass<input type="checkbox" class="human-pass"></label>
-          <label>Score Low<input type="checkbox" class="score-low"></label>
-          <label>Miss Low<input type="text" class="num miss-low"></label>
-          <label>Score High<input type="checkbox" class="score-high"></label>
-          <label>Miss High<input type="text" class="num miss-high"></label>
-          <label>Possess Time<input type="text" class="num possess-time"></label>
-        </div>
-      </div>
-    </script>
-    <div class="red cycle-remove button" tabindex="0">-</div>
-    <div class="cycle-add button" tabindex="0">+</div>
+    <div class="scoring form-row">
+      <label>High Score<input type="text" class="num" id="high-score"></label>
+      <label>High Miss<input type="text" class="num" id="high-miss"></label>
+      <label>Low Score<input type="text" class="num" id="low-score"></label>
+      <label>Low Miss<input type="text" class="num" id="low-miss"></label>
+    </div>
+    <div class="truss form-row">
+      <label>Truss<input type="text" class="num" id="truss"></label>
+      <label>Truss Miss<input type="text" class="num" id="truss-miss"></label>
+      <label>Catch<input type="text" class="num" id="catch"></label>
+      <label>Catch Miss<input type="text" class="num" id="catch-miss"></label>
+    </div>
+    <div class="pass form-row">
+      <label>Human Pass<input type="text" class="num" id="human-pass"></label>
+      <label>Human Pass Miss<input type="text" class="num" id="human-pass-miss"></label>
+      <label>Robot Pass<input type="text" class="num" id="robot-pass"></label>
+      <label>Robot Pass Miss<input type="text" class="num" id="robot-pass-miss"></label>
+    </div>
+    <div class="possess form-row">
+      <label>Other Poss.<input type="text" class="num" id="other-possessions"></label>
+      <label>Dropped Ball<input type="text" class="num" id="dropped-ball"></label>
+    </div>  
+    <div class="load form-row">
+      <label>Human Load<input type="text" class="num" id="human-load"></label>
+      <label>Human Load Miss<input type="text" class="num" id="human-load-miss"></label>
+      <label>Floor Load<input type="text" class="num" id="floor-load"></label>
+      <label>Floor Load Miss<input type="text" class="num" id="floor-load-miss"></label>
+    </div>
     <div class="defense form-row">
       <span class="checkbox-container">
         <label><input type="radio" name="defense" id="defense-none">None</label>
@@ -111,12 +112,6 @@ class DataEntryTemplate extends Template {
       <label>Driving/Maneuverability<input type="text" class="num" id="driving"></label>
       <label>Pushing<input type="text" class="num" id="pushing"></label>
       <label>Defense<input type="text" class="num" id="defense"></label>
-      <label>Goalie/Blocking<input type="text" class="num" id="blocking"></label>
-      <label>Ball Control/Passing<input type="text" class="num" id="posessing"></label>
-      <label>Floor Pickup<input type="text" class="num" id="floor-pickup"></label>
-      <label>Truss Throwing<input type="text" class="num" id="trussing"></label>
-      <label>Catching<input type="text" class="num" id="catching"></label>
-      <label>Bad Things<input type="text" class="num" id="bad-things"></label>
     </div>
    </form>
    <div>

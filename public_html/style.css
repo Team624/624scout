@@ -317,6 +317,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#992727', end
 
 #entry-form {
   width: auto;
+  min-width: 900px;
   display: inline-block;
 }
 #entry-form label {

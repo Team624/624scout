@@ -1,16 +1,4 @@
- DROP TEMPORARY TABLE IF EXISTS cycles_result;
- DROP TEMPORARY TABLE IF EXISTS matches_result;
-
-CREATE TEMPORARY TABLE IF NOT EXISTS cycles_result ENGINE = MEMORY (
-	SELECT 
-        match_number, 
-        team_number, 
-        cycles.*,
-        get_back OR get_mid OR get_front AS 'possess'
-        FROM cycles INNER JOIN match_data ON cycles.match_data_id = match_data.id
-        WHERE team_number=:team_number									-- TEAMMAMAMAM
-);
-SELECT * FROM cycles_result;
+DROP TEMPORARY TABLE IF EXISTS matches_result;
 
 CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
 	SELECT 
@@ -20,7 +8,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     scouts.name as 'scout_name',
     auto_goalie,
     (auto_goalie = 0) AS 'auto_normal',
-	auto_high_hot,
+    auto_high_hot,
     auto_high_cold,
     auto_high_miss,
     auto_low_hot,
@@ -29,6 +17,25 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     auto_mobility,
     auto_block,
     auto_block_miss,
+    (human_load + floor_load + other_possess + catch) AS 'possessions',
+    tele_high_score,
+    tele_high_miss,
+    tele_low_score,
+    tele_low_miss,
+    truss,
+    truss_miss,
+    catch,
+    catch_miss,
+    human_pass,
+    human_pass_miss,
+    robot_pass,
+    robot_pass_miss,
+    human_load,
+    human_load_miss,
+    floor_load,
+    floor_load_miss,
+    other_possess,
+    dropped_balls,
     tele_defense_time,
     tele_block,
     tipped,
@@ -40,30 +47,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     driving_rating,
     pushing_rating,
     defense_rating,
-    blocking_rating,
-    control_rating,
-    pickup_rating,
-    truss_rating,
-    catch_rating,
-    badness_rating,
-	count(cycles_result.id) as  'cycles_played',
-    sum(get_back) as 'get_back',
-    sum(get_mid) as 'get_mid',
-    sum(get_front) as 'get_front',
-    sum(move_back) as 'move_back',
-    sum(move_mid) as 'move_mid',
-    sum(move_front) as 'move_front',
-    sum(truss) as 'truss',
-    sum(catch) as 'catch',
-    sum(miss_catch) as 'miss_catch',
-    sum(catch+miss_catch) as 'catch_total',
-    sum(human_pass) as 'human_pass',
-    sum(score_low) as 'score_low',
-    sum(miss_low) as 'miss_low',
-    sum(score_high) as 'score_high',
-    sum(miss_high) as 'miss_high',
-    sum(possess_time) as 'possess_time',
-    sum(get_back OR get_mid OR get_front) as 'possessions'
+    
 	FROM match_data
 	INNER JOIN scouts ON match_data.scout_id = scouts.id
 	LEFT JOIN cycles_result ON cycles_result.match_data_id = match_data.id
@@ -96,15 +80,10 @@ CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY (
   sum(broke_down) AS 'broke_down',
   ROUND(avg(fouls) , 2)as 'fouls',
   ROUND(avg(tech_fouls), 2) as 'tech_fouls',
-  ROUND(avg(fouls*20 + tech_fouls*50), 1) as 'foul_points',
+  ROUND(avg(foul_points), 1) as 'foul_points',
   ROUND(avg(case when driving_rating = 0 then null else driving_rating end), 2) as 'driving_rating', -- don't count zeros into these, they mean N/A
   ROUND(avg(case when pushing_rating = 0 then null else pushing_rating end), 2) as 'pushing_rating',
   ROUND(avg(case when defense_rating = 0 then null else defense_rating end), 2) as 'defense_rating',
-  ROUND(avg(case when pickup_rating = 0 then null else pickup_rating end), 2) as 'pickup_rating',
-  ROUND(avg(case when blocking_rating = 0 then null else blocking_rating end), 2) as 'blocking_rating',
-  ROUND(avg(case when control_rating = 0 then null else control_rating end), 2) as 'control_rating',
-  ROUND(avg(case when truss_rating = 0 then null else truss_rating end), 2) as 'truss_rating',
-  ROUND(avg(case when catch_rating = 0 then null else catch_rating end), 2) as 'catch_rating',
   ROUND(avg(badness_rating), 1) as 'badness_rating', -- except for badness rating, where 0 is meaningful
   ROUND(SUM(get_back) / sum(case when no_show = 0 then 1 end), 2) as 'get_back', -- per match
   ROUND(SUM(get_mid) / sum(case when no_show = 0 then 1 end), 2) as 'get_mid',
