@@ -237,9 +237,9 @@ $(document).ready(function() {
     if(!post) return;
     $.post('/?controller=submit&action=submit', JSON.stringify(post), function(dat) {
       alertify.success('Data submitted :)');
-      /*window.setTimeout(function() {
+      window.setTimeout(function() {
         location.reload(true); 
-      }, 1000);*/
+      }, 1000);
     }).fail(function(dat) {
       alertify.error(dat.responseText);
       console.log(dat.responseText);
@@ -250,9 +250,9 @@ $(document).ready(function() {
     if(!post) return;
     $.post('/?controller=submit&action=update', JSON.stringify(post), function(dat) {
       alertify.success('Data updated :/');
-      /*window.setTimeout(function() {
+      window.setTimeout(function() {
         location.reload(true); 
-      }, 1000);*/
+      }, 1000);
     }).fail(function(dat) {
       alertify.error(dat.responseText);
       console.log(dat.responseText);
