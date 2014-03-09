@@ -198,7 +198,9 @@ class DatabaseModel {
     }
     
     public function getTeamData($team) {
+    
       $fileRoot = $GLOBALS['fileRoot'];
+      
       /*$aggSql = file_get_contents($fileRoot . 'aggregate_query.sql');
       $aggQuery = self::$conn->prepare($aggSql);
       $aggQuery->bindValue(':team_number', $team);
@@ -217,25 +219,30 @@ class DatabaseModel {
       $cyclesQuery->execute();
       $cycles = $cyclesQuery->fetchAll(PDO::FETCH_ASSOC);*/
       self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
-      $sql = file_get_contents($fileRoot . 'UberQuery.sql');
+      $sql = file_get_contents($fileRoot . 'UberQueryDOrlando.sql');
       $query = self::$conn->prepare($sql);
+      
      // $query->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
       $query->bindValue(':team_number', $team);
-      $query->execute();
+      
+      $query->execute();  
+      
       $query->nextRowset();
+      
       $query->nextRowset();
-      $query->nextRowset(); // skip CREATE TABLE
-      $cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select
-      $query->nextRowset(); //move on
-      $query->nextRowset(); //skip CREATE TABLE
+      ////$query->nextRowset(); // skip CREATE TABLE
+      //$cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select     
+      ////$query->nextRowset(); //move on
+      ////$query->nextRowset(); //skip CREATE TABLE   
       $matches = $query->fetchAll(PDO::FETCH_ASSOC);
-     // echo var_dump($matches);
+     
       $query->nextRowset();
       $query->nextRowset();
       $data = $query->fetch(PDO::FETCH_ASSOC);
+      
      // echo var_dump($data);
      echo "<!--";
-      foreach($matches as &$match) { //zip cycles into each match
+      /*foreach($matches as &$match) { //zip cycles into each match
         echo " zip ";
         $matchCycles = [];
         foreach($cycles as $cycle) {
@@ -247,11 +254,12 @@ class DatabaseModel {
         }
         $match['num_cycles'] = count($matchCycles);
         $match['cycles'] = $matchCycles;
-      }
+      }*/
       $data['num_matches'] = count($matches);
       $data['matches'] = $matches;
       echo "-->";
       return $data;
+      
     }
     
     public function getRawMatchData() {
