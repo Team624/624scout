@@ -16,6 +16,24 @@ class DatabaseModel {
     'auto_mobility',
     'auto_block',
     'auto_block_miss',
+    'tele_high_score',
+    'tele_high_miss',
+    'tele_low_score',
+    'tele_low_miss',
+    'truss',
+    'truss_miss',
+    'catch',
+    'catch_miss',
+    'human_pass',
+    'human_pass_miss',
+    'robot_pass',
+    'robot_pass_miss',
+    'human_load',
+    'human_load_miss',
+    'floor_load',
+    'floor_load_miss',
+    'other_possess',
+    'dropped_balls',
     'tele_defense_time',
     'tele_block',
     'no_show',
@@ -73,6 +91,7 @@ class DatabaseModel {
       $cols = "";
       $params = "";
       foreach($data as $col => $val) {
+        error_log("Data: " . $data,3,"c:/wamp/logs/php_error.log");
         if(in_array($col, self::$matchDataCols)) {
           $cols .= ($cols=="")? '' : ', ';
           $cols .= $col;
@@ -81,17 +100,18 @@ class DatabaseModel {
         }
       }
       $sql = "INSERT INTO match_data ($cols) VALUES ($params)";
+      //error_log($sql,3,"c:/wamp/logs/php_error.log");
       $query = self::$conn->prepare($sql);
       foreach ($data as $col => $val) {
         if(in_array($col, self::$matchDataCols)) {
           $query->bindValue(":$col", $val);
         }
       }
-       //     $query->debugDumpParams();
+      //$query->debugDumpParams();
       $query->execute();
       
       $matchDataId = self::$conn->lastInsertId();
-      if(isset($data['cycles'])) { //insert each cycle
+      /*if(isset($data['cycles'])) { //insert each cycle
         foreach($data['cycles'] as $cycle) {
           $cycle['match_data_id'] = $matchDataId;
           $cols = "";
@@ -113,7 +133,7 @@ class DatabaseModel {
           }
           $query->execute();
         }
-      }
+      }*/
       
      if(!$trans) self::$conn->commit();
     }

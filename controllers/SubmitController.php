@@ -4,6 +4,7 @@ class SubmitController extends Controller {
   public function submit() {
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
+    /*error_log(var_dump($obj),3,"c:/wamp/logs/php_error.log");*/
    // echo var_dump($obj);
     $db = new DatabaseModel();
     try {
@@ -22,7 +23,10 @@ class SubmitController extends Controller {
   public function update() {
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
-   // echo var_dump($obj);
+    /*ob_start();
+    var_dump($obj);
+    $result = ob_get_clean();
+    error_log($result,3,"c:/wamp/logs/php_error.log");*/
     $db = new DatabaseModel();
     try {
       $db->updateMatch($obj);
