@@ -108,6 +108,18 @@
     '#balls-blocked': valNum,
     '#fouls': valNum,
     '#tech-fouls': valNum,
+    '#high-score': valNum,
+    '#high-miss': valNum,
+    '#low-score': valNum,
+    '#low-miss': valNum,
+    '#truss': valNum,
+    '#truss-miss': valNum,
+    '#catch': valNum,
+    '#catch-miss': valNum,
+    '#human-pass': valNum,
+    '#human-pass-miss': valNum,
+    '#robot-pass': valNum,
+    '#robot-pass-miss,other-possessions,dropped-ball,human-load,human-load-miss,floor-load,floor-load-miss': valNum,
     '#driving,#pushing,#defense' : valSubj
   };
   var normalAutonMap = {
