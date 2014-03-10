@@ -1,0 +1,1 @@
+Idk how your magic check boxes work but they broke when I implemented the superCSSLoader. For some reason it works when a copy of the polaris image is in the root directory, so if you want to change the image, mess with that one.
