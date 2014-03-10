@@ -103,7 +103,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY (
   ROUND(100 * SUM(truss) / SUM(cycles_played), 0) as 'truss_percent',
   ROUND(SUM(catch) / sum(case when no_show = 0 then 1 end), 2) as 'catch',
   ROUND(SUM(miss_catch) / sum(case when no_show = 0 then 1 end), 2) as 'miss_catch',
-  ROUND(SUM(catch_total) / sum(case when no_show = 0 then 1 end), 2) as 'catch_total'
+  ROUND(SUM(catch_total) / sum(case when no_show = 0 then 1 end), 2) as 'catch_total',
 FROM matches_result
 INNER JOIN teams ON teams.number = matches_result.team_number
 );

@@ -431,7 +431,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
   font-size: 24px;
 }
 #teamDisplay .box {
-  text-align: right;
+  text-align: left;
 }
 .box {
 
@@ -440,6 +440,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 
 .box row {
   white-space:nowrap;
+  
 }
 
 .table-holder {

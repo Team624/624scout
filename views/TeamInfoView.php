@@ -12,6 +12,6 @@ class TeamInfoView implements View {
     $template->set('team', $this->team);
     $template->set('data', $db->getTeamData($this->team));
     $template->render();
-    echo var_dump($db->getTeamData($this->team));
+   // echo var_dump($db->getTeamData($this->team));
   }
 }
