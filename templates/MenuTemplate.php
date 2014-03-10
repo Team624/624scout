@@ -11,6 +11,7 @@ class MenuTemplate extends Template {
         <li><a href="/?controller=page&amp;action=schedule">Match Schedule</a></li>
         <li><a href="/?controller=page&amp;action=dataCoverage">Data Coverage</a></li>
         <li><a href="/?controller=teamInfo&amp;action=display">Team Info</a></li>
+        <li><a href="/?controller=matchInfo&amp;action=display">Match Info</a></li>
         <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
         <li><a href="/?controller=page&amp;action=teamList">Team List</a></li>
         <li><a href="/?controller=page&amp;action=scoutList">Scout List</a></li>

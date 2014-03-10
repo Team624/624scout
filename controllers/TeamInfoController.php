@@ -2,7 +2,9 @@
 
 class TeamInfoController extends Controller {
   public function display() {
-    (new TeamInfoDisplayView())->render();
+    $theTeam = "";
+    if(isset($_GET['team'])){$theTeam = $_GET['team'];}
+    (new TeamInfoDisplayView($theTeam))->render();
   }
   
   public function getInfo() {
