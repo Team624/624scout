@@ -6,6 +6,6 @@ class MatchInfoController extends Controller {
   }
   
   public function getInfo() {
-    (new MatchInfoView($_GET['team']))->render();
+    (new MatchInfoView($_GET['match']))->render();
   }
 }?>
