@@ -34,7 +34,6 @@ height: 30px;
   margin: 0;
   height: 30px;
   display: inline-block;
-
 }
 
 .menu>li a {
@@ -52,6 +51,9 @@ height: 30px;
   padding: 0;
   color: white;
   margin-left: 20px;
+}
+#simple-menu{
+  display:none;
 }
 table {
     border-collapse: separate;
