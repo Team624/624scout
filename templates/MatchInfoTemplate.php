@@ -38,6 +38,7 @@ class MatchInfoTemplate extends Template {
           <th rowspan = "2" colspan = "1">Truss</th>
           <th rowspan = "2" colspan = "1">Foul /tech</th>
           <th rowspan = "2" colspan = "1">Defense Rateing</th>
+          <th rowspan = "2" colspan = "1">Rbt Passes</th>
           <th rowspan = "1" colspan = "2">Loading</th>
         </tr>
         <tr>
@@ -46,8 +47,8 @@ class MatchInfoTemplate extends Template {
           <th>Low</th>
           <th>High</th>
           <th>Low</th>
-          <th>Floor HP</th>
           <th>Dirrect HP</th>
+          <th>Floor</th>
         </tr>
       </thead>
       <?php
@@ -68,7 +69,8 @@ class MatchInfoTemplate extends Template {
           <td><?=$td['truss']?> / <?=($td['truss']+$td['truss_miss'])?></td>
           <td><?=$td['fouls']?> / <?=($td['tech_fouls'])?></td>
           <td><?=$td['defense_rating']?></td>
-          <td><?=$td['human_load']?> / <?=($td['floor_load_attempts'])?></td>
+          <td><?=$td['robot_pass']?> / <?=($td['robot_pass_attempts'])?></td>
+          <td><?=$td['human_load']?> / <?=($td['human_load_attempts'])?></td>
           <td><?=$td['floor_load']?> / <?=($td['floor_load']+$td['floor_load_miss'])?></td>
         </tr>
       <?php } ?>
