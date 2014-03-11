@@ -459,7 +459,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
   margin: 0px;
 }
 .pannelIcon-tr{
-  
+  color: green;
 }
 /*.panLink{
   white-space: nowrap;
@@ -469,6 +469,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 }
 .sidr ul li span{
   margin-left: -15px;
+  color: #06F000;
 }
 .sidr ul li a{
   width: 100%;
