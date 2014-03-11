@@ -1,6 +1,7 @@
 //submit.js
 (function() { 
   $(document).ready(function() {
+    console.log("doc ready");
     $('#simple-menu').sidr({
       source:"#menuContent",
       onClose:onSlidrClose,
