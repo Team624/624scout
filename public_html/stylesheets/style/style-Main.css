@@ -450,3 +450,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 .table-holder {
   overflow: auto;
 }
+.pannelIcon{
+  padding: 15px 0px 15px 0px;
+}
+.pannelIcon-t{
+  width: 20px;
+  padding: 0px;
+  margin: 0px;
+}
+.pannelIcon-tr{
+  
+}
+/*.panLink{
+  white-space: nowrap;
+}*/
+.sidr ul li a, .sidr ul li span{
+  display: inline-block;
+}
+.sidr ul li span{
+  margin-left: -15px;
+}
+.sidr ul li a{
+  width: 100%;
+}
