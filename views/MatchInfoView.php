@@ -12,6 +12,6 @@ class MatchInfoView implements View {
     $template->set('match', $this->match);
     $template->set('data', $db->getMatchData($this->match));
     $template->render();
-   echo var_dump($db->getTeamData($this->team));
+   //echo var_dump($db->getTeamData($this->team));
   }
 }
