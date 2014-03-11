@@ -20,7 +20,8 @@ include ('./stylesheets/icon-font.css');
 //note that the order of the files in the list can be significant.
 
 $mainFiles = [
-'style-Main.css'
+'style-Main.css',
+'matchInfo.css'
 ];
 //include ('./stylesheets/style-Main.css');
 foreach($mainFiles as $file) {

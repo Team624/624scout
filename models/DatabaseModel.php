@@ -217,7 +217,7 @@ class DatabaseModel {
       self::$conn->commit();
     }
     
-    public function getTeamData($team) {
+    public function getTeamData($team,$includeAggrigated = TRUE) {
     
       $fileRoot = $GLOBALS['fileRoot'];
       
@@ -244,18 +244,20 @@ class DatabaseModel {
       
      // $query->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
       $query->bindValue(':team_number', $team);
-      
+      //TODO make sure the non-aggrigated table creation does not happen when it is turned off
       $query->execute();  
       
+      $query->nextRowset();
       $query->nextRowset();
       
       $query->nextRowset();
       ////$query->nextRowset(); // skip CREATE TABLE
       //$cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select     
       ////$query->nextRowset(); //move on
-      ////$query->nextRowset(); //skip CREATE TABLE   
-      $matches = $query->fetchAll(PDO::FETCH_ASSOC);
-     
+      ////$query->nextRowset(); //skip CREATE TABLE 
+      $matches = null;   
+      if($includeAggrigated) $matches = $query->fetchAll(PDO::FETCH_ASSOC);
+      
       $query->nextRowset();
       $query->nextRowset();
       $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -281,7 +283,31 @@ class DatabaseModel {
       return $data;
       
     }
+    public function getMatchData($match) {
     
+      $fileRoot = $GLOBALS['fileRoot'];
+      self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
+      $sql = "SELECT * FROM schedule WHERE match_number=$match";
+      $query = self::$conn->prepare($sql);
+      $query->execute();  
+      
+      $data = $query->fetch(PDO::FETCH_ASSOC);
+      $data['teamDatas'] = array(
+        $data['red_1'] => $this->getTeamData($data['red_1'],FALSE),
+        $data['red_2'] => $this->getTeamData($data['red_2'],FALSE),
+        $data['red_3'] => $this->getTeamData($data['red_3'],FALSE),
+        $data['blue_1'] => $this->getTeamData($data['blue_1'],FALSE),
+        $data['blue_2'] => $this->getTeamData($data['blue_2'],FALSE),
+        $data['blue_3'] => $this->getTeamData($data['blue_3'],FALSE)
+      );
+      //$teamDatas = array(
+      
+      /*$data['num_matches'] = count($matches);
+      $data['matches'] = $matches;
+      echo "-->";*/
+      return $data;
+      
+    }
     public function getRawMatchData() {
       $sql = 'SELECT * FROM match_data ORDER BY match_number';
       $query = self::$conn->prepare($sql);

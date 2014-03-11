@@ -17,7 +17,7 @@ class TeamListTemplate extends Template {
     </tr>
     <?php foreach($t as $k => $v) { ?>
       <tr>
-      <td class=""><?=$k?></td>
+      <td class=""><a href = <?=("/?controller=teamInfo&action=display&team=" . $k)?>><?=$k?></a></td>
       <td class=""><?=$v?></td>
       </tr>
     <?php } ?>
