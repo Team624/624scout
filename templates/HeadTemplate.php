@@ -8,6 +8,7 @@ class HeadTemplate extends Template {
 
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>624 Scouting</title>
     <link rel="stylesheet" type="text/css" href="/SuperCSSLoader.php"></link>
