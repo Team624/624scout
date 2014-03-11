@@ -1,0 +1,32 @@
+.matchTime{
+  font-size:13px;
+}
+tr.blueAlliance{
+  background:#BBF;
+}
+tr.redAlliance{
+  background:#FBB;
+}
+.match-info-table a{
+  color:blue;
+}
+.match-info-table{
+ table-layout: auto;
+ width:auto;
+}
+.match-info-table td{
+  width: auto;
+  /*white-space: nowrap;
+  */
+}
+.match-info-table th{
+  text-align:center;
+ /* background:none;*/
+}
+/*.match-info-table thead{
+  background:#CFC;
+}*/
+.match-info-table tr .teamCell{
+  /*background:#DDD;*/
+  text-align:center;
+}

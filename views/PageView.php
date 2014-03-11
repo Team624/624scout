@@ -32,10 +32,12 @@ abstract class PageView implements View {
   }
   
   function render() {
+    ?><!--<div data-role="none" data-enhance="false">--><?php
     $this->renderHead();
     $this->renderMenus();
     $this->renderBody();
     $this->renderFooter();
+    ?><!--</div>--><?php
   }
   
   

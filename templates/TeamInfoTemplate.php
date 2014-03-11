@@ -12,59 +12,79 @@ class TeamInfoTemplate extends Template {
   <div class="team-title">
     Team <?=$this->data['team']?> - <?=$d['name']?>
    </div>
-   <div> <b><?=$d['matches_played']?></b> matches actually played, <b><?=$d['no_show']?></b> no-shows </div>
-   <div class="auton box">
-    <div>Autonomous</div>
+  <div> <b><?=$d['matches_played']?></b> matches actually played, <b><?=$d['no_show']?></b> no-shows </div>
+  <div class="auton box">
+      <div>Autonomous</div>
+      <div class="box">
+        Start in White Zone: <b><?=$d['auto_normal']?></b> / <b><?=$d['matches_played']?></b> matches
+        <div class="row" style="float:right;">
+        </div>
+        <div class="row">
+          High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
+        </div>
+        <div class="row">
+          Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
+        </div>
+        <div class="row">
+          Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
+        </div>
+      </div>
+      <div class="box">
+        Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
+        <div class="row">
+          Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
+        </div>
+      </div>
+  </div>
+  <br>
+  <div class="teleop box">
+    <div>Teleop</div>
     <div class="box">
-      Normal (<?=$d['auto_normal']?>/<?=$d['matches_played']?>)
-      <div class="row" style="float:right;">
-        Hot/Cold/Miss
+      Shooting
+      <div class="row">
+      High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
       </div>
       <div class="row">
-        High Goal: (<b><?=$d['auto_high_hot']?></b>/<b><?=$d['auto_high_cold']?></b>/<b><?=$d['auto_high_miss']?></b>)
+      Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+      </div> 
+    </div>
+     <div class="box">
+      Truss Ability
+      <div class="row">
+      Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
       </div>
       <div class="row">
-        Low Goal: (<b><?=$d['auto_low_hot']?></b>/<b><?=$d['auto_low_cold']?></b>/<b><?=$d['auto_low_miss']?></b>)
-      </div>
-      <div class="row">
-        Mobility: <b><?=$d['auto_mobility']?></b>/<b><?=$d['auto_normal']?></b>
+      Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
       </div>
     </div>
     <div class="box">
-      Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
+      Passing
       <div class="row">
-        Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
-      </div>
-    </div>
-   </div>
-   <div class="teleop box">
-    Teleop Offense
-    <div class="row">
-    Possessions: <b><?=$d['possessions']?></b> of <b><?=$d['cycles']?></b> cycles
-    </div>
-    <div class="row">
-    High Goal: <b><?=$d['score_high']?></b> of <b><?=$d['shots_high']?></b> shots
-    </div>
-    <div class="row">
-    Low Goal: <b><?=$d['score_low']?></b> of <b><?=$d['shots_low']?></b> shots
-    </div>
-    <div class="row">
-    Truss Throw: <b><?=$d['truss']?></b>/match (<b><?=$d['truss_percent']?></b>% of cycles)
-    </div>
-    <div class="row">
-    Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch_total']?></b> attempts
-    </div>
-   </div>
-   <div class="defense box">
-      Teleop Defense
-      <div class="row">
-        Defense Time: <b><?=$d['tele_defense_time']?></b>/3.0
+      To Human: <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
       </div>
       <div class="row">
-        Shots Blocked: <b><?=$d['tele_block']?></b>
+      To Robot: <b><?=$d['robot_pass']?></b> of <b><?=$d['robot_pass_attempts']?></b> shots (<?=$d['robot_pass_accuracy']*100?>%)
       </div>
-   </div>
-   <div class="bad box">
+    </div>
+    <div class="box">
+      Loading
+      <div class="row">
+      Direct Human Load: <b><?=$d['human_load']?></b> of <b><?=$d['human_load_attempts']?></b> attempts (<?=$d['human_load_accuracy']*100?>%)
+      </div>
+      <div class="row">
+      Floor Load: <b><?=$d['floor_load']?></b> of <b><?=$d['floor_load_attempts']?></b> attempts (<?=$d['floor_load_accuracy']*100?>%)
+      </div>
+    </div>
+    <div class="box">
+      Possesion
+      <div class="row">
+      Other Possessions: <b><?=$d['other_possess']?></b>
+      </div>
+      <div class="row">
+      Dropped Balls: <b><?=$d['dropped_balls']?></b>
+      </div>
+    </div>
+    <div class="bad box">
     Bad Things
       <div clas="row">
         Tipped: <b><?=$d['tipped']?></b> of <?=$d['matches_played']?> matches
@@ -79,49 +99,32 @@ class TeamInfoTemplate extends Template {
         <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
       </div>
    </div>
-   <div class="subjective box">
-    Subjective Ratings
-      <div clas="row">
-        Driving/Maneuverability: <b><?=$d['driving_rating']?></b>
+    <div class="box">
+      Ratings
+      <div class="row">
+      Driving: <b><?=$d['driving_rating']?></b>
       </div>
-      <div clas="row">
-        Pushing: <b><?=$d['pushing_rating']?></b>
+      <div class="row">
+      Pushing: <b><?=$d['pushing_rating']?></b>
       </div>
-      <div clas="row">
-        Defense: <b><?=$d['defense_rating']?></b>
+      <div class="row">
+      Defense: <b><?=$d['defense_rating']?></b>
       </div>
-      <div clas="row">
-        Goalie/Blocking: <b><?=$d['blocking_rating']?></b>
-      </div>
-      <div clas="row">
-        Ball Control/Passing: <b><?=$d['control_rating']?></b>
-      </div>
-      <div clas="row">
-        Floor Pickup: <b><?=$d['pickup_rating']?></b>
-      </div>
-      <div clas="row">
-        Truss Throwing: <b><?=$d['truss_rating']?></b>
-      </div>
-      <div clas="row">
-        Truss Catching: <b><?=$d['catch_rating']?></b>
-      </div>
-      <div clas="row">
-        Badness: <b><?=$d['badness_rating']?></b>
-      </div>
+    </div>
    </div>
    <div> Raw Data </div>
    <div class="table-holder">
     <table class="raw-table">
       <tr>
         <?php foreach ($d as $key => $val) { 
-          if($key !== 'matches' && $key !== 'cycles' && $key !== 'name') {
+          if($key !== 'matches' && $key !== 'name') {
         ?>
           <th><p><?= $key?></p></th>
         <?php }} ?>
       </tr>
       <tr>
         <?php foreach ($d as $key=>$val) {
-          if($key !== 'matches' && $key !== 'cycles' && $key !== 'name') {
+          if($key !== 'matches' && $key !== 'name') {
          ?>
           <td><div><?= $val===null?'--':$val ?></div></td>
         <?php }} ?>
@@ -135,14 +138,14 @@ class TeamInfoTemplate extends Template {
       <table class="raw-table">
         <tr>
           <?php foreach ($m as $key => $val) { 
-            if($key !== 'matches' && $key !== 'cycles') {
+            if($key !== 'matches') {
           ?>
             <th><p><?= $key?></p></th>
           <?php }} ?>
         </tr>
         <tr>
           <?php foreach ($m as $key=>$val) {
-            if($key !== 'matches' && $key !== 'cycles') {
+            if($key !== 'matches') {
            ?>
             <td><div <?=$key==='scout_name'?'class="name"':'a'?>><?= $val===null?'--':$val ?></div></td>
           <?php }} ?>
@@ -150,5 +153,6 @@ class TeamInfoTemplate extends Template {
       </table>
     <?php } ?>
    </div>
+  </div>
   <?php }
 }

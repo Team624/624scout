@@ -48,20 +48,30 @@
     '#auton-low-cold',
     '#auton-low-miss',
     '#auton-mobility',
-    '.miss-low',
-    '.miss-high',
+    '#high-score',
+    '#high-miss',
+    '#low-score',
+    '#low-miss',
+    '#truss',
+    '#truss-miss',
+    '#catch',
+    '#catch-miss',
+    '#human-pass',
+    '#human-pass-miss',
+    '#robot-pass',
+    '#robot-pass-miss',
+    '#other-possessions',
+    '#dropped-ball',
+    '#human-load',
+    '#human-load-miss',
+    '#floor-load',
+    '#floor-load-miss',
     '#balls-blocked',
     '#fouls',
     '#tech-fouls',
     '#driving',
     '#pushing',
-    '#defense',
-    '#blocking',
-    '#posessing',
-    '#floor-pickup',
-    '#trussing',
-    '#catching',
-    '#bad-things'
+    '#defense'
   ];
   function autoZero() {
     for(var i=0; i<zeroList.length; i++) {
@@ -98,11 +108,25 @@
     '#balls-blocked': valNum,
     '#fouls': valNum,
     '#tech-fouls': valNum,
-    '#driving,#pushing,#defense,#blocking,#posessing,#trussing,#catching,#bad-things,#floor-pickup' : valSubj
+    '#high-score': valNum,
+    '#high-miss': valNum,
+    '#low-score': valNum,
+    '#low-miss': valNum,
+    '#truss': valNum,
+    '#truss-miss': valNum,
+    '#catch': valNum,
+    '#catch-miss': valNum,
+    '#human-pass': valNum,
+    '#human-pass-miss': valNum,
+    '#robot-pass': valNum,
+    '#robot-pass-miss,other-possessions,dropped-ball,human-load,human-load-miss,floor-load,floor-load-miss': valNum,
+    '#driving,#pushing,#defense' : valSubj
   };
   var normalAutonMap = {
     '#auton-normal-start' : valLocation,
-    '#auton-high-hot,#auton-high-cold,#auton-high-miss,#auton-low-hot,#auton-low-cold,#auton-low-miss' : valNum
+    '#auton-high-hot,#auton-high-cold,#auton-high-miss,#auton-low-hot,#auton-low-cold,#auton-low-miss' : valNum,
+    '#high-score,#high-miss,#low-score,#low-miss,#truss,#truss-miss,#catch,#catch-miss,#human-pass,#human-pass-miss,#robot-pass,#robot-pass-miss' : valNum,
+    '#other-possessions,#dropped-ball,#human-load,#human-load-miss,#floor-load,#floor-load-miss' : valNum
   };
   var goalieAutonMap = {
     '#auton-shots-blocked,#auton-shots-not-blocked' : valNum,
@@ -168,6 +192,28 @@ function prepSubmit() {
     } else {
       post.tele_defense_time = 0;
     }
+    post.tele_high_score = parseInt($('#high-score').val());
+    post.tele_high_miss = parseInt($('#high-miss').val());
+    post.tele_low_score = parseInt($('#low-score').val());
+    post.tele_low_miss = parseInt($('#low-miss').val());
+    
+    post.truss = parseInt($('#truss').val());
+    post.truss_miss = parseInt($('#truss-miss').val());
+    post.catch = parseInt($('#catch').val());
+    post.catch_miss = parseInt($('#catch-miss').val());
+    
+    post.human_pass = parseInt($('#human-pass').val());
+    post.human_pass_miss = parseInt($('#human-pass-miss').val());
+    post.robot_pass = parseInt($('#robot-pass').val());
+    post.robot_pass_miss = parseInt($('#robot-pass-miss').val());
+    
+    post.human_load = parseInt($('#human-load').val());
+    post.human_load_miss = parseInt($('#human-load-miss').val());
+    post.floor_load = parseInt($('#floor-load').val());
+    post.floor_load_miss = parseInt($('#floor-load-miss').val());
+    
+    post.other_possess = parseInt($('#other-possessions').val());
+    post.dropped_balls = parseInt($('#dropped-ball').val());
     
     post.tele_block = parseInt($('#balls-blocked').val());
     post.tipped = $('#tipped').prop('checked')?true:false;
@@ -179,45 +225,7 @@ function prepSubmit() {
     post.driving_rating = parseInt($('#driving').val());
     post.pushing_rating = parseInt($('#pushing').val());
     post.defense_rating = parseInt($('#defense').val());
-    post.blocking_rating = parseInt($('#blocking').val());
-    post.control_rating = parseInt($('#posessing').val());
-    post.pickup_rating = parseInt($('#floor-pickup').val());
-    post.truss_rating = parseInt($('#trussing').val());
-    post.catch_rating = parseInt($('#catching').val());
-    post.badness_rating = parseInt($('#bad-things').val());
-    post.cycles = [];
-    $('.cycle-holder').each(function(i) {
-      var c = {};
-      c.cycle_number = i+1;
-      var t = $(this);
-      var get_blue = t.find('.get-b').prop('checked')?true:false;
-      c.get_mid = t.find('.get-w').prop('checked')?true:false;
-      var get_red = t.find('.get-r').prop('checked')?true:false;
-      var move_blue = t.find('.move-b').prop('checked')?true:false;
-      c.move_mid = t.find('.move-w').prop('checked')?true:false;
-      var move_red = t.find('.move-r').prop('checked')?true:false;
-      if(red) { //red alliance
-        c.get_back = get_blue;
-        c.get_front = get_red;
-        c.move_back = move_blue;
-        c.move_front = move_red;
-      } else { //blue alliance
-        c.get_back = get_red;
-        c.get_front = get_blue;
-        c.move_back = move_red;
-        c.move_front = move_blue;
-      }
-      c.truss = t.find('.truss').prop('checked')?true:false;
-      c.catch = t.find('.catch').prop('checked')?true:false;
-      c.miss_catch = t.find('.catch-miss').prop('checked')?true:false;
-      c.human_pass = t.find('.human-pass').prop('checked')?true:false;
-      c.score_low = t.find('.score-low').prop('checked')?true:false;
-      c.miss_low = parseInt(t.find('.miss-low').val());
-      c.score_high = t.find('.score-high').prop('checked')?true:false;
-      c.miss_high = parseInt(t.find('.miss-high').val());
-      c.possess_time = parseInt(t.find('.possess-time').val());
-      post.cycles[i] = c;
-    });
+   
   }
   return post;
 } 

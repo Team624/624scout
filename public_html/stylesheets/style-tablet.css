@@ -1,0 +1,20 @@
+#simple-menu{
+  display:inline-block;
+  float:left;
+  color:white;
+  padding-top: 5px;
+  font-size:15px;
+  text-decoration:none;
+  width:40px;
+}
+.menu{
+  display:none;
+}
+#menuContent{
+  display:none;
+}
+/*.logo{
+  height: 30px;
+  float:left;
+  padding-left:10px;
+}*/

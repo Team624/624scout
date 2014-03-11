@@ -56,6 +56,9 @@ switch ($controller) {
   case 'teamInfo':
     (new TeamInfoController($action))->executeAction();
     break;
+  case 'matchInfo':
+    (new MatchInfoController($action))->executeAction();
+    break;
   default: 
     header('HTTP/1.1 404 Not Found');
     echo '404';

@@ -7,6 +7,8 @@ class IndexTemplate extends Template {
   }
   public function render() { ?>
    <a href="http://www2.usfirst.org/2014comp/Events/TXSA/rankings.html"> Alamo Regional Standings </a>
-
+	
+	<p>much orlando edition</p>
+	<p>Such David Edit</p>
   <?php }
 }

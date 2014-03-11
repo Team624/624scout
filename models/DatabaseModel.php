@@ -16,6 +16,24 @@ class DatabaseModel {
     'auto_mobility',
     'auto_block',
     'auto_block_miss',
+    'tele_high_score',
+    'tele_high_miss',
+    'tele_low_score',
+    'tele_low_miss',
+    'truss',
+    'truss_miss',
+    'catch',
+    'catch_miss',
+    'human_pass',
+    'human_pass_miss',
+    'robot_pass',
+    'robot_pass_miss',
+    'human_load',
+    'human_load_miss',
+    'floor_load',
+    'floor_load_miss',
+    'other_possess',
+    'dropped_balls',
     'tele_defense_time',
     'tele_block',
     'no_show',
@@ -73,6 +91,7 @@ class DatabaseModel {
       $cols = "";
       $params = "";
       foreach($data as $col => $val) {
+        error_log("Data: " . $data,3,"c:/wamp/logs/php_error.log");
         if(in_array($col, self::$matchDataCols)) {
           $cols .= ($cols=="")? '' : ', ';
           $cols .= $col;
@@ -81,17 +100,18 @@ class DatabaseModel {
         }
       }
       $sql = "INSERT INTO match_data ($cols) VALUES ($params)";
+      //error_log($sql,3,"c:/wamp/logs/php_error.log");
       $query = self::$conn->prepare($sql);
       foreach ($data as $col => $val) {
         if(in_array($col, self::$matchDataCols)) {
           $query->bindValue(":$col", $val);
         }
       }
-       //     $query->debugDumpParams();
+      //$query->debugDumpParams();
       $query->execute();
       
       $matchDataId = self::$conn->lastInsertId();
-      if(isset($data['cycles'])) { //insert each cycle
+      /*if(isset($data['cycles'])) { //insert each cycle
         foreach($data['cycles'] as $cycle) {
           $cycle['match_data_id'] = $matchDataId;
           $cols = "";
@@ -113,7 +133,7 @@ class DatabaseModel {
           }
           $query->execute();
         }
-      }
+      }*/
       
      if(!$trans) self::$conn->commit();
     }
@@ -197,8 +217,10 @@ class DatabaseModel {
       self::$conn->commit();
     }
     
-    public function getTeamData($team) {
+    public function getTeamData($team,$includeAggrigated = TRUE) {
+    
       $fileRoot = $GLOBALS['fileRoot'];
+      
       /*$aggSql = file_get_contents($fileRoot . 'aggregate_query.sql');
       $aggQuery = self::$conn->prepare($aggSql);
       $aggQuery->bindValue(':team_number', $team);
@@ -217,25 +239,32 @@ class DatabaseModel {
       $cyclesQuery->execute();
       $cycles = $cyclesQuery->fetchAll(PDO::FETCH_ASSOC);*/
       self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
-      $sql = file_get_contents($fileRoot . 'UberQuery.sql');
+      $sql = file_get_contents($fileRoot . 'UberQueryDOrlando.sql');
       $query = self::$conn->prepare($sql);
+      
      // $query->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
       $query->bindValue(':team_number', $team);
-      $query->execute();
+      //TODO make sure the non-aggrigated table creation does not happen when it is turned off
+      $query->execute();  
+      
       $query->nextRowset();
       $query->nextRowset();
-      $query->nextRowset(); // skip CREATE TABLE
-      $cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select
-      $query->nextRowset(); //move on
-      $query->nextRowset(); //skip CREATE TABLE
-      $matches = $query->fetchAll(PDO::FETCH_ASSOC);
-     // echo var_dump($matches);
+      
+      $query->nextRowset();
+      ////$query->nextRowset(); // skip CREATE TABLE
+      //$cycles = $query->fetchAll(PDO::FETCH_ASSOC); //get first select     
+      ////$query->nextRowset(); //move on
+      ////$query->nextRowset(); //skip CREATE TABLE 
+      $matches = null;   
+      if($includeAggrigated) $matches = $query->fetchAll(PDO::FETCH_ASSOC);
+      
       $query->nextRowset();
       $query->nextRowset();
       $data = $query->fetch(PDO::FETCH_ASSOC);
+      
      // echo var_dump($data);
      echo "<!--";
-      foreach($matches as &$match) { //zip cycles into each match
+      /*foreach($matches as &$match) { //zip cycles into each match
         echo " zip ";
         $matchCycles = [];
         foreach($cycles as $cycle) {
@@ -247,13 +276,38 @@ class DatabaseModel {
         }
         $match['num_cycles'] = count($matchCycles);
         $match['cycles'] = $matchCycles;
-      }
+      }*/
       $data['num_matches'] = count($matches);
       $data['matches'] = $matches;
       echo "-->";
       return $data;
+      
     }
+    public function getMatchData($match) {
     
+      $fileRoot = $GLOBALS['fileRoot'];
+      self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
+      $sql = "SELECT * FROM schedule WHERE match_number=$match";
+      $query = self::$conn->prepare($sql);
+      $query->execute();  
+      
+      $data = $query->fetch(PDO::FETCH_ASSOC);
+      $data['teamDatas'] = array(
+        $data['red_1'] => $this->getTeamData($data['red_1'],FALSE),
+        $data['red_2'] => $this->getTeamData($data['red_2'],FALSE),
+        $data['red_3'] => $this->getTeamData($data['red_3'],FALSE),
+        $data['blue_1'] => $this->getTeamData($data['blue_1'],FALSE),
+        $data['blue_2'] => $this->getTeamData($data['blue_2'],FALSE),
+        $data['blue_3'] => $this->getTeamData($data['blue_3'],FALSE)
+      );
+      //$teamDatas = array(
+      
+      /*$data['num_matches'] = count($matches);
+      $data['matches'] = $matches;
+      echo "-->";*/
+      return $data;
+      
+    }
     public function getRawMatchData() {
       $sql = 'SELECT * FROM match_data ORDER BY match_number';
       $query = self::$conn->prepare($sql);
