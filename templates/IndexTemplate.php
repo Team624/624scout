@@ -6,9 +6,7 @@ class IndexTemplate extends Template {
     $this->keys[]='';
   }
   public function render() { ?>
-   <a href="http://www2.usfirst.org/2014comp/Events/TXSA/rankings.html"> Alamo Regional Standings </a>
-	
-	<p>much orlando edition</p>
-	<p>Such David Edit</p>
+   <p>CRyptonite Scouting - Orlando Edition</p>
+   <a href="http://www2.usfirst.org/2014comp/Events/FLOR/rankings.html"> Orlando Standings </a>
   <?php }
 }
