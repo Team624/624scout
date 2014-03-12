@@ -474,3 +474,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
 .sidr ul li a{
   width: 100%;
 }
+
+.sec-title{
+  font-weight:bold;
+  font-size: 16px;
+}
