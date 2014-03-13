@@ -13,7 +13,7 @@ var match = $('#searchMatch').val();
     $.get('/?controller=matchInfo&action=getInfo&match='+match, function(res) {
       $('#matchDisplay').html(res);
     }).fail(function(res) {
-      alertify.error(res);
+      alertify.error(res.responseText);
     });
 }
 })();
