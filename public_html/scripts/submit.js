@@ -225,8 +225,10 @@ function prepSubmit() {
     post.driving_rating = parseInt($('#driving').val());
     post.pushing_rating = parseInt($('#pushing').val());
     post.defense_rating = parseInt($('#defense').val());
-   
   }
+  if($('#entry-notes').val() !== '') {
+    post.note = $('#entry-notes').val();
+   }
   return post;
 } 
   

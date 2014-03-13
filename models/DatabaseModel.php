@@ -91,7 +91,6 @@ class DatabaseModel {
       $cols = "";
       $params = "";
       foreach($data as $col => $val) {
-        error_log("Data: " . $data,3,"c:/wamp/logs/php_error.log");
         if(in_array($col, self::$matchDataCols)) {
           $cols .= ($cols=="")? '' : ', ';
           $cols .= $col;
@@ -100,7 +99,6 @@ class DatabaseModel {
         }
       }
       $sql = "INSERT INTO match_data ($cols) VALUES ($params)";
-      //error_log($sql,3,"c:/wamp/logs/php_error.log");
       $query = self::$conn->prepare($sql);
       foreach ($data as $col => $val) {
         if(in_array($col, self::$matchDataCols)) {
@@ -111,31 +109,19 @@ class DatabaseModel {
       $query->execute();
       
       $matchDataId = self::$conn->lastInsertId();
-      /*if(isset($data['cycles'])) { //insert each cycle
-        foreach($data['cycles'] as $cycle) {
-          $cycle['match_data_id'] = $matchDataId;
-          $cols = "";
-          $params = "";
-          foreach ($cycle as $col=>$val) {
-            if(in_array($col, self::$cycleCols)) {
-              $cols .= ($cols=="")? '' : ', ';
-              $cols .= $col;
-              $params .= ($params=='')? '' : ', ';
-              $params .= ":$col";
-            }
-          }
-          $sql = "INSERT INTO cycles ($cols) VALUES ($params)";
-          $query = self::$conn->prepare($sql);
-          foreach ($cycle as $col => $val) {
-            if(in_array($col, self::$cycleCols)) {
-              $query->bindValue(":$col", $val);
-            }
-          }
-          $query->execute();
-        }
-      }*/
       
-     if(!$trans) self::$conn->commit();
+
+      if(isset($data['note'])) {
+        $query->closeCursor();
+        $sql = 'INSERT INTO notes (team, match_number, text) VALUES (:team, :match_number, :text)';
+        $query = self::$conn->prepare($sql);
+        $query->bindValue(':match_number', $data['match_number']);
+        $query->bindValue(':team', $data['team_number']);
+        $query->bindValue(':text', $data['note']);
+        $query->execute();
+      }
+           if(!$trans) self::$conn->commit();
+    return true;
     }
     
     public function updateMatch($data) {
@@ -220,24 +206,7 @@ class DatabaseModel {
     public function getTeamData($team,$includeAggrigated = TRUE) {
     
       $fileRoot = $GLOBALS['fileRoot'];
-      
-      /*$aggSql = file_get_contents($fileRoot . 'aggregate_query.sql');
-      $aggQuery = self::$conn->prepare($aggSql);
-      $aggQuery->bindValue(':team_number', $team);
-      $aggQuery->execute();
-      $data = $aggQuery->fetch(PDO::FETCH_ASSOC);
-      
-      $matchSql = file_get_contents($fileRoot . 'matches_query.sql');
-      $matchQuery = self::$conn->prepare($matchSql);
-      $matchQuery->bindValue(':team_number', $team);
-      $matchQuery->execute();
-      $matches = $matchQuery->fetchAll(PDO::FETCH_ASSOC);
-      
-      $cyclesSql = file_get_contents($fileRoot . 'cycle_query.sql');
-      $cyclesQuery = self::$conn->prepare($cyclesSql);
-      $cyclesQuery->bindValue(':team_number', $team);
-      $cyclesQuery->execute();
-      $cycles = $cyclesQuery->fetchAll(PDO::FETCH_ASSOC);*/
+     
       self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
       $sql = file_get_contents($fileRoot . 'UberQueryDOrlando.sql');
       $query = self::$conn->prepare($sql);
@@ -261,25 +230,16 @@ class DatabaseModel {
       $query->nextRowset();
       $query->nextRowset();
       $data = $query->fetch(PDO::FETCH_ASSOC);
+      $query->closeCursor();
       
-     // echo var_dump($data);
-     echo "<!--";
-      /*foreach($matches as &$match) { //zip cycles into each match
-        echo " zip ";
-        $matchCycles = [];
-        foreach($cycles as $cycle) {
-          echo '<i>boink </i>';
-          if($cycle['match_number'] == $match['match_number']) {
-            echo '<b>pling</b> ';
-            $matchCycles[] = $cycle;
-          }
-        }
-        $match['num_cycles'] = count($matchCycles);
-        $match['cycles'] = $matchCycles;
-      }*/
+      $noteSql = 'SELECT match_number, team, text FROM notes WHERE team = :team';
+      $noteQuery = self::$conn->prepare($noteSql);
+      $noteQuery->bindValue(':team', $team);
+      $noteQuery->execute();
+      $data['notes'] = $noteQuery->fetchAll(PDO::FETCH_ASSOC);
+      
       $data['num_matches'] = count($matches);
       $data['matches'] = $matches;
-      echo "-->";
       return $data;
       
     }
@@ -322,5 +282,14 @@ class DatabaseModel {
      // $query->bindValue(':team', $team);
       $query->execute();
       return $query->fetchAll(PDO::FETCH_ASSOC);
-    } 
+    }
+
+    public function submitNote($data) {
+      $sql = 'INSERT INTO notes (team, text) VALUES (:team, :text)';
+      $query = self::$conn->prepare($sql);
+      $query->bindValue(':team', $data['team']);
+      $query->bindValue(':text', $data['text']);
+      $query->execute();
+      return true;
+    }
   }

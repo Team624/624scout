@@ -112,19 +112,28 @@ class TeamInfoTemplate extends Template {
       </div>
     </div>
    </div>
+   <div> Notes </div>
+   <div class="box">
+    <?php foreach($d['notes'] as $note) { ?>
+        <?php if (isset($note['match_number'])) { ?>
+          Q<?= $note['match_number']?>:
+        <?php } ?>
+        <div class="note box"><?= $note['text'] ?></div>
+    <?php } ?>
+   </div>
    <div> Raw Data </div>
    <div class="table-holder">
     <table class="raw-table">
       <tr>
         <?php foreach ($d as $key => $val) { 
-          if($key !== 'matches' && $key !== 'name') {
+          if($key !== 'matches' && $key !== 'name' && $key !=='notes') {
         ?>
           <th><p><?= $key?></p></th>
         <?php }} ?>
       </tr>
       <tr>
         <?php foreach ($d as $key=>$val) {
-          if($key !== 'matches' && $key !== 'name') {
+          if($key !== 'matches' && $key !== 'name' && $key !=='notes') {
          ?>
           <td><div><?= $val===null?'--':$val ?></div></td>
         <?php }} ?>

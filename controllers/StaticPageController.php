@@ -30,4 +30,7 @@ class StaticPageController extends Controller {
  protected function scoutList() {
   (new ScoutListView())->render();
  }
+ protected function noteEntry() {
+	(new NoteEntryView())->render();
+ }
 }

@@ -238,7 +238,9 @@ input.num {
   box-shadow: 0 0 2px 0 rgba(0,0,0,0.2) inset;
   background-color:#d8d8d8;
 }
-
+.note.box {
+  display: inline-block;
+}
 .cycle.form-row {
   display: inline-block;
   vertical-align: top;

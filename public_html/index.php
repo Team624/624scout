@@ -34,10 +34,7 @@ function autoload($class) {
 spl_autoload_register('autoload');
 
 
-$config = new Configuration($fileRoot . 'config.ini');
-
-Session::setup();
-    
+$config = new Configuration($fileRoot . 'config.ini'); 
 $controller = isset ($_GET['controller']) ? $_GET['controller'] : 'page';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 function h($s) {
@@ -58,6 +55,9 @@ switch ($controller) {
     break;
   case 'matchInfo':
     (new MatchInfoController($action))->executeAction();
+    break;
+  case 'notes':
+    (new NotesController($action))->executeAction();
     break;
   default: 
     header('HTTP/1.1 404 Not Found');
