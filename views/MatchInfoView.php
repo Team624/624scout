@@ -10,7 +10,11 @@ class MatchInfoView implements View {
     $db = new DatabaseModel();
     $template = new MatchInfoTemplate();
     $template->set('match', $this->match);
-    $template->set('data', $db->getMatchData($this->match));
+    try {
+      $template->set('data', $db->getMatchData($this->match));
+    } catch (Exception $ex) {
+      die ($ex->getMessage());
+    }
     $template->render();
    //echo var_dump($db->getTeamData($this->team));
   }
