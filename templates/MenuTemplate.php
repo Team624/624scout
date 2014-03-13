@@ -19,6 +19,7 @@ class MenuTemplate extends Template {
           <li><a href="/?controller=page&amp;action=scoutList">Scout List</a></li>
           <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
           <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
+		  <li><a href="/?controller=page&amp;action=noteEntry">Note Entry</a></li>
         </ul>
       </div>
     </div>
@@ -34,6 +35,7 @@ class MenuTemplate extends Template {
         <li><a href="/?controller=page&amp;action=scoutList"> Scout List</a></li>
         <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
         <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
+		<li><a href="/?controller=page&amp;action=noteEntry">Note Entry</a></li>
       </ul>
     </div>
     <div class="page">
