@@ -12,7 +12,7 @@ class MatchInfoView implements View {
     $template->set('match', $this->match);
     try {
       $template->set('data', $db->getMatchData($this->match));
-    } catch ($ex) {
+    } catch (Exception $ex) {
       die ($ex->getMessage());
     }
     $template->render();
