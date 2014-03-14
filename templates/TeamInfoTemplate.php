@@ -13,6 +13,9 @@ class TeamInfoTemplate extends Template {
     Team <?=$this->data['team']?> - <?=$d['name']?>
    </div>
   <div> <b><?=$d['matches_played']?></b> matches actually played, <b><?=$d['no_show']?></b> no-shows </div>
+    <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg')) { ?>
+    <a href="<?='/team_pics/' . $d['team_number'] . '.jpg' ?>">Image</a>
+  <?php } ?>
   <br>
   <div class = "sec-title">Autonomous</div>
   <hr>
@@ -127,11 +130,7 @@ class TeamInfoTemplate extends Template {
         <div class="note box"><?= $note['text'] ?></div>
     <?php } ?>
    </div>
-<div>
-  <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg')) { ?>
-    <img src="<? =$_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg' ?>"></img>
-  <?php } ?>
-</div>
+
  <br>
 <br>
    <div class = "sec-title"> Raw Data </div>
