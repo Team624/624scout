@@ -4,6 +4,9 @@ $(document).ready(function() {
   if($('#searchTeam').val() > 0){
     loadMatchInfo();
   }
+  if($('#searchMatch').val() > 0){
+    loadMatchInfo();
+  }
   $('#searchMatchBut').click(function() {
     loadMatchInfo();
   });
