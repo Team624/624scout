@@ -125,6 +125,11 @@ class TeamInfoTemplate extends Template {
       <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
     </div>
  </div>
+<div>
+  <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg')) { ?>
+    <img src="<?=$_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg'?>"></img>
+  <?php } ?>
+</div>
  <br>
 <br>
    <div class = "sec-title"> Raw Data </div>
