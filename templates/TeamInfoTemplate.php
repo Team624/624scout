@@ -46,15 +46,7 @@ class TeamInfoTemplate extends Template {
     High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
     </div>
    </div>
-   <div> Notes </div>
-   <div class="box">
-    <?php foreach($d['notes'] as $note) { ?>
-        <?php if (isset($note['match_number'])) { ?>
-          Q<?= $note['match_number']?>:
-        <?php } ?>
-        <div class="note box"><?= $note['text'] ?></div>
-    <?php } ?>
-   </div>
+   
    <div> Raw Data </div>
     <div class="row">
     Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
@@ -125,9 +117,19 @@ class TeamInfoTemplate extends Template {
       <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
     </div>
  </div>
+ <div class = "sec-title"> Notes </div>
+ <hr>
+   <div class="box">
+    <?php foreach($d['notes'] as $note) { ?>
+        <?php if (isset($note['match_number'])) { ?>
+          Q<?= $note['match_number']?>:
+        <?php } ?>
+        <div class="note box"><?= $note['text'] ?></div>
+    <?php } ?>
+   </div>
 <div>
   <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg')) { ?>
-    <img src="<?=$_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg'?>"></img>
+    <img src="<? =$_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg' ?>"></img>
   <?php } ?>
 </div>
  <br>
