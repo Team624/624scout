@@ -36,16 +36,51 @@ spl_autoload_register('autoload');
 
 $config = new Configuration($fileRoot . 'config.ini');
 
-Session::setup();
-    
+//Session::setup();
+session_start();  
+//assignControlers();
 $controller = isset ($_GET['controller']) ? $_GET['controller'] : 'page';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
+$specialKey = "";
+$specialKey = isset($_GET['uid']) ? $_GET['uid'] = "excelPro" : "";
+$isSpecial = $controller == "page" && $action == 'rawData' && $specialKey == "excelPro";
+if(isset($_SESSION['valid']) || $controller == "loginer" || $isSpecial){
+  
+}
+else{
+  if(isset($_COOKIE["youReal"])){
+    switch($_COOKIE["youReal"]){
+      case Session::$scoutCookieCode:
+        $_SESSION['valid'] = TRUE;
+        $_SESSION['entry'] = FALSE;
+        $_SESSION['setup'] = FALSE;
+        break;
+      case Session::$entererCookieCode:
+        $_SESSION['valid'] = TRUE;
+        $_SESSION['entry'] = TRUE;
+        $_SESSION['setup'] = TRUE;
+        break;
+    }
+    //assignControlers();
+  }
+  else{
+    $controller = "page";
+    $action = "testMe";
+  }
+}
+
+/*function assignControlers(){
+  $controller = isset ($_GET['controller']) ? $_GET['controller'] : 'page';
+  $action = isset($_GET['action']) ? $_GET['action'] : 'index';
+}*/
+
 function h($s) {
   return htmlspecialchars($s);
 }
+
 switch ($controller) {
   case 'page':
-    (new StaticPageController($action))->executeAction();
+   (new StaticPageController($action))->executeAction();
     break;
   case 'submit':
     (new SubmitController($action))->executeAction();
@@ -58,6 +93,9 @@ switch ($controller) {
     break;
   case 'matchInfo':
     (new MatchInfoController($action))->executeAction();
+    break;
+  case 'loginer':
+    (new LoginerController($action))->executeAction();
     break;
   default: 
     header('HTTP/1.1 404 Not Found');

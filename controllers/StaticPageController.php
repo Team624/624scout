@@ -11,11 +11,15 @@ class StaticPageController extends Controller {
  }
  
  protected function dataEntry() {
-  (new DataEntryView())->render();
+  if($_SESSION['entry']==TRUE){
+    (new DataEntryView())->render();
+  }
  }
  
  protected function setup() {
+  if($_SESSION['setup']==TRUE){
   (new SetupView())->render();
+  }
  }
  
  protected function rawData() {
@@ -29,5 +33,8 @@ class StaticPageController extends Controller {
  }
  protected function scoutList() {
   (new ScoutListView())->render();
+ }
+ protected function testMe() {
+  (new TestMeView())->render();
  }
 }

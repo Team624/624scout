@@ -10,7 +10,7 @@ abstract class PageView implements View {
   function renderMenus() {
     
     $template = new MenuTemplate();
-    if(Session::isLoggedIn()) {
+    /*if(Session::isLoggedIn()) {
       $user = Session::getLoggedInUser();
       $template->set('user', $user->username);
       $template->set('is_approved', $user->is_approved);
@@ -20,7 +20,7 @@ abstract class PageView implements View {
       $template->set('is_admin', $user->is_admin);
       $template->set('fname', $user->fname);
       $template->set('lname', $user->lname);
-    }
+    }*/
     $template->render();
   }
   

@@ -1,6 +1,8 @@
 <?php
 class Session {
-  protected static $user;
+  public static $scoutCookieCode = "ItotesAscoutBro";
+  public static $entererCookieCode = "IAproSwagEnterManmasta";
+  /*protected static $user;
   protected static $isLoggedIn;
   public static function setup() {
     session_start();    
@@ -37,5 +39,5 @@ class Session {
     self::$user = $user;
     self::$isLoggedIn = true;
     $_SESSION['user'] = $user->id;
-  }
+  }*/
 }
