@@ -23,6 +23,11 @@ class MenuTemplate extends Template {
             <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
             <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
           <?php } ?>
+          <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
+          <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
+          <?php if(isset($_SESSION['entry']) && $_SESSION['entry']==TRUE){ ?>
+            <li><a href="/?controller=page&amp;action=noteEntry">Note Entry</a></li>
+          <?php } ?>
         </ul>
       </div>
     </div>
@@ -42,6 +47,12 @@ class MenuTemplate extends Template {
           <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
           <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
         <?php } ?>
+
+        <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
+        <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
+        <?php if(isset($_SESSION['entry']) && $_SESSION['entry']==TRUE){ ?>
+            <li><a href="/?controller=page&amp;action=noteEntry">Note Entry</a></li>
+          <?php } ?>
       </ul>
     </div>
     <div class="page">

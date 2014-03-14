@@ -34,11 +34,13 @@ function autoload($class) {
 spl_autoload_register('autoload');
 
 
+
 $config = new Configuration($fileRoot . 'config.ini');
 
 //Session::setup();
 session_start();  
 //assignControlers();
+
 $controller = isset ($_GET['controller']) ? $_GET['controller'] : 'page';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 $specialKey = "";
@@ -96,6 +98,9 @@ switch ($controller) {
     break;
   case 'loginer':
     (new LoginerController($action))->executeAction();
+    break;
+  case 'notes':
+    (new NotesController($action))->executeAction();
     break;
   default: 
     header('HTTP/1.1 404 Not Found');

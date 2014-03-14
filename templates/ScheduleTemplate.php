@@ -23,14 +23,14 @@ class ScheduleTemplate extends Template {
     </tr>
     <?php foreach($s as $row) { ?>
       <tr>
-      <td class="match-number"><?=$row['match_number']?></td>
+      <td class="match-number"><a class="invisilink" href="/?controller=matchInfo&action=display&match=<?=$row['match_number']?>"><?=$row['match_number']?></a></td>
       <td class="match-time"><?=$row['time']?></td>
-      <td class="red"><?=$row['red_1']?></td>
-      <td class="red"><?=$row['red_2']?></td>
-      <td class="red"><?=$row['red_3']?></td>
-      <td class="blue"><?=$row['blue_1']?></td>
-      <td class="blue"><?=$row['blue_2']?></td>
-      <td class="blue"><?=$row['blue_3']?></td>
+      <td class="red"><a href="/?controller=teamInfo&action=display&team=<?=$row['red_1']?>" class="invisilink"><?=$row['red_1']?></a></td>
+      <td class="red"><a href="/?controller=teamInfo&action=display&team=<?=$row['red_2']?>" class="invisilink"><?=$row['red_2']?></a></td>
+      <td class="red"><a href="/?controller=teamInfo&action=display&team=<?=$row['red_3']?>" class="invisilink"><?=$row['red_3']?></a></td>
+      <td class="blue"><a href="/?controller=teamInfo&action=display&team=<?=$row['blue_1']?>" class="invisilink"><?=$row['blue_1']?></a></td>
+      <td class="blue"><a href="/?controller=teamInfo&action=display&team=<?=$row['blue_2']?>" class="invisilink"><?=$row['blue_2']?></a></td>
+      <td class="blue"><a href="/?controller=teamInfo&action=display&team=<?=$row['blue_3']?>" class="invisilink"><?=$row['blue_3']?></a></td>
     <?php } ?>
     </table>
   </div>

@@ -113,6 +113,7 @@ class DataEntryTemplate extends Template {
       <label>Pushing<input type="text" class="num" id="pushing"></label>
       <label>Defense<input type="text" class="num" id="defense"></label>
     </div>
+    Notes:<textarea id="entry-notes"></textarea>
    </form>
    <div>
     <button class="big button" id="submit">Submit</div>

@@ -45,6 +45,17 @@ class TeamInfoTemplate extends Template {
     <div class="row">
     High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
     </div>
+   </div>
+   <div> Notes </div>
+   <div class="box">
+    <?php foreach($d['notes'] as $note) { ?>
+        <?php if (isset($note['match_number'])) { ?>
+          Q<?= $note['match_number']?>:
+        <?php } ?>
+        <div class="note box"><?= $note['text'] ?></div>
+    <?php } ?>
+   </div>
+   <div> Raw Data </div>
     <div class="row">
     Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
     </div> 
@@ -122,14 +133,14 @@ class TeamInfoTemplate extends Template {
     <table class="raw-table">
       <tr>
         <?php foreach ($d as $key => $val) { 
-          if($key !== 'matches' && $key !== 'name') {
+          if($key !== 'matches' && $key !== 'name' && $key !=='notes') {
         ?>
           <th><p><?= $key?></p></th>
         <?php }} ?>
       </tr>
       <tr>
         <?php foreach ($d as $key=>$val) {
-          if($key !== 'matches' && $key !== 'name') {
+          if($key !== 'matches' && $key !== 'name' && $key !=='notes') {
          ?>
           <td><div><?= $val===null?'--':$val ?></div></td>
         <?php }} ?>

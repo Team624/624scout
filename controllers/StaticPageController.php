@@ -36,5 +36,10 @@ class StaticPageController extends Controller {
  }
  protected function testMe() {
   (new TestMeView())->render();
+}
+ protected function noteEntry() {
+  if($_SESSION['entry']==TRUE){
+    (new NoteEntryView())->render();
+    }
  }
 }

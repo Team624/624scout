@@ -29,6 +29,11 @@ height: 30px;
   float:left;
 }
 
+a.invisilink {
+  color: black;
+  text-decoration: none;
+}
+
 .menu {
   list-style-type: none;
   margin: 0;
@@ -238,7 +243,9 @@ input.num {
   box-shadow: 0 0 2px 0 rgba(0,0,0,0.2) inset;
   background-color:#d8d8d8;
 }
-
+.note.box {
+  display: inline-block;
+}
 .cycle.form-row {
   display: inline-block;
   vertical-align: top;
@@ -475,6 +482,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c9b00', end
   width: 100%;
 }
 
+
 .sec-title{
   font-weight:bold;
   font-size: 16px;
@@ -502,3 +510,4 @@ input.password{
 .entry{
   margin-top: 15px;
 }
+

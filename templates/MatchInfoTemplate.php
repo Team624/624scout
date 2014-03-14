@@ -19,7 +19,7 @@ class MatchInfoTemplate extends Template {
       $i++;
       $trClass = ($i<=3) ?  "redAlliance" : "blueAlliance";
       ?>
-      <? =(if($i=4){ "<br>"};) ?>
+      <?= $i=4 ? '<br>' : '' ?>
         <div class="box">
           <div class="row"><a href = <?=("/?controller=teamInfo&action=display&team=" . $t)?>><?=$t?></a></div>
           <div class="row"><?=$td['name']?></div>
