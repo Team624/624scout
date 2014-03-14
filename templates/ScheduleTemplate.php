@@ -23,7 +23,7 @@ class ScheduleTemplate extends Template {
     </tr>
     <?php foreach($s as $row) { ?>
       <tr>
-      <td class="match-number"><a href="/?controller=matchInfo&action=display&match=<?=$row['match_number']?>"><?=$row['match_number']?></a></td>
+      <td class="match-number"><a class="invisilink" href="/?controller=matchInfo&action=display&match=<?=$row['match_number']?>"><?=$row['match_number']?></a></td>
       <td class="match-time"><?=$row['time']?></td>
       <td class="red"><a href="/?controller=teamInfo&action=display&team=<?=$row['red_1']?>" class="invisilink"><?=$row['red_1']?></a></td>
       <td class="red"><a href="/?controller=teamInfo&action=display&team=<?=$row['red_2']?>" class="invisilink"><?=$row['red_2']?></a></td>
