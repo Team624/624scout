@@ -47,7 +47,9 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     (fouls * 20 + tech_fouls * 50) as foul_points,
     driving_rating,
     pushing_rating,
-    defense_rating
+    defense_rating,
+   IFNULL(auto_high_hot,0)*20 + IFNULL(auto_high_cold,0)*15 + IFNULL(auto_low_hot,0)*11 + IFNULL(auto_low_cold*6,0) + IFNULL(auto_mobility*5,0) + IFNULL(auto_block*15,0)
+      + tele_high_score*10 + tele_low_score*1 + ((human_load+floor_load+other_possess+catch)-(tele_high_score+tele_low_score+tele_high_miss+tele_low_miss+dropped_balls))*10 + truss*10 + catch*10 AS PS
     
 	FROM match_data
 	INNER JOIN scouts ON match_data.scout_id = scouts.id
@@ -115,7 +117,8 @@ CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY (
   sum(floor_load+floor_load_miss) as 'floor_load_attempts',
   ROUND(SUM(floor_load)/sum(floor_load+floor_load_miss),2) as 'floor_load_accuracy',
   sum(other_possess) as 'other_possess',
-  sum(dropped_balls) as 'dropped_balls'
+  sum(dropped_balls) as 'dropped_balls',
+  ROUND(avg(PS), 2) as 'PS'
 FROM matches_result
 INNER JOIN teams ON teams.number = matches_result.team_number
 );

@@ -63,18 +63,12 @@ else{
         $_SESSION['setup'] = TRUE;
         break;
     }
-    //assignControlers();
   }
   else{
     $controller = "page";
     $action = "testMe";
   }
 }
-
-/*function assignControlers(){
-  $controller = isset ($_GET['controller']) ? $_GET['controller'] : 'page';
-  $action = isset($_GET['action']) ? $_GET['action'] : 'index';
-}*/
 
 function h($s) {
   return htmlspecialchars($s);
@@ -101,6 +95,9 @@ switch ($controller) {
     break;
   case 'notes':
     (new NotesController($action))->executeAction();
+    break;
+  case 'rankings':
+    (new RankingsController($action))->executeAction();
     break;
   default: 
     header('HTTP/1.1 404 Not Found');
