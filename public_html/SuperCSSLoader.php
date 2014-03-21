@@ -8,9 +8,7 @@
 // mobile connections.
 header('Content-Type: text/css');
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 604800)); //Tell the browser to cache this for 1 week
-?><!--@media(max-width: 549px) { 
-      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-      }--><?php
+
 include ('./stylesheets/skins/polaris/polaris.css');
 include ('./stylesheets/alertify.core.css');
 include ('./stylesheets/alertify.default.css');
