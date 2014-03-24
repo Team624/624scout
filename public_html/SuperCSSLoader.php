@@ -19,7 +19,8 @@ include ('./stylesheets/icon-font.css');
 
 $mainFiles = [
 'style-Main.css',
-'matchInfo.css'
+'matchInfo.css',
+'info-bar.css'
 ];
 //include ('./stylesheets/style-Main.css');
 foreach($mainFiles as $file) {

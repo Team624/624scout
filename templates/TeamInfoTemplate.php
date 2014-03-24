@@ -17,7 +17,26 @@ class TeamInfoTemplate extends Template {
     <a href="<?='/team_pics/' . $d['team_number'] . '.jpg' ?>">Image</a>
   <?php } ?>
   <br>
-  <div class = "sec-title">Autonomous</div>
+  <div class = "info-bar-holder">
+	<div class = "info-bar">
+		<div class = "section">
+			<div class = "info-title">Autonomous</div>
+			<div class="row">
+			  High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
+			</div>
+			<div class="row">
+			  Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
+			</div>
+			<div class="row">
+			  Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
+			</div>
+		</div>
+		<div class = "section">
+			Chart!
+		</div>
+	</div>
+  </div>
+  <!--<div class = "sec-title">Autonomous</div>
   <hr>
   <div class="box">
     Start in White Zone: <b><?=$d['auto_normal']?></b> / <b><?=$d['matches_played']?></b> matches
@@ -119,7 +138,7 @@ class TeamInfoTemplate extends Template {
     <div class="row">
       <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
     </div>
- </div>
+ </div>-->
  <div class = "sec-title"> Notes </div>
  <hr>
    <div class="box">
