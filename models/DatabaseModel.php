@@ -243,6 +243,19 @@ class DatabaseModel {
       return $data;
       
     }
+    
+    public function getAllTeamData() {
+      $fileRoot = $GLOBALS['fileRoot'];
+      $sql = file_get_contents($fileRoot . 'TeamsQuery.sql');
+      $query = self::$conn->prepare($sql);
+      $query->execute();
+      $result = $query->fetchAll(PDO::FETCH_ASSOC);
+      $teams = [];
+      foreach($result as $row) {
+        $teams[$row['team_number']] = $row;
+      }
+      return $teams;
+    }
     public function getMatchData($match) {
     
       $fileRoot = $GLOBALS['fileRoot'];

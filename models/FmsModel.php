@@ -40,19 +40,19 @@ class FmsModel {
       if ($i >= 3)  {
         $cols = $row->getElementsByTagName('td');
         $result = [];
-        $result['time'] = $cols->item(0)->nodeValue;
-        $result['match'] = $cols->item(1)->nodeValue;
-        $result['red_1'] = $cols->item(2)->nodeValue;
-        $result['red_2'] = $cols->item(3)->nodeValue;
-        $result['red_3'] = $cols->item(4)->nodeValue;
-        $result['blue_1'] = $cols->item(5)->nodeValue;
-        $result['blue_2'] = $cols->item(6)->nodeValue;
-        $result['blue_3'] = $cols->item(7)->nodeValue;
-        $result['red_score'] = $cols->item(8)->nodeValue;
+        $result['time'] =       $cols->item(0)->nodeValue;
+        $result['match'] =      $cols->item(1)->nodeValue;
+        $result['red_1'] =      $cols->item(2)->nodeValue;
+        $result['red_2'] =      $cols->item(3)->nodeValue;
+        $result['red_3'] =      $cols->item(4)->nodeValue;
+        $result['blue_1'] =     $cols->item(5)->nodeValue;
+        $result['blue_2'] =     $cols->item(6)->nodeValue;
+        $result['blue_3'] =     $cols->item(7)->nodeValue;
+        $result['red_score'] =  $cols->item(8)->nodeValue;
         $result['blue_score'] = $cols->item(9)->nodeValue;
-        $result['red_won'] = intval($result['red_score']) > intval($result['blue_score']);
+        $result['redWins'] = intval($result['red_score']) > intval($result['blue_score']);
         $result['tie'] = intval($result['red_score']) === intval($result['blue_score']);
-        $results[] = $result;
+        $results[$result['match']] = $result;
       }
       $i++;
     }
