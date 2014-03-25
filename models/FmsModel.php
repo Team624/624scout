@@ -1,7 +1,9 @@
 <?php
 class FmsModel {
   public static $EVENT_CODE = 'FLOR';
-  
+  public static $trimFields = [
+    'QS','assist','auto','trussCatch','teleop'
+  ];
   public function getRankings() {
     $text = file_get_contents('http://www2.usfirst.org/2014comp/events/' . self::$EVENT_CODE . '/rankings.html');
     $doc = new DOMDocument();
@@ -13,6 +15,7 @@ class FmsModel {
       if ($i >= 2)  {
         $cols = $row->getElementsByTagName('td');
         $rankingRow = [];
+        $rankingRow['seed'] = $cols->item(0)->nodeValue;
         $rankingRow['team'] = $cols->item(1)->nodeValue;
         $rankingRow['QS'] = $cols->item(2)->nodeValue;
         $rankingRow['assist'] = $cols->item(3)->nodeValue;
@@ -22,6 +25,9 @@ class FmsModel {
         $rankingRow['record'] = $cols->item(7)->nodeValue;
         $rankingRow['DQ'] = $cols->item(8)->nodeValue;
         $rankingRow['played'] = $cols->item(9)->nodeValue;
+        foreach(self::$trimFields as $field) {
+          $rankingRow[$field] = preg_replace('/\.00$/','',$rankingRow[$field]);
+        }
         $rankings[$cols->item(0)->nodeValue] = $rankingRow;
       }
       $i++;

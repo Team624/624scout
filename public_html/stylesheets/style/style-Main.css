@@ -510,4 +510,17 @@ input.password{
 .entry{
   margin-top: 15px;
 }
+.rankings tr {
+  background:#aae;
+}
+.rankings tr.odd-qs {
+  background: #eaa;
+}
+
+.rankings tr td.us {
+  background: #aea;
+}
+.rankings .ltm {
+  background: #aae;
+}
 

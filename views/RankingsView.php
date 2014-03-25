@@ -1,7 +1,7 @@
 <?php
 
 class RankingsView extends PageView {
-  public function renderBody() {   
+ /* public function renderBody() {   
     $db = new DatabaseModel();
     $fms = new FmsModel();
     $schedule = $db->getSchedule();
@@ -17,12 +17,45 @@ class RankingsView extends PageView {
       echo '<br />';
        $correct = $predictor->checkAccuracy($predSched, $results);
       echo 'correct: ' . $correct;
-      if($correct <= $lastCorrect) $predictor->unmutate();
+      if($correct < $lastCorrect) { 
+        $predictor->unmutate();
+      } else {
+            $lastCorrect = $correct;
+      }
       echo '<br />';
-      $lastCorrect = $correct;
+
     }
     
     $template = new RankingsTemplate();
+    $template->render();
+  }*/
+  public function renderBody() {
+    $fms = new FmsModel();
+    $rankings = $fms->getRankings();
+    $lastQS = 0;
+    $odd = false;
+    foreach($rankings as &$rank) {
+      if($rank['QS'] !== $lastQS) {
+       $odd = !$odd;
+      }
+      $lastQS = $rank['QS'];
+      $rank['oddQS'] = $odd;
+    }
+    $maxPlayed = 0;
+    foreach($rankings as &$rank) {
+      if($rank['played'] > $maxPlayed) {
+        $maxPlayed = $rank['played'];
+      }
+    }
+    foreach($rankings as &$rank) {
+      if($rank['played'] < $maxPlayed) {
+        $rank['lessThanMax'] = true;
+      } else {
+        $rank['lessThanMax'] = false;
+      }
+    }
+    $template = new RankingsTemplate();
+    $template->set('rankings', $rankings);
     $template->render();
   }
 }
