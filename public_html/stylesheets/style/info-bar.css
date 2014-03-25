@@ -1,0 +1,28 @@
+.info-bar-holder{
+	width: 100%;
+	position:relative;
+	margin-left:-10px;
+	margin-right:-10px;
+	left:0px;
+}
+.info-bar{
+	width: 100%;
+	border: solid black;
+	border-width: 2px 0 2px 0;
+	padding: 0 10px 0 10px;
+	overflow: hidden; /* will contain if #first is longer than #second */
+}
+.info-bar > .section{
+	height: 100%;
+	width:50%;
+}
+.left.section{
+	float:left; 
+}
+.right.section{
+	
+	overflow: hidden; 
+}
+.section > .table-holder{
+	margin: 5px 10px 0 5px;
+}

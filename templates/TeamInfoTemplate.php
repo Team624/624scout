@@ -19,7 +19,7 @@ class TeamInfoTemplate extends Template {
   <br>
   <div class = "info-bar-holder">
 	<div class = "info-bar">
-		<div class = "section">
+		<div class = "left section">
 			<div class = "info-title">Autonomous</div>
 			<div class="row">
 			  High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
@@ -31,8 +31,23 @@ class TeamInfoTemplate extends Template {
 			  Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
 			</div>
 		</div>
-		<div class = "section">
-			Chart!
+		<div class = "right section">
+			<div class="table-holder">
+				<table>
+					<thead>
+						<th>Matches</th>
+						<?php foreach($d['matches'] as $m) { ?>
+							<th><?=$m['match_number']?></th>
+						<?php } ?>
+					</thead>
+					<tr>
+						<td>High Goals</td>
+						<td>2</td>
+						<td>1</td>
+						<td>2</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
   </div>
