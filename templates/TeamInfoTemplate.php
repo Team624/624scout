@@ -33,7 +33,7 @@ class TeamInfoTemplate extends Template {
 		</div>
 		<div class = "right section">
 			<div class="table-holder">
-				<table>
+				<table class="matchByMatch">
 					<thead>
 						<th>Matches</th>
 						<?php foreach($d['matches'] as $m) { ?>
@@ -41,10 +41,26 @@ class TeamInfoTemplate extends Template {
 						<?php } ?>
 					</thead>
 					<tr>
-						<td>High Goals</td>
-						<td>2</td>
-						<td>1</td>
-						<td>2</td>
+						<td nowrap>High (Hot-Cold-Miss)</td>
+						<?php foreach($d['matches'] as $m) { 
+							if($m['auto_high_hot']+$m['auto_high_cold']+$m['auto_high_miss']>0){ ?>
+								<td><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
+							<?php }
+							else{ ?>
+								<td><div class="icon-cancel-circle"></div></td>
+							<?php } ?>
+						<?php } ?>
+					</tr>
+					<tr>
+						<td nowrap>Low (Hot-Cold-Miss)</td>
+						<?php foreach($d['matches'] as $m) { 
+							if($m['auto_low_hot']+$m['auto_low_cold']+$m['auto_low_miss']>0){ ?>
+								<td><?=$m['auto_low_hot']?>-<?=$m['auto_low_cold']?>-<?=$m['auto_low_miss']?></td>
+							<?php }
+							else{ ?>
+								<td class="didNotDo"><div class="icon-cancel-circle"></div></td>
+							<?php } ?>
+						<?php } ?>
 					</tr>
 				</table>
 			</div>
