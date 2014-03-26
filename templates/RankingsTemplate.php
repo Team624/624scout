@@ -4,6 +4,7 @@ class RankingsTemplate extends Template {
 
   public function __construct() {
     $this->keys[] = 'rankings';
+    $this->keys[] = '624assist';
   }
   public function render() { ?>
     Rankings
@@ -28,9 +29,18 @@ class RankingsTemplate extends Template {
               <?=$rank['team']?>
             </a>
           </td>
-          <td <?=$rank['oddQS']?'ltm':''?>><?=$rank['played']?></td>
+          <td class="<?=$rank['lessThanMax']?'ltm':''?>">
+            <?=$rank['played']?>
+            <?php if($rank['lessThanMax']) { ?>
+              <span class="icon-arrow-up rank-icon"></span>
+            <?php } ?>
+          </td>
           <td><?=$rank['QS']?></td>
-          <td><?=$rank['assist']?></td>
+          <td><?=$rank['assist']?>
+            <?php if($rank['assist'] > $this->data['624assist']) { ?>
+              <span class="icon-notification rank-icon"></span>
+            <?php } ?>
+          </td>
           <td><?=$rank['auto']?></td>
           <td><?=$rank['trussCatch']?></td>
           <td><?=$rank['teleop']?></td>

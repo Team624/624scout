@@ -34,20 +34,23 @@ class RankingsView extends PageView {
     $rankings = $fms->getRankings();
     $lastQS = 0;
     $odd = false;
-    foreach($rankings as &$rank) {
+    $ourAssist = 0;
+    foreach($rankings as &$rank) { //break up alternating QS values and find 624's assist
       if($rank['QS'] !== $lastQS) {
        $odd = !$odd;
       }
       $lastQS = $rank['QS'];
       $rank['oddQS'] = $odd;
+      
+      if($rank['team'] == 624) $ourAssist = $rank['assist'];
     }
     $maxPlayed = 0;
-    foreach($rankings as &$rank) {
+    foreach($rankings as &$rank) { //find the highest num of matches played
       if($rank['played'] > $maxPlayed) {
         $maxPlayed = $rank['played'];
       }
     }
-    foreach($rankings as &$rank) {
+    foreach($rankings as &$rank) { //find teams that have played fewer than max matches
       if($rank['played'] < $maxPlayed) {
         $rank['lessThanMax'] = true;
       } else {
@@ -56,6 +59,7 @@ class RankingsView extends PageView {
     }
     $template = new RankingsTemplate();
     $template->set('rankings', $rankings);
+    $template->set('624assist', $ourAssist);
     $template->render();
   }
 }
