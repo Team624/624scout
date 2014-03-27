@@ -3,13 +3,40 @@ class SetupController extends Controller {
   public function display() {
     (new SetupView())->render();
   }
-  
+  public function loadTeams() {
+    $eventCode = strtolower($_POST['eventCode']); 
+    $opts = [
+      'http'=>[
+      'method'=>"GET",
+      'header'=>'X-TBA-App-Id: frc624:scouting-system:v2014.1'
+      ]
+    ];
+    $context = stream_context_create($opts);
+    $html = @file_get_contents("http://www.thebluealliance.com/api/v2/event/2014$eventCode/teams", false, $context);
+    if ($html === false) {
+      (new ErrorView(422, 'Unprocessable Entity', 'Error connecting to TBA API'))->render();
+      return;
+    }
+    $teamList = json_decode($html, true);
+    $teams = [];
+    foreach($teamList as $teamData) {
+      $teams[$teamData['team_number']] = $teamData['nickname'];
+    }
+    try {
+       $db = new DatabaseModel();
+       $db->setTeamList($teams);
+       (new ErrorView(200, 'OK'))->render();
+     } catch (Exception $ex) {
+    (new ErrorView(500, 'Internal Server Error', 'Database refuses to accept our perfectly good team list with ' . count($teams) . ' teams.'))->render();
+    }
+  }
   public function loadSchedule() {
     $eventCode = $_POST['eventCode'];
     
     $html = @file_get_contents("http://www2.usfirst.org/2014comp/Events/$eventCode/schedulequal.html");
     if ($html === false) {
       (new ErrorView(422, 'Unprocessable Entity', 'Match Data page loaded not goodly'))->render();
+      return;
     } else {
       $doc = new DOMDocument();
       @$doc->loadHTML($html);
@@ -46,6 +73,7 @@ class SetupController extends Controller {
      }
     }  
   }
+ 
 }
 //Third table
 

@@ -522,3 +522,19 @@ input.password{
 .rank-icon {
   float: right;
 }
+.long.num {
+  width: 100px;
+}
+
+#obliterate-dialog {
+  display: none;
+  position: absolute;
+  background: #faa;
+  padding: 20px;
+  border-radius: 10px;
+  left: 50px;
+  right: 50px;
+  top: 50px;
+  bottom: 50px;
+  text-align: center;
+}

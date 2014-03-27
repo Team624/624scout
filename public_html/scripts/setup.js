@@ -9,5 +9,17 @@
         alertify.error(dat.responseText);
       });
     });
+    $('#load-teams').click(function() {
+      $.post('/?controller=setup&action=loadTeams', {eventCode:$('#event-code').val()}, function(data) {
+        alertify.success('Team List loaded!');
+        window.console.log(data);
+      }).fail(function (dat) {
+      window.console.log(dat);
+        alertify.error(dat.responseText);
+      });
+    });
+    $('#obliterate-dialog-show').click(function() {
+      $('#obliterate-dialog').slideDown(1000);
+    });
   });
 })();
