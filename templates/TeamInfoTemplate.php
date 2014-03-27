@@ -41,13 +41,27 @@ class TeamInfoTemplate extends Template {
 						<?php } ?>
 					</thead>
 					<tr>
+						<td nowrap>Start Pos.</td>
+						<?php foreach($d['matches'] as $m) { 
+							if($m['no_show']>0){ ?>
+								<td>NO SHOW</td>
+							<?php }
+							else if($m['auto_normal'] > 0){ ?>
+								<td></td>
+							<?php } 
+							else { ?>
+								<td class="didNotDo">X</td>
+							<?php } ?>
+						<?php } ?>
+					</tr>
+					<tr>
 						<td nowrap>High (Hot-Cold-Miss)</td>
 						<?php foreach($d['matches'] as $m) { 
 							if($m['auto_high_hot']+$m['auto_high_cold']+$m['auto_high_miss']>0){ ?>
 								<td><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
 							<?php }
 							else{ ?>
-								<td><div class="icon-cancel-circle"></div></td>
+								<td class="didNotDo">x</td>
 							<?php } ?>
 						<?php } ?>
 					</tr>
@@ -58,7 +72,21 @@ class TeamInfoTemplate extends Template {
 								<td><?=$m['auto_low_hot']?>-<?=$m['auto_low_cold']?>-<?=$m['auto_low_miss']?></td>
 							<?php }
 							else{ ?>
-								<td class="didNotDo"><div class="icon-cancel-circle"></div></td>
+								<td class="didNotDo">x</td>
+							<?php } ?>
+						<?php } ?>
+					</tr>
+					<tr>
+						<td nowrap>Mobility</td>
+						<?php foreach($d['matches'] as $m) { 
+							if($m['auto_mobility']>0 && $m['auto_normal'] >0){ ?>
+								<td><div class="icon-checkmark-2"></div></td>
+							<?php }
+							else if($m['auto_normal'] < 1){ ?>
+								<td class="didNotDo"></td>
+							<?php } 
+							else { ?>
+								<td class="didNotDo">X</td>
 							<?php } ?>
 						<?php } ?>
 					</tr>

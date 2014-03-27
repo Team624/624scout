@@ -25,6 +25,8 @@
 .section > .table-holder{
 	margin: 5px 10px 0 5px;
 	overflow: auto;
+	border: 0px solid transparent;
+	border-width: 0 0 5px 0;
 }
 .right.section > .table-holder{
 	float:right;
