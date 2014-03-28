@@ -44,7 +44,7 @@ class SetupController extends Controller {
      $rowNum = 0;
      $schedule = [];
      foreach($rows as $row) {
-      if($rowNum >= 3) {
+      if($rowNum >= 2) {
         $schedRow = [];
         $cols = $row->getElementsByTagName('td');
         $schedRow['time'] = $cols->item(0)->nodeValue;
@@ -72,6 +72,21 @@ class SetupController extends Controller {
       (new ErrorView(500, 'Internal Server Error', $msg))->render();
      }
     }  
+  }
+  
+  public function obliterate() {
+    $pass = $_POST['password'];
+    try {
+      $db = new DatabaseModel();
+      if($db->obliterate($pass)) {
+        (new ErrorView(200, 'OK'))->render();
+      } else {
+        (new ErrorView(422, 'Unprocessable Entity', 'Incorrect password'))->render();
+      }
+    } catch (Exception $ex) {
+      $msg = $ex->getMessage();
+      (new ErrorView(500, 'Internal Server Error', $msg))->render();
+    }
   }
  
 }

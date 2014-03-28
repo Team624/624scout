@@ -27,7 +27,7 @@ class SetupTemplate extends Template {
   </div>
   
   <div id="obliterate-dialog">
-    <div><label>Obliteration Password:<input class="long num" type="password"></label></div>
+    <div><label>Obliteration Password:<input id="oblit-pass" class="long num" type="password"></label></div>
     <div><div class="red button" id="obliterate">OBLITERATE</div></div>
   </div>
   <?php }

@@ -21,5 +21,14 @@
     $('#obliterate-dialog-show').click(function() {
       $('#obliterate-dialog').slideDown(1000);
     });
+    $('#obliterate').click(function() {
+      $.post('/?controller=setup&action=obliterate', {password:$('#oblit-pass').val()}, function(data) {
+        alertify.success('Obliteration complete!');
+        window.console.log(data);
+      }).fail(function (dat) {
+      window.console.log(dat);
+        alertify.error(dat.responseText);
+      });
+    });
   });
 })();
