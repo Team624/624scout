@@ -9,6 +9,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS matches_result ENGINE = MEMORY(
     scouts.name as 'scout_name',
     auto_goalie,
     (auto_goalie = 0) AS 'auto_normal',
+    auto_location,
     auto_high_hot,
     auto_high_cold,
     auto_high_miss,
