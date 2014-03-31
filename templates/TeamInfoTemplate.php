@@ -18,419 +18,429 @@ class TeamInfoTemplate extends Template {
   <?php } ?>
   <br>
   <div class = "info-bar-holder">
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Autonomous</div>
-        <div class="row">
-          High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
-        </div>
-        <div class="row">
-          Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
-        </div>
-        <div class="row">
-          Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
-        </div>
-        <br>
-        Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
-        <div class="row">
-          Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
-        </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>Start Pos.</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['no_show']>0){ ?>
-                    <td>Nshow</td>
-                  <?php }
-                  else if($m['auto_normal'] > 0){ ?>
-                    <td><?=$m['auto_location']?></td>
-                  <?php } 
-                  else { ?>
-                    <td>Goal<?=$m['auto_location']?></td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>High (Hot-Cold-Miss)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['auto_high_hot']+$m['auto_high_cold']+$m['auto_high_miss']>0){ ?>
-                    <td><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (Hot-Cold-Miss)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['auto_low_hot']+$m['auto_low_cold']+$m['auto_low_miss']>0){ ?>
-                    <td><?=$m['auto_low_hot']?>-<?=$m['auto_low_cold']?>-<?=$m['auto_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Mobility</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['auto_mobility']>0 && $m['auto_normal'] >0){ ?>
-                    <td><div class="icon-checkmark-2"></div></td>
-                  <?php }
-                  else if($m['auto_normal'] < 1){ ?>
-                    <td class="didNotDo"></td>
-                  <?php } 
-                  else { ?>
-                    <td class="didNotDo">X</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Shooting</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Truss Ability</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
+	<div class = "bar-group">
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Autonomous</div>
+			<div class="row">
+			  High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
+			</div>
+			<div class="row">
+			  Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
+			</div>
+			<div class="row">
+			  Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
+			</div>
+			<br>
+			Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
+			<div class="row">
+			  Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
+			</div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>Start Pos.</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['no_show']>0){ ?>
+						<td>Nshow</td>
+					  <?php }
+					  else if($m['auto_normal'] > 0){ ?>
+						<td><?=$m['auto_location']?></td>
+					  <?php } 
+					  else { ?>
+						<td>Goal<?=$m['auto_location']?></td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>High (Hot-Cold-Miss)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['auto_high_hot']+$m['auto_high_cold']+$m['auto_high_miss']>0){ ?>
+						<td><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Low (Hot-Cold-Miss)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['auto_low_hot']+$m['auto_low_cold']+$m['auto_low_miss']>0){ ?>
+						<td><?=$m['auto_low_hot']?>-<?=$m['auto_low_cold']?>-<?=$m['auto_low_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Mobility</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['auto_mobility']>0 && $m['auto_normal'] >0){ ?>
+						<td><div class="icon-checkmark-2"></div></td>
+					  <?php }
+					  else if($m['auto_normal'] < 1){ ?>
+						<td class="didNotDo"></td>
+					  <?php } 
+					  else { ?>
+						<td class="didNotDo">X</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class = "bar-group">
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Shooting</div>
+			  <div class="row">
+				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+			  </div>
+			  <div class="row">
+				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+			  </div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>High (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
+						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Truss Ability</div>
+			  <div class="row">
+				Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
+			  </div>
+			  <div class="row">
+				Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
+			</div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>Truss Throw</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['truss']+$m['truss_miss']>0){ ?>
+						<td><?=$m['truss']?>/<?=$m['truss']+$m['truss_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Catch</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['catch']+$m['catch_miss']>0){ ?>
+						<td><?=$m['catch']?>/<?=$m['catch']+$m['catch_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class = "bar-group">
+		<div class = "info-bar">
+		  <div class = "left section">
         <div class = "info-title">Passing</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Loading</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Possesion</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Ratings</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class = "info-bar">
-      <div class = "left section">
-        <div class = "info-title">Defense</div>
-          <div class="row">
-            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-          </div>
-          <div class="row">
-            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-          </div>
-      </div>
-      <div class = "right section">
-        <div class = "right info-content">
-          <div class="table-holder">
-            <table class="matchByMatch">
-              <thead>
-                <th>Matches</th>
-                <?php foreach($d['matches'] as $m) { ?>
-                  <th><?=$m['match_number']?></th>
-                <?php } ?>
-              </thead>
-              <tr>
-                <th class = "vertical" nowrap>High (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-                    <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-              <tr>
-                <th class = "vertical" nowrap>Low (makes/attmpts)</td>
-                <?php foreach($d['matches'] as $m) { 
-                  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-                    <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-                  <?php }
-                  else{ ?>
-                    <td class="didNotDo">x</td>
-                  <?php } ?>
-                <?php } ?>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+			  <div class="row">
+          To Human: <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
+				</div>
+				<div class="row">
+          To Robot: <b><?=$d['robot_pass']?></b> of <b><?=$d['robot_pass_attempts']?></b> shots (<?=$d['robot_pass_accuracy']*100?>%)
+				</div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+          <table class="matchByMatch">
+            <thead>
+            <th>Matches</th>
+            <?php foreach($d['matches'] as $m) { ?>
+              <th><?=$m['match_number']?></th>
+            <?php } ?>
+            </thead>
+            <tr>
+            <th class = "vertical" nowrap>To Human</td>
+            <?php foreach($d['matches'] as $m) { 
+              if($m['human_pass']+$m['human_pass_miss']>0){ ?>
+              <td><?=$m['human_pass']?>/<?=$m['human_pass']+$m['human_pass_miss']?></td>
+              <?php }
+              else{ ?>
+              <td class="didNotDo">x</td>
+              <?php } ?>
+            <?php } ?>
+            </tr>
+            <tr>
+            <th class = "vertical" nowrap>To Robot</td>
+            <?php foreach($d['matches'] as $m) { 
+              if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+              <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+              <?php }
+              else{ ?>
+              <td class="didNotDo">x</td>
+              <?php } ?>
+            <?php } ?>
+            </tr>
+          </table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Loading</div>
+			  <div class="row">
+				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+			  </div>
+			  <div class="row">
+				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+			  </div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>High (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
+						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Possesion</div>
+			  <div class="row">
+				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+			  </div>
+			  <div class="row">
+				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+			  </div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>High (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
+						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class = "bar-group">
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Ratings</div>
+			  <div class="row">
+				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+			  </div>
+			  <div class="row">
+				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+			  </div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>High (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
+						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class = "bar-group">
+		<div class = "info-bar">
+		  <div class = "left section">
+			<div class = "info-title">Defense</div>
+			  <div class="row">
+				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+			  </div>
+			  <div class="row">
+				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+			  </div>
+		  </div>
+		  <div class = "right section">
+			<div class = "right info-content">
+			  <div class="table-holder">
+				<table class="matchByMatch">
+				  <thead>
+					<th>Matches</th>
+					<?php foreach($d['matches'] as $m) { ?>
+					  <th><?=$m['match_number']?></th>
+					<?php } ?>
+				  </thead>
+				  <tr>
+					<th class = "vertical" nowrap>High (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
+						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				  <tr>
+					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
+					<?php foreach($d['matches'] as $m) { 
+					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+					  <?php }
+					  else{ ?>
+						<td class="didNotDo">x</td>
+					  <?php } ?>
+					<?php } ?>
+				  </tr>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
   <!--<div class = "sec-title">Autonomous</div>
   <hr>
   <div class="box">
@@ -539,12 +549,11 @@ class TeamInfoTemplate extends Template {
    <div class="box">
     <?php foreach($d['notes'] as $note) { ?>
         <?php if (isset($note['match_number'])) { ?>
-          Q<?= $note['match_number']?>:
+          <?= $note['match_number']?>:
         <?php } ?>
         <div class="note box"><?= $note['text'] ?></div>
     <?php } ?>
    </div>
-
  <br>
 <br>
    <div class = "sec-title"> Raw Data </div>
