@@ -64,31 +64,46 @@ class DataEntryTemplate extends Template {
         <label>Low Miss<input type="text" class="num" id="auton-low-miss"></label>
       </div>
     </div>
-    <div class="scoring form-row">
+    <div class="form-row">
       <label>High Score<input type="text" class="num" id="high-score"></label>
       <label>High Miss<input type="text" class="num" id="high-miss"></label>
-      <label>Low Score<input type="text" class="num" id="low-score"></label>
-      <label>Low Miss<input type="text" class="num" id="low-miss"></label>
+      <div class="entry-gap"></div>
+      <label>Field Truss Fail<input type="text" class="num" id="field-truss-fail"></label>
+      <label>Field Truss Success<input type="text" class="num" id="field-truss"></label>
     </div>
-    <div class="truss form-row">
-      <label>Truss<input type="text" class="num" id="truss"></label>
-      <label>Truss Miss<input type="text" class="num" id="truss-miss"></label>
+    <div class="form-row">
+      <label>Low Score<input type="text" class="num" id="low-score"></label>
+      <label>Low Miss<input type="text" class="num" id="low-miss"></label>     
+      <div class="entry-gap"></div>
+      <label>HP Truss Fail<input type="text" class="num" id="human-truss-fail"></label>
+      <label>HP Truss Over<input type="text" class="num" id="human-truss-over"></label>
+      <label>HP Truss<input type="text" class="num" id="human-truss"></label>
+    </div>
+    <div class="form-row">
+      <div class="entry-gap"></div>
+      <div class="entry-gap"></div>
       <label>Catch<input type="text" class="num" id="catch"></label>
       <label>Catch Miss<input type="text" class="num" id="catch-miss"></label>
     </div>
-    <div class="pass form-row">
-      <label>Human Pass<input type="text" class="num" id="human-pass"></label>
-      <label>Human Pass Miss<input type="text" class="num" id="human-pass-miss"></label>
+    <div class="form-row">
+      <!--<label>Human Pass<input type="text" class="num" id="human-pass"></label>
+      <label>Human Pass Miss<input type="text" class="num" id="human-pass-miss"></label>-->
+      <div class="entry-gap"></div>
+      <div class="entry-gap"></div>
       <label>Robot Pass<input type="text" class="num" id="robot-pass"></label>
       <label>Robot Pass Miss<input type="text" class="num" id="robot-pass-miss"></label>
     </div>
-    <div class="possess form-row">
+    <div class="form-row">
       <label>Other Poss.<input type="text" class="num" id="other-possessions"></label>
-      <label>Dropped Ball<input type="text" class="num" id="dropped-ball"></label>
-    </div>  
-    <div class="load form-row">
+      <div class="half-gap"></div>
+      <div class="entry-gap"></div>
       <label>Human Load<input type="text" class="num" id="human-load"></label>
       <label>Human Load Miss<input type="text" class="num" id="human-load-miss"></label>
+    </div>  
+    <div class="form-row">
+      <label>Dropped Ball<input type="text" class="num" id="dropped-ball"></label>
+      <div class="half-gap"></div>
+      <div class="entry-gap"></div>
       <label>Floor Load<input type="text" class="num" id="floor-load"></label>
       <label>Floor Load Miss<input type="text" class="num" id="floor-load-miss"></label>
     </div>

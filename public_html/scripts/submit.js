@@ -52,12 +52,13 @@
     '#high-miss',
     '#low-score',
     '#low-miss',
-    '#truss',
-    '#truss-miss',
+    '#field-truss',
+    '#field-truss-fail',
+    '#human-truss',
+    '#human-truss-fail',
+    '#human-truss-over',
     '#catch',
     '#catch-miss',
-    '#human-pass',
-    '#human-pass-miss',
     '#robot-pass',
     '#robot-pass-miss',
     '#other-possessions',
@@ -112,12 +113,13 @@
     '#high-miss': valNum,
     '#low-score': valNum,
     '#low-miss': valNum,
-    '#truss': valNum,
-    '#truss-miss': valNum,
+    '#field-truss': valNum,
+    '#field-truss-fail': valNum,
+    '#human-truss': valNum,
+    '#human-truss-fail': valNum,
+    '#human-truss-over': valNum,
     '#catch': valNum,
     '#catch-miss': valNum,
-    '#human-pass': valNum,
-    '#human-pass-miss': valNum,
     '#robot-pass': valNum,
     '#robot-pass-miss,other-possessions,dropped-ball,human-load,human-load-miss,floor-load,floor-load-miss': valNum,
     '#driving,#pushing,#defense' : valSubj
@@ -197,13 +199,15 @@ function prepSubmit() {
     post.tele_low_score = parseInt($('#low-score').val());
     post.tele_low_miss = parseInt($('#low-miss').val());
     
-    post.truss = parseInt($('#truss').val());
-    post.truss_miss = parseInt($('#truss-miss').val());
+    post.field_truss = parseInt($('#field-truss').val());
+    post.field_truss_miss = parseInt($('#field-truss-fail').val());
+    post.human_truss = parseInt($('#field-truss').val());
+    post.human_truss_fail = parseInt($('#field-truss-fail').val());
+    post.human_truss_over = parseInt($('#field-truss-fail').val());
     post.catch = parseInt($('#catch').val());
     post.catch_miss = parseInt($('#catch-miss').val());
     
-    post.human_pass = parseInt($('#human-pass').val());
-    post.human_pass_miss = parseInt($('#human-pass-miss').val());
+   
     post.robot_pass = parseInt($('#robot-pass').val());
     post.robot_pass_miss = parseInt($('#robot-pass-miss').val());
     

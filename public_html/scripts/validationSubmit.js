@@ -16,6 +16,13 @@ $(document).ready(function() {
       
     });
   });
+  $('#password').keydown(function(evt) {
+    console.log(evt);
+    if(evt.which === 13) {
+      $('#submitPW').click();
+      
+    }
+  });
 });
 
 })();
