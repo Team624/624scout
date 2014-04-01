@@ -250,12 +250,12 @@ class TeamInfoTemplate extends Template {
 		<div class = "info-bar">
 		  <div class = "left section">
 			<div class = "info-title">Loading</div>
-			  <div class="row">
-				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-			  </div>
-			  <div class="row">
-				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-			  </div>
+        <div class="row">
+        Direct Human Load: <b><?=$d['human_load']?></b> of <b><?=$d['human_load_attempts']?></b> attempts (<?=$d['human_load_accuracy']*100?>%)
+        </div>
+        <div class="row">
+        Floor Load: <b><?=$d['floor_load']?></b> of <b><?=$d['floor_load_attempts']?></b> attempts (<?=$d['floor_load_accuracy']*100?>%)
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -268,10 +268,10 @@ class TeamInfoTemplate extends Template {
 					<?php } ?>
 				  </thead>
 				  <tr>
-					<th class = "vertical" nowrap>High (makes/attmpts)</td>
+					<th class = "vertical" nowrap>Direct Human</td>
 					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+					  if($m['human_load']+$m['human_load_miss']>0){ ?>
+						<td><?=$m['human_load']?>/<?=$m['human_load']+$m['human_load_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
@@ -279,10 +279,10 @@ class TeamInfoTemplate extends Template {
 					<?php } ?>
 				  </tr>
 				  <tr>
-					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
+					<th class = "vertical" nowrap>Floor Pickup</td>
 					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+					  if($m['floor_load']+$m['floor_load_miss']>0){ ?>
+						<td><?=$m['floor_load']?>/<?=$m['floor_load']+$m['floor_load_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
@@ -296,13 +296,13 @@ class TeamInfoTemplate extends Template {
 		</div>
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Possesion</div>
+			<div class = "info-title">Possession</div>
 			  <div class="row">
-				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-			  </div>
-			  <div class="row">
-				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-			  </div>
+        Other Possessions: <b><?=$d['other_possess']?></b>
+        </div>
+        <div class="row">
+        Dropped Balls: <b><?=$d['dropped_balls']?></b>
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -315,26 +315,16 @@ class TeamInfoTemplate extends Template {
 					<?php } ?>
 				  </thead>
 				  <tr>
-					<th class = "vertical" nowrap>High (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
+					<th class = "vertical" nowrap>Other Possessions</td>
+					<?php foreach($d['matches'] as $m) { ?> 
+						<td><?=$m['other_possess']?></td>
 					<?php } ?>
 				  </tr>
 				  <tr>
-					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
+            <th class = "vertical" nowrap>Dropped Balls</td>
+            <?php foreach($d['matches'] as $m) { ?> 
+              <td><?=$m['dropped_balls']?></td>
+             <?php } ?>
 				  </tr>
 				</table>
 			  </div>
@@ -345,62 +335,116 @@ class TeamInfoTemplate extends Template {
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Ratings</div>
-			  <div class="row">
-				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-			  </div>
-			  <div class="row">
-				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-			  </div>
+			<div class = "info-title">Defense and Ratings</div>
+        <div class="row">
+        Balls Blocked: <b><?=$d['tele_block']?></b>
+        </div>
+        <div class="row">
+        Defense Rating: <b><?=$d['defense_rating']?></b>
+        </div>
+        <div class="row">
+        Driving Rating: <b><?=$d['driving_rating']?></b>
+        </div>
+        <div class="row">
+        Pushing Rainting: <b><?=$d['pushing_rating']?></b>
+        </div>
 		  </div>
 		  <div class = "right section">
-			<div class = "right info-content">
-			  <div class="table-holder">
-				<table class="matchByMatch">
-				  <thead>
-					<th>Matches</th>
-					<?php foreach($d['matches'] as $m) { ?>
-					  <th><?=$m['match_number']?></th>
-					<?php } ?>
-				  </thead>
-				  <tr>
-					<th class = "vertical" nowrap>High (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
-				  </tr>
-				  <tr>
-					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
-				  </tr>
-				</table>
-			  </div>
-			</div>
+        <div class = "right info-content">
+          <div class="table-holder">
+          <table class="matchByMatch">
+            <thead>
+            <th>Matches</th>
+            <?php foreach($d['matches'] as $m) { ?>
+              <th><?=$m['match_number']?></th>
+            <?php } ?>
+            </thead>
+            <tr>
+              <th class = "vertical" nowrap>Time Defending</td>
+              <?php foreach($d['matches'] as $m) { ?>
+                <td>
+                   <?php switch($m['tele_defense_time']){ 
+                    case 0: ?>
+                      0%
+                      <?php break;
+                    case 1: ?>
+                      <25%
+                      <?php break;
+                    case 2: ?>
+                      ~50%
+                      <?php break;
+                    case 3: ?>
+                      >75%
+                    <?php break; ?>
+                <?php } ?>
+                </td>
+              <?php } ?>
+            </tr>
+            <tr>
+              <th class = "vertical" nowrap>Defense Rating</td>
+                <?php foreach($d['matches'] as $m) { 
+                   if($m['defense_rating']>0){ ?>
+                    <td><?=$m['defense_rating']?></td>
+                    <?php }
+                    else{ ?>
+                    <td class="">N/A</td>
+                    <?php } ?>
+                  <?php } ?>
+              </tr>
+            <tr>
+            <tr>
+              <th class = "vertical" nowrap>Balls Blocked</td>
+                <?php foreach($d['matches'] as $m) { ?> 
+                  <td><?=$m['tele_block']?></td>
+                <?php } ?>
+              </tr>
+            <tr>
+            <tr>
+              <th class = "vertical" nowrap>Driving</td>
+                <?php foreach($d['matches'] as $m) { 
+                   if($m['driving_rating']>0){ ?>
+                    <td><?=$m['driving_rating']?></td>
+                    <?php }
+                    else{ ?>
+                    <td class="">N/A</td>
+                    <?php } ?>
+                  <?php } ?>
+              </tr>
+            <tr>
+            <tr>
+              <th class = "vertical" nowrap>Pushing</td>
+                <?php foreach($d['matches'] as $m) { 
+                   if($m['pushing_rating']>0){ ?>
+                    <td><?=$m['pushing_rating']?></td>
+                    <?php }
+                    else{ ?>
+                    <td class="">N/A</td>
+                    <?php } ?>
+                  <?php } ?>
+              </tr>
+            <tr>
+          </table>
+          </div>
+        </div>
 		  </div>
 		</div>
 	</div>
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Defense</div>
-			  <div class="row">
-				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-			  </div>
-			  <div class="row">
-				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-			  </div>
+			<div class = "info-title">Bad Things</div>
+        <div clas="row">
+          Tipped: <b><?=$d['tipped']?></b> of <?=$d['matches_played']?> matches
+        </div>
+        <div clas="row">
+          Mech. Failure: <b><?=$d['broke_down']?></b> of <?=$d['matches_played']?> matches
+        </div>
+        <div clas="row">
+          Lost Comms: <b><?=$d['lost_comms']?></b> of <?=$d['matches_played']?> matches
+        </div>
+        <div class="row">
+          <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -413,26 +457,28 @@ class TeamInfoTemplate extends Template {
 					<?php } ?>
 				  </thead>
 				  <tr>
-					<th class = "vertical" nowrap>High (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
+            <th class = "vertical" nowrap>Tipped</td>
+            <?php foreach($d['matches'] as $m) { ?> 
+              <td><?=$m['tipped']?></td>
+             <?php } ?>
 				  </tr>
-				  <tr>
-					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
+          <tr>
+            <th class = "vertical" nowrap>Mech. Failure</td>
+            <?php foreach($d['matches'] as $m) { ?> 
+              <td><?=$m['broke_down']?></td>
+             <?php } ?>
+				  </tr>
+          <tr>
+            <th class = "vertical" nowrap>Lost Com</td>
+            <?php foreach($d['matches'] as $m) { ?> 
+              <td><?=$m['lost_comms']?></td>
+             <?php } ?>
+				  </tr>
+          <tr>
+            <th class = "vertical" nowrap>Fouls(normal/tech)</td>
+            <?php foreach($d['matches'] as $m) { ?> 
+              <td><?=$m['fouls']?> / <?=$m['tech_fouls']?></td>
+             <?php } ?>
 				  </tr>
 				</table>
 			  </div>
@@ -530,7 +576,7 @@ class TeamInfoTemplate extends Template {
     </div>
   </div>
   <div class="bad box">
-  Bad Things
+    Bad Things
     <div clas="row">
       Tipped: <b><?=$d['tipped']?></b> of <?=$d['matches_played']?> matches
     </div>
