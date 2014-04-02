@@ -21,21 +21,26 @@ class TeamInfoTemplate extends Template {
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Autonomous</div>
-			<div class="row">
-			  High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
-			</div>
-			<div class="row">
-			  Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
-			</div>
-			<div class="row">
-			  Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
-			</div>
-			<br>
-			Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
-			<div class="row">
-			  Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
-			</div>
+        <div class = "left info-content">
+          <div class = "info-title">Autonomous</div>
+          <div class="row">
+            High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
+          </div>
+          <div class="row">
+            Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
+          </div>
+          <div class="row">
+            Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
+          </div>
+          <br>
+          Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
+          <div class="row">
+            Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
+          </div>
+        </div>
+        <div class = "grippy-circles">
+          * * * * *
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -153,13 +158,13 @@ class TeamInfoTemplate extends Template {
 		</div>
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Truss Ability</div>
-			  <div class="row">
-				Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
-			  </div>
-			  <div class="row">
-				Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
-			</div>
+        <div class = "info-title">Truss Ability</div>
+          <div class="row">
+          Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
+          </div>
+          <div class="row">
+          Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -337,10 +342,10 @@ class TeamInfoTemplate extends Template {
 		  <div class = "left section">
 			<div class = "info-title">Defense and Ratings</div>
         <div class="row">
-        Balls Blocked: <b><?=$d['tele_block']?></b>
+        Defense Rating: <b><?=$d['defense_rating']?></b>
         </div>
         <div class="row">
-        Defense Rating: <b><?=$d['defense_rating']?></b>
+        Balls Blocked: <b><?=$d['tele_block']?></b>
         </div>
         <div class="row">
         Driving Rating: <b><?=$d['driving_rating']?></b>

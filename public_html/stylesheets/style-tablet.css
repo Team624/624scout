@@ -22,3 +22,15 @@
 .info-bar{
 	width: 200%;
 }
+.info-bar .left.section .info-content{
+  /*float: left;*/
+}
+.grippy-circles{
+  display:block;
+  /*position:absolute;*/
+  height: 100%;
+  width: 10px;
+  background:blue;
+  top:0px;
+  float: right;
+}
