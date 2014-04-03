@@ -99,6 +99,9 @@ switch ($controller) {
   case 'rankings':
     (new RankingsController($action))->executeAction();
     break;
+  case 'image':
+    (new ImageController($action))->executeAction();
+    break;
   default: 
     header('HTTP/1.1 404 Not Found');
     echo '404';

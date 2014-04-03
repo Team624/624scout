@@ -20,12 +20,13 @@ class DatabaseModel {
     'tele_high_miss',
     'tele_low_score',
     'tele_low_miss',
-    'truss',
-    'truss_miss',
+    'field_truss',
+    'field_truss_fail',
+    'human_truss',
+    'human_truss_fail',
+    'human_truss_over',
     'catch',
     'catch_miss',
-    'human_pass',
-    'human_pass_miss',
     'robot_pass',
     'robot_pass_miss',
     'human_load',
@@ -52,25 +53,7 @@ class DatabaseModel {
     'catch_rating',
     'badness_rating'
   ];
-  protected static $cycleCols = [
-    'match_data_id',
-    'cycle_number',
-    'get_back',
-    'get_mid',
-    'get_front',
-    'move_back',
-    'move_mid',
-    'move_front',
-    'truss',
-    'catch',
-    'miss_catch',
-    'human_pass',
-    'score_low',
-    'miss_low',
-    'score_high',
-    'miss_high',
-    'possess_time'
-  ];
+  
   public function __construct() {
       try {
         if (!isset(self::$conn)) {

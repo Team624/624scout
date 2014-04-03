@@ -121,14 +121,12 @@
     '#catch': valNum,
     '#catch-miss': valNum,
     '#robot-pass': valNum,
-    '#robot-pass-miss,other-possessions,dropped-ball,human-load,human-load-miss,floor-load,floor-load-miss': valNum,
+    '#robot-pass-miss,#other-possessions,#dropped-ball,#human-load,#human-load-miss,#floor-load,#floor-load-miss': valNum,
     '#driving,#pushing,#defense' : valSubj
   };
   var normalAutonMap = {
     '#auton-normal-start' : valLocation,
     '#auton-high-hot,#auton-high-cold,#auton-high-miss,#auton-low-hot,#auton-low-cold,#auton-low-miss' : valNum,
-    '#high-score,#high-miss,#low-score,#low-miss,#truss,#truss-miss,#catch,#catch-miss,#human-pass,#human-pass-miss,#robot-pass,#robot-pass-miss' : valNum,
-    '#other-possessions,#dropped-ball,#human-load,#human-load-miss,#floor-load,#floor-load-miss' : valNum
   };
   var goalieAutonMap = {
     '#auton-shots-blocked,#auton-shots-not-blocked' : valNum,
@@ -200,10 +198,10 @@ function prepSubmit() {
     post.tele_low_miss = parseInt($('#low-miss').val());
     
     post.field_truss = parseInt($('#field-truss').val());
-    post.field_truss_miss = parseInt($('#field-truss-fail').val());
-    post.human_truss = parseInt($('#field-truss').val());
-    post.human_truss_fail = parseInt($('#field-truss-fail').val());
-    post.human_truss_over = parseInt($('#field-truss-fail').val());
+    post.field_truss_fail = parseInt($('#field-truss-fail').val());
+    post.human_truss = parseInt($('#human-truss').val());
+    post.human_truss_fail = parseInt($('#human-truss-fail').val());
+    post.human_truss_over = parseInt($('#human-truss-fail').val());
     post.catch = parseInt($('#catch').val());
     post.catch_miss = parseInt($('#catch-miss').val());
     
