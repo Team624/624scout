@@ -39,7 +39,7 @@ class TeamInfoTemplate extends Template {
           </div>
         </div>
         <div class = "grippy-circles">
-          * * * * *
+          <p>                              </p>
         </div>
 		  </div>
 		  <div class = "right section">
