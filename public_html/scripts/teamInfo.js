@@ -23,17 +23,16 @@ var team = $('#searchTeam').val();
     });
 }
 function swipeifyStuff(){
-  var hammer_options = {};
-  /*$('.info-bar').addClass('section-1');*/
+  var hammer_options = {swipe_velocity: 0.4};
   $('.info-bar')
     .hammer(hammer_options)
     .on("swipe",function(event){
       if($('#auto-gippies').css('display') != "none"){
         console.log(event);
-        if(event.gesture.deltaX < -30){
+        if(event.gesture.deltaX < -10){
           changeInfoBar(event.currentTarget,2);
         }
-        else if(event.gesture.deltaX > 30){
+        else if(event.gesture.deltaX > 10){
           changeInfoBar(event.currentTarget,1);
         }
       }
