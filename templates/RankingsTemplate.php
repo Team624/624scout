@@ -49,6 +49,5 @@ class RankingsTemplate extends Template {
         </tr>
       <?php } ?>
     </table>
-    <?= var_dump($this->data['rankings']) ?>
   <?php }
 }
