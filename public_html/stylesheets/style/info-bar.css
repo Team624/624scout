@@ -47,7 +47,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b9b9b', end
 }
 .right.section{
   width:50%;
-	overflow: auto; 
+	overflow: auto;
+  margin-left: 10px;
 }
 /*.vert-centerer:before{
   height:100%;
@@ -61,7 +62,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b9b9b', end
   /*margin: 5px 0px 0 5px;
   border: 0px solid transparent;
 	border-width: 0 0 5px 0;*/
-  float:left;
+  /*float:left;*/
 }
 .right.info-content{
    float:right;

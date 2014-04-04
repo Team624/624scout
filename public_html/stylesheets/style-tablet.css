@@ -29,10 +29,11 @@
   display:block;
   background-image:url('/grippyCirclefp.png');
   background-repeat:repeat-y;
-  /*position:absolute;*/
+  position:absolute;
   height: 100%;
   width: 10px;
   min-height:60px;
   top:0px;
+  left: 49%;
   float: right;
 }
