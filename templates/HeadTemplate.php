@@ -16,6 +16,7 @@ class HeadTemplate extends Template {
     <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
     <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />-->
     <script src="/jquery-1.11.0.min.js"></script>
+    <script src="/jquery.hammer-full.min.js"></script>
     <!--<script>
     $(document).one("mobileinit", function () {
     $.mobile.ignoreContentEnabled=true;

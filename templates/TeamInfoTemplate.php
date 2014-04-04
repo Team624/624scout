@@ -19,7 +19,7 @@ class TeamInfoTemplate extends Template {
   <br>
   <div class = "info-bar-holder">
 	<div class = "bar-group">
-		<div class = "info-bar">
+		<div class = "info-bar" id = "auto-bar">
 		  <div class = "left section">
         <div class = "left info-content">
           <div class = "info-title">Autonomous</div>
@@ -38,7 +38,7 @@ class TeamInfoTemplate extends Template {
             Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
           </div>
         </div>
-        <div class = "grippy-circles">
+        <div class = "grippy-circles" id = "auto-gippies">
           <p>                              </p>
         </div>
 		  </div>
@@ -111,13 +111,18 @@ class TeamInfoTemplate extends Template {
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Shooting</div>
-			  <div class="row">
-				High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-			  </div>
-			  <div class="row">
-				Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-			  </div>
+        <div class = "left info-content">
+          <div class = "info-title">Shooting</div>
+          <div class="row">
+          High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+          </div>
+          <div class="row">
+          Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+          </div>
+        </div>
+        <div class = "grippy-circles">
+          <p>                              </p>
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -158,14 +163,20 @@ class TeamInfoTemplate extends Template {
 		</div>
 		<div class = "info-bar">
 		  <div class = "left section">
-        <div class = "info-title">Truss Ability</div>
+        <div class = "left info-content">
+          <div class = "info-title">Truss Ability</div>
           <div class="row">
           Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
           </div>
           <div class="row">
           Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
+          </div>
+        </div>
+        <div class = "grippy-circles" id = "auto-gippies">
+          <p>                              </p>
         </div>
 		  </div>
+
 		  <div class = "right section">
 			<div class = "right info-content">
 			  <div class="table-holder">
@@ -207,13 +218,18 @@ class TeamInfoTemplate extends Template {
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-        <div class = "info-title">Passing</div>
-			  <div class="row">
-          To Human: <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
-				</div>
-				<div class="row">
-          To Robot: <b><?=$d['robot_pass']?></b> of <b><?=$d['robot_pass_attempts']?></b> shots (<?=$d['robot_pass_accuracy']*100?>%)
-				</div>
+        <div class = "left info-content">
+          <div class = "info-title">Passing</div>
+          <div class="row">
+            To Human: <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
+          </div>
+          <div class="row">
+            To Robot: <b><?=$d['robot_pass']?></b> of <b><?=$d['robot_pass_attempts']?></b> shots (<?=$d['robot_pass_accuracy']*100?>%)
+          </div>
+        </div>
+        <div class = "grippy-circles" id = "auto-gippies">
+          <p>                              </p>
+        </div>
 		  </div>
 		  <div class = "right section">
 			<div class = "right info-content">
@@ -254,12 +270,17 @@ class TeamInfoTemplate extends Template {
 		</div>
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Loading</div>
-        <div class="row">
-        Direct Human Load: <b><?=$d['human_load']?></b> of <b><?=$d['human_load_attempts']?></b> attempts (<?=$d['human_load_accuracy']*100?>%)
+        <div class = "left info-content">
+          <div class = "info-title">Loading</div>
+          <div class="row">
+          Direct Human Load: <b><?=$d['human_load']?></b> of <b><?=$d['human_load_attempts']?></b> attempts (<?=$d['human_load_accuracy']*100?>%)
+          </div>
+          <div class="row">
+          Floor Load: <b><?=$d['floor_load']?></b> of <b><?=$d['floor_load_attempts']?></b> attempts (<?=$d['floor_load_accuracy']*100?>%)
+          </div>
         </div>
-        <div class="row">
-        Floor Load: <b><?=$d['floor_load']?></b> of <b><?=$d['floor_load_attempts']?></b> attempts (<?=$d['floor_load_accuracy']*100?>%)
+        <div class = "grippy-circles" id = "auto-gippies">
+          <p>                              </p>
         </div>
 		  </div>
 		  <div class = "right section">
@@ -301,12 +322,17 @@ class TeamInfoTemplate extends Template {
 		</div>
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Possession</div>
-			  <div class="row">
-        Other Possessions: <b><?=$d['other_possess']?></b>
+        <div class = "left info-content">
+          <div class = "info-title">Possession</div>
+          <div class="row">
+          Other Possessions: <b><?=$d['other_possess']?></b>
+          </div>
+          <div class="row">
+          Dropped Balls: <b><?=$d['dropped_balls']?></b>
+          </div>
         </div>
-        <div class="row">
-        Dropped Balls: <b><?=$d['dropped_balls']?></b>
+        <div class = "grippy-circles" id = "auto-gippies">
+          <p>                              </p>
         </div>
 		  </div>
 		  <div class = "right section">
@@ -340,18 +366,23 @@ class TeamInfoTemplate extends Template {
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Defense and Ratings</div>
-        <div class="row">
-        Defense Rating: <b><?=$d['defense_rating']?></b>
+        <div class = "left info-content">
+          <div class = "info-title">Defense and Ratings</div>
+          <div class="row">
+          Defense Rating: <b><?=$d['defense_rating']?></b>
+          </div>
+          <div class="row">
+          Balls Blocked: <b><?=$d['tele_block']?></b>
+          </div>
+          <div class="row">
+          Driving Rating: <b><?=$d['driving_rating']?></b>
+          </div>
+          <div class="row">
+          Pushing Rainting: <b><?=$d['pushing_rating']?></b>
+          </div>
         </div>
-        <div class="row">
-        Balls Blocked: <b><?=$d['tele_block']?></b>
-        </div>
-        <div class="row">
-        Driving Rating: <b><?=$d['driving_rating']?></b>
-        </div>
-        <div class="row">
-        Pushing Rainting: <b><?=$d['pushing_rating']?></b>
+        <div class = "grippy-circles" id = "auto-gippies">
+          <p>                              </p>
         </div>
 		  </div>
 		  <div class = "right section">
@@ -437,18 +468,23 @@ class TeamInfoTemplate extends Template {
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
-			<div class = "info-title">Bad Things</div>
-        <div clas="row">
-          Tipped: <b><?=$d['tipped']?></b> of <?=$d['matches_played']?> matches
+        <div class = "left info-content">
+          <div class = "info-title">Bad Things</div>
+          <div clas="row">
+            Tipped: <b><?=$d['tipped']?></b> of <?=$d['matches_played']?> matches
+          </div>
+          <div clas="row">
+            Mech. Failure: <b><?=$d['broke_down']?></b> of <?=$d['matches_played']?> matches
+          </div>
+          <div clas="row">
+            Lost Comms: <b><?=$d['lost_comms']?></b> of <?=$d['matches_played']?> matches
+          </div>
+          <div class="row">
+            <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
+          </div>
         </div>
-        <div clas="row">
-          Mech. Failure: <b><?=$d['broke_down']?></b> of <?=$d['matches_played']?> matches
-        </div>
-        <div clas="row">
-          Lost Comms: <b><?=$d['lost_comms']?></b> of <?=$d['matches_played']?> matches
-        </div>
-        <div class="row">
-          <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
+        <div class = "grippy-circles" id = "auto-gippies">
+          <p>                              </p>
         </div>
 		  </div>
 		  <div class = "right section">
