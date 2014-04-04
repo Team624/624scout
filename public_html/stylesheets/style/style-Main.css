@@ -63,13 +63,13 @@ a.invisilink {
 table {
     border-collapse: separate;
     border-spacing: 0;
-    min-width: 350px;
 }
 table tr th,
 table tr td {
     border-right: 1px solid #888;
     border-bottom: 1px solid #888;
     padding: 5px;
+    white-space: nowrap;
 }
 table tr th:first-child,
 table tr td:first-child {
@@ -186,6 +186,7 @@ td.not-found {
   margin-left: 50px;
   float: right;
   margin-right: 150px;
+  background: #eee;
 }
 
 .schedule-preview td, .schedule-preview th {
@@ -201,9 +202,7 @@ td.not-found {
   background: #aaf;
 }
 
-.schedule-preview td {
-  background: #eee;
-}
+
 
 
 
@@ -510,4 +509,32 @@ input.password{
 .entry{
   margin-top: 15px;
 }
+.rankings tr {
+  background:#aae;
+}
+.rankings tr.odd-qs {
+  background: #eaa;
+}
 
+.rankings td.us {
+  background: #aea;
+}
+.rank-icon {
+  float: right;
+}
+.long.num {
+  width: 100px;
+}
+
+#obliterate-dialog {
+  display: none;
+  position: absolute;
+  background: #faa;
+  padding: 20px;
+  border-radius: 10px;
+  left: 50px;
+  right: 50px;
+  top: 50px;
+  bottom: 50px;
+  text-align: center;
+}

@@ -203,6 +203,28 @@ class DatabaseModel {
       self::$conn->commit();
     }
     
+    public function setTeamList($teams) {
+      self::$conn->beginTransaction();
+      $dropTeams = self::$conn->prepare('DELETE FROM schedule');
+      $dropTeams->execute();
+      
+      $sql = 'INSERT INTO teams (number, name) VALUES ';
+      $firstVal = true;
+      foreach($teams as $number=>$name) {
+        if($firstVal) $firstVal = false;
+        else $sql .= ',';
+        $sql .= '(?,?)';
+      }
+      $stmt = self::$conn->prepare($sql);
+      $params = [];
+      foreach($teams as $number=>$name) {
+        array_push($params, $number, $name);
+      }
+      $stmt->execute($params);
+      
+      self::$conn->commit();
+    } 
+    
     public function getTeamData($team,$includeAggrigated = TRUE) {
     
       $fileRoot = $GLOBALS['fileRoot'];
@@ -242,6 +264,19 @@ class DatabaseModel {
       $data['matches'] = $matches;
       return $data;
       
+    }
+    
+    public function getAllTeamData() {
+      $fileRoot = $GLOBALS['fileRoot'];
+      $sql = file_get_contents($fileRoot . 'TeamsQuery.sql');
+      $query = self::$conn->prepare($sql);
+      $query->execute();
+      $result = $query->fetchAll(PDO::FETCH_ASSOC);
+      $teams = [];
+      foreach($result as $row) {
+        $teams[$row['team_number']] = $row;
+      }
+      return $teams;
     }
     public function getMatchData($match) {
     
@@ -291,5 +326,19 @@ class DatabaseModel {
       $query->bindValue(':text', $data['text']);
       $query->execute();
       return true;
+    }
+    
+    public function obliterate($pw) {
+      if($pw === '624obliterationpassword') {
+        self::$conn->beginTransaction();
+          self::$conn->query('DELETE FROM notes');
+          self::$conn->query('DELETE FROM match_data');
+          self::$conn->query('DELETE FROM schedule');
+          self::$conn->query('DELETE FROM teams');
+        self::$conn->commit();
+        return true;
+      } else {
+        return false;
+      }
     }
   }
