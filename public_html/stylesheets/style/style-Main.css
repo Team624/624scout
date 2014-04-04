@@ -520,10 +520,19 @@ input.password{
   background: #aea;
 }
 .rank-icon {
-  float: right;
 }
 .long.num {
   width: 100px;
+}
+
+.entry-gap {
+  display: inline-block;
+  width: 140px;
+}
+
+.half-gap {
+  width: 60px;
+  display:inline-block;
 }
 
 #obliterate-dialog {

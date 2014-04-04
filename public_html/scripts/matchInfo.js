@@ -1,14 +1,16 @@
 //teamInfo.js
 (function() {
 $(document).ready(function() {
-  if($('#searchTeam').val() > 0){
-    loadMatchInfo();
-  }
   if($('#searchMatch').val() > 0){
     loadMatchInfo();
   }
   $('#searchMatchBut').click(function() {
     loadMatchInfo();
+  });
+  $('#searchMatch').keydown(function(e) {
+    if(e.which === 13) {
+      loadMatchInfo();
+    }
   });
 });
 function loadMatchInfo(){

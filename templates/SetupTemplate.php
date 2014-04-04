@@ -9,7 +9,7 @@ class SetupTemplate extends Template {
   Setup Page (Don't touch)
   <div>
     Event Code: 
-    <input id="event-code" type="text" value="TXSA"></input>
+    <input id="event-code" type="text" value="TXHO"></input>
   </div>
   <br />
     <div>

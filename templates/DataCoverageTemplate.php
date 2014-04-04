@@ -8,7 +8,6 @@ class DataCoverageTemplate extends Template {
   public function render() {
   $s = $this->data['schedule'];
   ?>
-   SCEDHULE!
    <div class="schedule-holder">
      <table class="schedule nohi">
     <tr>

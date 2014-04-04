@@ -36,8 +36,8 @@ class MatchInfoTemplate extends Template {
           <th rowspan = "1" colspan = "3">Auto</th>
           <th rowspan = "1" colspan = "2">TeleShooting</th>
           <th rowspan = "2" colspan = "1">Truss</th>
-          <th rowspan = "2" colspan = "1">Foul /tech</th>
-          <th rowspan = "2" colspan = "1">Defense Rateing</th>
+          <th rowspan = "2" colspan = "1">Foul /Tech</th>
+          <th rowspan = "2" colspan = "1">Defense Rating</th>
           <th rowspan = "2" colspan = "1">Rbt Passes</th>
           <th rowspan = "1" colspan = "2">Loading</th>
         </tr>
@@ -47,7 +47,7 @@ class MatchInfoTemplate extends Template {
           <th>Low</th>
           <th>High</th>
           <th>Low</th>
-          <th>Dirrect HP</th>
+          <th>Direct HP</th>
           <th>Floor</th>
         </tr>
       </thead>

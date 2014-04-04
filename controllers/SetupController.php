@@ -8,7 +8,7 @@ class SetupController extends Controller {
     $opts = [
       'http'=>[
       'method'=>"GET",
-      'header'=>'X-TBA-App-Id: frc624:scouting-system:v2014.1'
+      'header'=>'X-TBA-App-Id: frc624:scouting-system:v2014lonestar'
       ]
     ];
     $context = stream_context_create($opts);

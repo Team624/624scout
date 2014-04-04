@@ -7,6 +7,11 @@ $(document).ready(function() {
   $('#searchTeamBut').click(function() {
     loadTeamInfo();
   });
+  $('#searchTeam').keypress(function(evt) {
+    if(evt.which === 13) {
+      loadTeamInfo();
+    }
+  });
 });
 function loadTeamInfo(){
 var team = $('#searchTeam').val();

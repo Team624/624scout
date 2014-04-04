@@ -22,7 +22,7 @@ class RawDataTemplate extends Template {
         <?php foreach($row as $key => $val) { 
         if($val === NULL) $val = '--';
         ?>
-          <td><div><?= $val ?></div></td>
+          <td><?= $val ?></td>
         <?php } ?>
       </tr>
     <?php } ?>
