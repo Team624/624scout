@@ -175,7 +175,10 @@ class TeamInfoTemplate extends Template {
         <div class = "left info-content">
           <div class = "info-title">Truss Ability</div>
           <div class="row">
-          Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
+          Get's over truss <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
+          </div>
+          <div class="row">
+          To Human: Out of field or caught <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
           </div>
           <div class="row">
           Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
@@ -208,6 +211,17 @@ class TeamInfoTemplate extends Template {
 					<?php } ?>
 				  </tr>
 				  <tr>
+          <tr>
+            <th class = "vertical" nowrap>Human Success</td>
+            <?php foreach($d['matches'] as $m) { 
+              if($m['human_pass']+$m['human_pass_miss']>0){ ?>
+              <td><?=$m['human_pass']?>/<?=$m['human_pass']+$m['human_pass_miss']?></td>
+              <?php }
+              else{ ?>
+              <td class="didNotDo">x</td>
+              <?php } ?>
+            <?php } ?>
+            </tr>
 					<th class = "vertical" nowrap>Catch</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['catch']+$m['catch_miss']>0){ ?>
@@ -237,9 +251,6 @@ class TeamInfoTemplate extends Template {
         <div class = "left info-content">
           <div class = "info-title">Passing</div>
           <div class="row">
-            To Human: <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
-          </div>
-          <div class="row">
             To Robot: <b><?=$d['robot_pass']?></b> of <b><?=$d['robot_pass_attempts']?></b> shots (<?=$d['robot_pass_accuracy']*100?>%)
           </div>
         </div>
@@ -257,17 +268,6 @@ class TeamInfoTemplate extends Template {
               <th><?=$m['match_number']?></th>
             <?php } ?>
             </thead>
-            <tr>
-            <th class = "vertical" nowrap>To Human</td>
-            <?php foreach($d['matches'] as $m) { 
-              if($m['human_pass']+$m['human_pass_miss']>0){ ?>
-              <td><?=$m['human_pass']?>/<?=$m['human_pass']+$m['human_pass_miss']?></td>
-              <?php }
-              else{ ?>
-              <td class="didNotDo">x</td>
-              <?php } ?>
-            <?php } ?>
-            </tr>
             <tr>
             <th class = "vertical" nowrap>To Robot</td>
             <?php foreach($d['matches'] as $m) { 
