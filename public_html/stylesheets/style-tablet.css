@@ -13,6 +13,9 @@
 #menuContent{
   display:none;
 }
+.right.info-content {
+    max-width: 92%;
+}
 /*.logo{
   height: 30px;
   float:left;
