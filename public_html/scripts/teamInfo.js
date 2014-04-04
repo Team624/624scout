@@ -38,7 +38,7 @@ function swipeifyStuff(){
       }
     });*/
   var hammer_options = {};
-  $('.info-bar')
+  $('.info-bar:not(.no-stuff)')
     .hammer(hammer_options)
     .on("dragend",function(event){
       if($('#auto-gippies').css('display') != "none"){
@@ -47,7 +47,7 @@ function swipeifyStuff(){
       }
     });
   var hammer_options = {};
-  $('.info-bar')
+  $('.info-bar:not(.no-stuff)')
     .hammer(hammer_options)
     .on("drag",function(event){
       if($('#auto-gippies').css('display') != "none"){

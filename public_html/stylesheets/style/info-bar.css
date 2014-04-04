@@ -122,3 +122,10 @@ tr.spacer-row{
 .grippy-circles{
   display:none;
 }
+
+.no-stuff.info-bar{
+  background:grey;
+}
+.no-stuff.info-bar .info-title{
+  font-size:20px;
+}

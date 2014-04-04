@@ -109,58 +109,67 @@ class TeamInfoTemplate extends Template {
 		</div>
 	</div>
 	<div class = "bar-group">
-		<div class = "info-bar">
-		  <div class = "left section">
-        <div class = "left info-content">
-          <div class = "info-title">Shooting</div>
-          <div class="row">
-          High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+    <?php if($d['shots_high']+$d['shots_low'] > 0) { ?>
+      <div class = "info-bar">
+        <div class = "left section">
+          <div class = "left info-content">
+            <div class = "info-title">Shooting</div>
+            <div class="row">
+            High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
+            </div>
+            <div class="row">
+            Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+            </div>
           </div>
-          <div class="row">
-          Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
+          <div class = "grippy-circles">
+            <p>                              </p>
           </div>
         </div>
-        <div class = "grippy-circles">
-          <p>                              </p>
+        <div class = "right section">
+        <div class = "right info-content">
+          <div class="table-holder">
+          <table class="matchByMatch">
+            <thead>
+            <th>Matches</th>
+            <?php foreach($d['matches'] as $m) { ?>
+              <th><?=$m['match_number']?></th>
+            <?php } ?>
+            </thead>
+            <tr>
+            <th class = "vertical" nowrap>High (makes/attmpts)</td>
+            <?php foreach($d['matches'] as $m) { 
+              if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
+              <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+              <?php }
+              else{ ?>
+              <td class="didNotDo">x</td>
+              <?php } ?>
+            <?php } ?>
+            </tr>
+            <tr>
+            <th class = "vertical" nowrap>Low (makes/attmpts)</td>
+            <?php foreach($d['matches'] as $m) { 
+              if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
+              <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+              <?php }
+              else{ ?>
+              <td class="didNotDo">x</td>
+              <?php } ?>
+            <?php } ?>
+            </tr>
+          </table>
+          </div>
         </div>
-		  </div>
-		  <div class = "right section">
-			<div class = "right info-content">
-			  <div class="table-holder">
-				<table class="matchByMatch">
-				  <thead>
-					<th>Matches</th>
-					<?php foreach($d['matches'] as $m) { ?>
-					  <th><?=$m['match_number']?></th>
-					<?php } ?>
-				  </thead>
-				  <tr>
-					<th class = "vertical" nowrap>High (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-						<td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
-				  </tr>
-				  <tr>
-					<th class = "vertical" nowrap>Low (makes/attmpts)</td>
-					<?php foreach($d['matches'] as $m) { 
-					  if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-						<td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
-					  <?php }
-					  else{ ?>
-						<td class="didNotDo">x</td>
-					  <?php } ?>
-					<?php } ?>
-				  </tr>
-				</table>
-			  </div>
-			</div>
-		  </div>
-		</div>
+        </div>
+      </div>
+    <?php }
+    else { ?>
+    <div class = "no-stuff info-bar">
+      <div class = "info-title">No Shooting</div>
+    </div>
+    <?php } ?>
+    
+    <?php if($d['truss']+$d['truss_miss']+$d['catch']+$d['catch_miss'] > 0) { ?>
 		<div class = "info-bar">
 		  <div class = "left section">
         <div class = "left info-content">
@@ -214,7 +223,14 @@ class TeamInfoTemplate extends Template {
 			</div>
 		  </div>
 		</div>
+    <?php }
+    else { ?>
+    <div class = "no-stuff info-bar">
+      <div class = "info-title">No Trussing</div>
+    </div>
+    <?php } ?>
 	</div>
+  
 	<div class = "bar-group">
 		<div class = "info-bar">
 		  <div class = "left section">
