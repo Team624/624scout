@@ -126,6 +126,9 @@ tr.spacer-row{
 .no-stuff.info-bar{
   background:grey;
 }
+.good-info.no-stuff.info-bar{
+  background: #9C9;
+}
 .no-stuff.info-bar .info-title{
   font-size:20px;
 }

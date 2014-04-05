@@ -246,6 +246,7 @@ class TeamInfoTemplate extends Template {
 	</div>
   
 	<div class = "bar-group">
+    <?php if($d['robot_pass_attempts'] > 0) { ?>
 		<div class = "info-bar">
 		  <div class = "left section">
         <div class = "left info-content">
@@ -271,8 +272,8 @@ class TeamInfoTemplate extends Template {
             <tr>
             <th class = "vertical" nowrap>To Robot</td>
             <?php foreach($d['matches'] as $m) { 
-              if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-              <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+              if($m['robot_pass']+$m['robot_pass_miss'] > 0){ ?>
+              <td><?=$m['robot_pass']?>/<?=$m['robot_pass']+$m['robot_pass_miss']?></td>
               <?php }
               else{ ?>
               <td class="didNotDo">x</td>
@@ -284,6 +285,13 @@ class TeamInfoTemplate extends Template {
 			</div>
 		  </div>
 		</div>
+    <?php }
+    else { ?>
+    <div class = "no-stuff info-bar">
+      <div class = "info-title">Never Tried Passing to Bot</div>
+    </div>
+    <?php } 
+    if($d['human_load_attempts'] + $d['floor_load_attempts'] > 0) { ?>
 		<div class = "info-bar">
 		  <div class = "left section">
         <div class = "left info-content">
@@ -336,6 +344,12 @@ class TeamInfoTemplate extends Template {
 			</div>
 		  </div>
 		</div>
+    <?php }
+    else { ?>
+    <div class = "no-stuff info-bar">
+      <div class = "info-title">Never Tried Loading</div>
+    </div>
+    <?php } ?>
 		<div class = "info-bar">
 		  <div class = "left section">
         <div class = "left info-content">
@@ -482,6 +496,7 @@ class TeamInfoTemplate extends Template {
 		</div>
 	</div>
 	<div class = "bar-group">
+    <?php if($d['tipped'] + $d['broke_down'] + $d['tipped'] + $d['lost_comms'] + $d['fouls'] + $d['tech_fouls'] > 0) { ?>
 		<div class = "info-bar">
 		  <div class = "left section">
         <div class = "left info-content">
@@ -542,6 +557,12 @@ class TeamInfoTemplate extends Template {
 			</div>
 		  </div>
 		</div>
+    <?php }
+    else { ?>
+    <div class = "good-info no-stuff info-bar">
+      <div class = "info-title">No Bad Things</div>
+    </div>
+    <?php } ?>
 	  </div>
 	</div>
   <!--<div class = "sec-title">Autonomous</div>
