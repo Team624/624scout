@@ -14,7 +14,9 @@ class TeamInfoTemplate extends Template {
    </div>
   <div> <b><?=$d['matches_played']?></b> matches actually played, <b><?=$d['no_show']?></b> no-shows </div>
     <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg')) { ?>
-    <a href="<?='/team_pics/' . $d['team_number'] . '.jpg' ?>">Image</a>
+    <br>
+    <a href="<?='/team_pics/' . $d['team_number'] . '.jpg' ?>" target="_blank">Robot Image Pic</a>
+    <br>
   <?php } ?>
   <br>
   <div class = "info-bar-holder">

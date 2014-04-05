@@ -65,6 +65,7 @@ SELECT * FROM matches_result;
 CREATE TEMPORARY TABLE IF NOT EXISTS agg_result ENGINE = MEMORY ( 
   SELECT
   teams.name AS 'name',
+  :team_number AS 'team_number',
   count(matches_result.auto_normal) AS 'matches_played',
   sum(auto_normal) AS 'auto_normal',
   sum(auto_goalie) AS 'auto_goalie',
