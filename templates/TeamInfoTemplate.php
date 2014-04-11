@@ -93,6 +93,7 @@ class TeamInfoTemplate extends Template {
               else
                 if($m['auto_high_miss']>0)
                   $newCellClass = "bad-cell";
+              ///
             ?>
 						<td class = "<?=$newCellClass ?>" ><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
 					  <?php }
@@ -105,7 +106,17 @@ class TeamInfoTemplate extends Template {
 					<th class="vertical" >Low (Hot-Cold-Miss)</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['auto_low_hot']+$m['auto_low_cold']+$m['auto_low_miss']>0){ ?>
-						<td><?=$m['auto_low_hot']?>-<?=$m['auto_low_cold']?>-<?=$m['auto_low_miss']?></td>
+              <?php
+                //make the colors for the auto low scoring cell
+                $newCellClass = "normal-cell";
+                if($m['auto_low_hot']+$m['auto_low_cold']>0){
+                  $newCellClass = "good-cell";
+                }
+                else
+                  $newCellClass = "bad-cell";
+                ///
+              ?>
+              <td class = "<?=$newCellClass ?>"><?=$m['auto_low_hot']?>-<?=$m['auto_low_cold']?>-<?=$m['auto_low_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
