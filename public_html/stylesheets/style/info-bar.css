@@ -132,3 +132,12 @@ tr.spacer-row{
 .no-stuff.info-bar .info-title{
   font-size:20px;
 }
+td.caution-cell{
+  background: #EE7;
+}
+td.good-cell{
+  background: #7E7;
+}
+td.bad-cell{
+  background: #E77;
+}

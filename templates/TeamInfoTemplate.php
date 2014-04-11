@@ -61,7 +61,7 @@ class TeamInfoTemplate extends Template {
 						<td>Nshow</td>
 					  <?php }
 					  else if($m['auto_normal'] > 0){ ?>
-						<td><?=$m['auto_location']?></td>
+						<td class = "<?=($m['auto_location']==2)?"caution-cell":"normal-cell" ?>" ><?=$m['auto_location']?></td>
 					  <?php } 
 					  else { ?>
 						<td>Goal<?=$m['auto_location']?></td>
@@ -72,7 +72,19 @@ class TeamInfoTemplate extends Template {
 					<th class = "vertical" nowrap>High (Hot-Cold-Miss)</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['auto_high_hot']+$m['auto_high_cold']+$m['auto_high_miss']>0){ ?>
-						<td><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
+            <?php
+              //make the colors for the auto high scoring cell
+              $newCellClass = "normal-cell";
+              if($m['auto_high_hot']+$m['auto_high_cold']>0)
+                if($m['auto_high_miss']==0)
+                  $newCellClass = "good-cell";
+                else
+                  $newCellClass = "caution-cell";
+              else
+                if($m['auto_high_miss']>0)
+                  $newCellClass = "bad-cell";
+            ?>
+						<td class = "<?=$newCellClass ?>" ><?=$m['auto_high_hot']?>-<?=$m['auto_high_cold']?>-<?=$m['auto_high_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
