@@ -23,21 +23,22 @@ var team = $('#searchTeam').val();
     });
 }
 function swipeifyStuff(){
-  /*var hammer_options = {swipe_velocity: 0.4};
-  $('.info-bar')
-    .hammer(hammer_options)
-    .on("swipe",function(event){
+  var hammer_options = {swipe_velocity: 0.4};
+
+    new Hammer($('.info-bar'), { drag_lock_to_axis: true }).on("dragleft dragright swipeleft swiperight", function(ev){
+  //  alert(ev.type);
+  //  alert(ev.gesture.deltaX);
       if($('#auto-gippies').css('display') != "none"){
-        console.log(event);
-        if(event.gesture.deltaX < -10){
-          changeInfoBar(event.currentTarget,2);
+        console.log(ev);
+        if(ev.gesture.deltaX < 0){
+          changeInfoBar(ev.currentTarget,2);
         }
-        else if(event.gesture.deltaX > 10){
-          changeInfoBar(event.currentTarget,1);
+        else if(ev.gesture.deltaX > 0){
+          changeInfoBar(ev.currentTarget,1);
         }
       }
-    });*/
-  var hammer_options = {};
+    });
+  /*var hammer_options = {};
   $('.info-bar:not(.no-stuff)')
     .hammer(hammer_options)
     .on("dragend",function(event){
@@ -54,9 +55,9 @@ function swipeifyStuff(){
         console.log(event);
         dragBar(event.currentTarget,event);
       }
-    });
+    });*/
 }
-var barDelta = 0;
+/*var barDelta = 0;
 function endDragBar(bar,e){
   if(Math.abs(barDelta) > $(bar).width()/5){
     if(!$(bar).hasClass("onSec2")){
@@ -101,7 +102,7 @@ function dragBar(bar,e){
       }
     }
   }
-}
+}*/
 function changeInfoBar(bar, section){
   if(($(bar).hasClass("onSec2") && section == 1) || (!$(bar).hasClass("onSec2") && section == 2)){ //if not already there
     console.log("dif thing");
