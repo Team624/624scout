@@ -132,6 +132,9 @@ tr.spacer-row{
 .no-stuff.info-bar .info-title{
   font-size:20px;
 }
+td.minor-caution-cell{
+  background: #BB6;
+}
 td.caution-cell{
   background: #EE7;
 }
@@ -140,4 +143,15 @@ td.good-cell{
 }
 td.bad-cell{
   background: #E77;
+}
+td.blue-cell{
+  background: #0AF;
+}
+td.purple-cell{
+  background: #F0F;
+}
+td.hotGoal-cell{
+  text-decoration:underline;
+  /*box-shadow: inset 0 0 5px 2px #FF0;*/
+  /*color:yellow;*/
 }
