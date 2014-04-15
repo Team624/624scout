@@ -17,6 +17,7 @@ class HeadTemplate extends Template {
     <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />-->
     <script src="/jquery-1.11.0.min.js"></script>
     <script src="/jquery.hammer-full.min.js"></script>
+    <link rel="apple-touch-icon" href="/favIcon1.png" />
     <!--<script>
     $(document).one("mobileinit", function () {
     $.mobile.ignoreContentEnabled=true;

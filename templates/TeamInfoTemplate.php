@@ -174,7 +174,29 @@ class TeamInfoTemplate extends Template {
             <th class="vertical" >High (makes/attmpts)</td>
             <?php foreach($d['matches'] as $m) { 
               if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
-              <td><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
+              <?php
+                //make the colors for the tele high scoring cell
+                $newCellClass = "normal-cell";
+                $shots =$m['tele_high_score']+$m['tele_high_miss'];
+                if($shots>0){
+                  if($shots>=5)
+                    if($m['tele_high_miss']==0)
+                      $newCellClass='uber-good-cell';
+                    else if($m['tele_high_score']>=4)
+                      $newCellClass='good-cell';
+                    else if($m['tele_high_score']>=2)
+                      $newCellClass='caution-cell';
+                    else
+                      $newCellClass='uber-bad-cell';
+                  else if($shots>=2)
+                    if($m['tele_high_miss']==0)
+                      $newCellClass='good-cell';
+                    else if($d['tele_high_score']=0)
+                      $newCellClass='uber-bad-cell';
+                }
+                ///
+              ?>
+              <td class='<?=$newCellClass?>'><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
               <?php }
               else{ ?>
               <td class="didNotDo">x</td>
