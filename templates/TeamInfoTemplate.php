@@ -206,9 +206,19 @@ class TeamInfoTemplate extends Template {
                   else
                     if($m['tele_high_score']==0)
                       $newCellClass='bad-cell';
+                    else if($m['tele_high_score']==2)
+                      $newCellClass='minor-good-cell';
+                    else
+                      $newCellClass='caution-cell';
                   
                   //Gradient method
-                  
+                 /* $calcScore = $m['tele_high_score']*($m['tele_high_score']/$shots);
+                  $calcPercent = $calcScore/5;
+                  $calcPercent = ($calcPercent>1) ? 1 : $calcPercent;
+                  $calcPercent = ($calcPercent<0) ? 0 : $calcPercent;
+                  $calcRed = round(155*(1-$calcPercent))+100;
+                  $calcGreen = round(155*$calcPercent)+100;
+                   style = 'background: rgb(<?=$calcRed?>,<?=$calcGreen?>,0)'*/
                 }
                 ///
               ?>
@@ -223,7 +233,46 @@ class TeamInfoTemplate extends Template {
             <th class="vertical" >Low (makes/attmpts)</td>
             <?php foreach($d['matches'] as $m) { 
               if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
-              <td><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
+              <?php
+                //make the colors for the tele high scoring cell
+                $newCellClass = "normal-cell";
+                $shots =$m['tele_low_score']+$m['tele_low_miss'];
+                if($shots>0){
+                  if($shots>=5)
+                    if($m['tele_low_miss']==0)
+                      $newCellClass='uber-good-cell';
+                    else if($m['tele_low_score']>=4 && $m['tele_low_score']/($m['tele_low_score']+$m['tele_low_miss'])>=.75)
+                      $newCellClass='good-cell';
+                    else if($m['tele_low_score']>=4)
+                      $newCellClass='minor-good-cell';
+                    else if($m['tele_low_score']>=2)
+                      $newCellClass='caution-cell';
+                    else
+                      $newCellClass='uber-bad-cell';
+                  else if($shots>2)
+                    if($m['tele_low_miss']==0)
+                      $newCellClass='good-cell';
+                    else if($m['tele_low_score']>$m['tele_low_miss'])
+                      $newCellClass='minor-good-cell';
+                    else if($m['tele_low_score']==$m['tele_low_miss'])
+                      $newCellClass='caution-cell';
+                    else if($m['tele_low_score']==1)
+                      $newCellClass='bad-cell';
+                    else if($m['tele_low_score']==0)
+                      $newCellClass='uber-bad-cell';
+                    else
+                      $newCellClass='caution-cell';
+                  else
+                    if($m['tele_low_score']==0)
+                      $newCellClass='bad-cell';
+                    else if($m['tele_low_score']==2)
+                      $newCellClass='minor-good-cell';
+                    else
+                      $newCellClass='caution-cell';
+                }
+                ///
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
               <?php }
               else{ ?>
               <td class="didNotDo">x</td>
@@ -638,109 +687,6 @@ class TeamInfoTemplate extends Template {
     <?php } ?>
 	  </div>
 	</div>
-  <!--<div class="sec-title">Autonomous</div>
-  <hr>
-  <div class="box">
-    Start in White Zone: <b><?=$d['auto_normal']?></b> / <b><?=$d['matches_played']?></b> matches
-    <div class="row" style="float:right;">
-    </div>
-    <div class="row">
-      High Goal: (<b><?=$d['auto_high_hot']?></b> Hot, <b><?=$d['auto_high_cold']?></b> Cold, <b><?=$d['auto_high_miss']?></b> Misses)
-    </div>
-    <div class="row">
-      Low Goal: (<b><?=$d['auto_low_hot']?></b>  Hot,  <b><?=$d['auto_low_cold']?></b> Cold, <b><?=$d['auto_low_miss']?></b> Misses)
-    </div>
-    <div class="row">
-      Mobility: <b><?=$d['auto_mobility']?></b>/ <b><?=$d['auto_normal']?></b> Matches
-    </div>
-  </div>
-  <div class="box">
-    Goalie (<?=$d['auto_goalie']?>/<?=$d['matches_played']?>)
-    <div class="row">
-      Shot Blocks: <?=$d['auto_block']?> of <?=$d['auto_block_total']?>
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="sec-title">Teleop</div>
-  <hr>
-  <div class="box">
-    Shooting
-    <div class="row">
-    High Goal: <b><?=$d['tele_high_score']?></b> of <b><?=$d['shots_high']?></b> shots (<?=$d['high_accuracy']*100?>%)
-    </div>
-   </div>
-   
-   <div> Raw Data </div>
-    <div class="row">
-    Low Goal: <b><?=$d['tele_low_score']?></b> of <b><?=$d['shots_low']?></b> shots (<?=$d['low_accuracy']*100?>%)
-    </div> 
-  </div>
-   <div class="box">
-    Truss Ability
-    <div class="row">
-    Truss Throw: <b><?=$d['truss']?></b> of <b><?=$d['truss']+$d['truss_miss']?></b> attempts
-    </div>
-    <div class="row">
-    Catching: <b><?=$d['catch']?></b> of <b><?=$d['catch']+$d['catch_miss']?></b> attempts
-    </div>
-  </div>
-  <hr>
-  <div class="box">
-    Passing
-    <div class="row">
-    To Human: <b><?=$d['human_pass']?></b> of <b><?=$d['human_pass_attempts']?></b> attempts (<?=$d['human_pass_accuracy']*100?>%)
-    </div>
-    <div class="row">
-    To Robot: <b><?=$d['robot_pass']?></b> of <b><?=$d['robot_pass_attempts']?></b> shots (<?=$d['robot_pass_accuracy']*100?>%)
-    </div>
-  </div>
-  <div class="box">
-    Loading
-    <div class="row">
-    Direct Human Load: <b><?=$d['human_load']?></b> of <b><?=$d['human_load_attempts']?></b> attempts (<?=$d['human_load_accuracy']*100?>%)
-    </div>
-    <div class="row">
-    Floor Load: <b><?=$d['floor_load']?></b> of <b><?=$d['floor_load_attempts']?></b> attempts (<?=$d['floor_load_accuracy']*100?>%)
-    </div>
-  </div>
-  <div class="box">
-    Possesion
-    <div class="row">
-    Other Possessions: <b><?=$d['other_possess']?></b>
-    </div>
-    <div class="row">
-    Dropped Balls: <b><?=$d['dropped_balls']?></b>
-    </div>
-  </div>
-  <hr>
-  <div class="box">
-    Ratings
-    <div class="row">
-    Driving: <b><?=$d['driving_rating']?></b>
-    </div>
-    <div class="row">
-    Pushing: <b><?=$d['pushing_rating']?></b>
-    </div>
-    <div class="row">
-    Defense: <b><?=$d['defense_rating']?></b>
-    </div>
-  </div>
-  <div class="bad box">
-    Bad Things
-    <div clas="row">
-      Tipped: <b><?=$d['tipped']?></b> of <?=$d['matches_played']?> matches
-    </div>
-    <div clas="row">
-      Mech. Failure: <b><?=$d['broke_down']?></b> of <?=$d['matches_played']?> matches
-    </div>
-    <div clas="row">
-      Lost Comms: <b><?=$d['lost_comms']?></b> of <?=$d['matches_played']?> matches
-    </div>
-    <div class="row">
-      <b><?=$d['fouls']?></b> fouls &amp; <b><?=$d['tech_fouls']?></b> tech fouls (<b><?=$d['foul_points']?></b> pts)
-    </div>
- </div>-->
  <div class="sec-title"> Notes </div>
  <hr>
    <div class="box">

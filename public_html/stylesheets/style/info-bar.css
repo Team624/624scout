@@ -139,7 +139,10 @@ td.caution-cell{
   background: #EE7;
 }
 td.good-cell{
-  background: #7E7;
+  background: #6E6;
+}
+td.minor-good-cell{
+  background: #9B7;
 }
 td.uber-good-cell{
   background: #0F0;
@@ -160,7 +163,4 @@ td.hotGoal-cell{
 }
 td.uber-bad-cell{
   background: #F00;
-}
-td.minor-good-cell{
-  background: #7A7;
 }
