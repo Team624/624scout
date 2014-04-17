@@ -182,17 +182,33 @@ class TeamInfoTemplate extends Template {
                   if($shots>=5)
                     if($m['tele_high_miss']==0)
                       $newCellClass='uber-good-cell';
-                    else if($m['tele_high_score']>=4)
+                    else if($m['tele_high_score']>=4 && $m['tele_high_score']/($m['tele_high_score']+$m['tele_high_miss'])>=.75)
                       $newCellClass='good-cell';
+                    else if($m['tele_high_score']>=4)
+                      $newCellClass='minor-good-cell';
                     else if($m['tele_high_score']>=2)
                       $newCellClass='caution-cell';
                     else
                       $newCellClass='uber-bad-cell';
-                  else if($shots>=2)
+                  else if($shots>2)
                     if($m['tele_high_miss']==0)
                       $newCellClass='good-cell';
-                    else if($d['tele_high_score']=0)
+                    else if($m['tele_high_score']>$m['tele_high_miss'])
+                      $newCellClass='minor-good-cell';
+                    else if($m['tele_high_score']==$m['tele_high_miss'])
+                      $newCellClass='caution-cell';
+                    else if($m['tele_high_score']==1)
+                      $newCellClass='bad-cell';
+                    else if($m['tele_high_score']==0)
                       $newCellClass='uber-bad-cell';
+                    else
+                      $newCellClass='caution-cell';
+                  else
+                    if($m['tele_high_score']==0)
+                      $newCellClass='bad-cell';
+                  
+                  //Gradient method
+                  
                 }
                 ///
               ?>
