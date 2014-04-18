@@ -105,7 +105,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b9b9b', end
     border-bottom-right-radius: 0px;
 }
 .matchByMatch th{
-  background: #BDB;
+  background: #BBB;
   text-align:center;
 }
 .matchByMatch  th.vertical {
