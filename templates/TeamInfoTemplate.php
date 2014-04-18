@@ -9,6 +9,77 @@ class TeamInfoTemplate extends Template {
   public function render() {
   $d = $this->data['data'];
   ?>
+  <?php
+    function standardColor($success,$fails){
+      $shots =$success+$fails;
+      if($shots>0){
+        if($shots>=5)
+          if($fails==0)
+            return 'uber-good-cell';
+          else if($success>=4 && $success/($success+$fails)>=.75)
+            return 'good-cell';
+          else if($success>=4)
+            return 'minor-good-cell';
+          else if($success>=2)
+            return 'caution-cell';
+          else
+            return 'uber-bad-cell';
+        else if($shots>2)
+          if($fails==0)
+            return 'good-cell';
+          else if($success>$fails)
+            return 'minor-good-cell';
+          else if($success==$fails)
+            return 'caution-cell';
+          else if($success==1)
+            return 'bad-cell';
+          else if($success==0)
+            return 'uber-bad-cell';
+          else
+            return 'caution-cell';
+        else
+          if($success==0)
+            return 'bad-cell';
+          else if($success==2)
+            return 'minor-good-cell';
+          else
+            return 'caution-cell';
+        return "normal-cell";
+      }
+    }
+    function ratingsColor($rating){
+      switch($rating){
+        case 1:
+          return 'uber-bad-cell';
+          break;
+        case 2:
+          return 'bad-cell';
+          break;
+        case 3:
+          return 'bad-cell';
+          break;
+        case 4:
+          return 'minor-caution-cell';
+          break;
+        case 5:
+          return 'minor-caution-cell';
+          break;
+        case 6:
+          return 'minor-good-cell';
+          break;
+        case 7:
+          return 'good-cell';
+          break;
+        case 8:
+          return 'good-cell';
+          break;
+        case 9:
+          return 'uber-good-cell';
+          break;
+      }
+      return 'normal-cell';
+    }
+  ?>
   <div class="team-title">
     Team <?=$this->data['team']?> - <?=$d['name']?>
    </div>
@@ -176,41 +247,7 @@ class TeamInfoTemplate extends Template {
               if($m['tele_high_score']+$m['tele_high_miss']>0){ ?>
               <?php
                 //make the colors for the tele high scoring cell
-                $newCellClass = "normal-cell";
-                $shots =$m['tele_high_score']+$m['tele_high_miss'];
-                if($shots>0){
-                  if($shots>=5)
-                    if($m['tele_high_miss']==0)
-                      $newCellClass='uber-good-cell';
-                    else if($m['tele_high_score']>=4 && $m['tele_high_score']/($m['tele_high_score']+$m['tele_high_miss'])>=.75)
-                      $newCellClass='good-cell';
-                    else if($m['tele_high_score']>=4)
-                      $newCellClass='minor-good-cell';
-                    else if($m['tele_high_score']>=2)
-                      $newCellClass='caution-cell';
-                    else
-                      $newCellClass='uber-bad-cell';
-                  else if($shots>2)
-                    if($m['tele_high_miss']==0)
-                      $newCellClass='good-cell';
-                    else if($m['tele_high_score']>$m['tele_high_miss'])
-                      $newCellClass='minor-good-cell';
-                    else if($m['tele_high_score']==$m['tele_high_miss'])
-                      $newCellClass='caution-cell';
-                    else if($m['tele_high_score']==1)
-                      $newCellClass='bad-cell';
-                    else if($m['tele_high_score']==0)
-                      $newCellClass='uber-bad-cell';
-                    else
-                      $newCellClass='caution-cell';
-                  else
-                    if($m['tele_high_score']==0)
-                      $newCellClass='bad-cell';
-                    else if($m['tele_high_score']==2)
-                      $newCellClass='minor-good-cell';
-                    else
-                      $newCellClass='caution-cell';
-                  
+                $newCellClass = standardColor($m['tele_high_score'],$m['tele_high_miss']);
                   //Gradient method
                  /* $calcScore = $m['tele_high_score']*($m['tele_high_score']/$shots);
                   $calcPercent = $calcScore/5;
@@ -218,8 +255,8 @@ class TeamInfoTemplate extends Template {
                   $calcPercent = ($calcPercent<0) ? 0 : $calcPercent;
                   $calcRed = round(155*(1-$calcPercent))+100;
                   $calcGreen = round(155*$calcPercent)+100;
-                   style = 'background: rgb(<?=$calcRed?>,<?=$calcGreen?>,0)'*/
-                }
+                   style = 'background: rgb(<?=$calcRed?>,<?=$calcGreen?>,0)'
+                }*/
                 ///
               ?>
               <td class='<?=$newCellClass?>'><?=$m['tele_high_score']?>/<?=$m['tele_high_score']+$m['tele_high_miss']?></td>
@@ -235,41 +272,7 @@ class TeamInfoTemplate extends Template {
               if($m['tele_low_score']+$m['tele_low_miss']>0){ ?>
               <?php
                 //make the colors for the tele high scoring cell
-                $newCellClass = "normal-cell";
-                $shots =$m['tele_low_score']+$m['tele_low_miss'];
-                if($shots>0){
-                  if($shots>=5)
-                    if($m['tele_low_miss']==0)
-                      $newCellClass='uber-good-cell';
-                    else if($m['tele_low_score']>=4 && $m['tele_low_score']/($m['tele_low_score']+$m['tele_low_miss'])>=.75)
-                      $newCellClass='good-cell';
-                    else if($m['tele_low_score']>=4)
-                      $newCellClass='minor-good-cell';
-                    else if($m['tele_low_score']>=2)
-                      $newCellClass='caution-cell';
-                    else
-                      $newCellClass='uber-bad-cell';
-                  else if($shots>2)
-                    if($m['tele_low_miss']==0)
-                      $newCellClass='good-cell';
-                    else if($m['tele_low_score']>$m['tele_low_miss'])
-                      $newCellClass='minor-good-cell';
-                    else if($m['tele_low_score']==$m['tele_low_miss'])
-                      $newCellClass='caution-cell';
-                    else if($m['tele_low_score']==1)
-                      $newCellClass='bad-cell';
-                    else if($m['tele_low_score']==0)
-                      $newCellClass='uber-bad-cell';
-                    else
-                      $newCellClass='caution-cell';
-                  else
-                    if($m['tele_low_score']==0)
-                      $newCellClass='bad-cell';
-                    else if($m['tele_low_score']==2)
-                      $newCellClass='minor-good-cell';
-                    else
-                      $newCellClass='caution-cell';
-                }
+                $newCellClass = standardColor($m['tele_low_score'],$m['tele_low_miss']);
                 ///
               ?>
               <td class = '<?=$newCellClass?>'><?=$m['tele_low_score']?>/<?=$m['tele_low_score']+$m['tele_low_miss']?></td>
@@ -325,7 +328,13 @@ class TeamInfoTemplate extends Template {
 					<th class="vertical" >Truss Throw</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['truss']+$m['truss_miss']>0){ ?>
-						<td><?=$m['truss']?>/<?=$m['truss']+$m['truss_miss']?></td>
+              <?php
+                //make the colors for the tele high scoring cell
+                $newCellClass = standardColor($m['truss'],$m['truss_miss'])
+                
+                ///
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['truss']?>/<?=$m['truss']+$m['truss_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
@@ -337,7 +346,7 @@ class TeamInfoTemplate extends Template {
             <th class="vertical" >Human Success</td>
             <?php foreach($d['matches'] as $m) { 
               if($m['human_pass']+$m['human_pass_miss']>0){ ?>
-              <td><?=$m['human_pass']?>/<?=$m['human_pass']+$m['human_pass_miss']?></td>
+              <td class = '<?=standardColor($m['human_pass'],$m['human_pass_miss'])?>'><?=$m['human_pass']?>/<?=$m['human_pass']+$m['human_pass_miss']?></td>
               <?php }
               else{ ?>
               <td class="didNotDo">x</td>
@@ -347,7 +356,21 @@ class TeamInfoTemplate extends Template {
 					<th class="vertical" >Catch</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['catch']+$m['catch_miss']>0){ ?>
-						<td><?=$m['catch']?>/<?=$m['catch']+$m['catch_miss']?></td>
+            <?php
+                //make the colors for the tele high scoring cell
+                $newCellClass = "normal-cell";
+                $shots =$m['catch']+$m['catch_miss'];
+                if($m['catch']>=3)
+                  $newCellClass='uber-good-cell';
+                else if($m['catch']==2)
+                  $newCellClass='good-cell';
+                else if($m['catch']==1)
+                  $newCellClass='minor-good-cell';
+                else
+                  $newCellClass='caution-cell';
+                ///
+              ?>
+						<td class = '<?=$newCellClass?>'><?=$m['catch']?>/<?=$m['catch']+$m['catch_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
@@ -395,7 +418,7 @@ class TeamInfoTemplate extends Template {
             <th class="vertical" >To Robot</td>
             <?php foreach($d['matches'] as $m) { 
               if($m['robot_pass']+$m['robot_pass_miss'] > 0){ ?>
-              <td><?=$m['robot_pass']?>/<?=$m['robot_pass']+$m['robot_pass_miss']?></td>
+              <td class = '<?=standardColor($m['robot_pass'],$m['robot_pass_miss'])?>'><?=$m['robot_pass']?>/<?=$m['robot_pass']+$m['robot_pass_miss']?></td>
               <?php }
               else{ ?>
               <td class="didNotDo">x</td>
@@ -443,7 +466,7 @@ class TeamInfoTemplate extends Template {
 					<th class="vertical" >Direct Human</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['human_load']+$m['human_load_miss']>0){ ?>
-						<td><?=$m['human_load']?>/<?=$m['human_load']+$m['human_load_miss']?></td>
+						<td class = '<?=standardColor($m['human_load'],$m['human_load_miss'])?>'><?=$m['human_load']?>/<?=$m['human_load']+$m['human_load_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
@@ -454,7 +477,7 @@ class TeamInfoTemplate extends Template {
 					<th class="vertical" >Floor Pickup</td>
 					<?php foreach($d['matches'] as $m) { 
 					  if($m['floor_load']+$m['floor_load_miss']>0){ ?>
-						<td><?=$m['floor_load']?>/<?=$m['floor_load']+$m['floor_load_miss']?></td>
+						<td class = '<?=standardColor($m['floor_load'],$m['floor_load_miss'])?>'><?=$m['floor_load']?>/<?=$m['floor_load']+$m['floor_load_miss']?></td>
 					  <?php }
 					  else{ ?>
 						<td class="didNotDo">x</td>
@@ -500,13 +523,20 @@ class TeamInfoTemplate extends Template {
 				  <tr>
 					<th class="vertical" >Other Possessions</td>
 					<?php foreach($d['matches'] as $m) { ?> 
-						<td><?=$m['other_possess']?></td>
+						<td class = '<?=standardColor($m['other_possess'],0)?>'><?=$m['other_possess']?></td>
 					<?php } ?>
 				  </tr>
 				  <tr>
             <th class="vertical" >Dropped Balls</td>
             <?php foreach($d['matches'] as $m) { ?> 
-              <td><?=$m['dropped_balls']?></td>
+              <?php
+                $newCellClass = "normal-cell";
+                if($m['dropped_balls']>=2)
+                  $newCellClass='uber-good-cell';
+                else if($m['dropped_balls']==1)
+                  $newCellClass='bad-cell';
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['dropped_balls']?></td>
              <?php } ?>
 				  </tr>
 				</table>
@@ -549,21 +579,36 @@ class TeamInfoTemplate extends Template {
             </thead>
             <tr>
               <th class="vertical" >Time Defending</td>
-              <?php foreach($d['matches'] as $m) { ?>
-                <td>
+              <?php foreach($d['matches'] as $m) { 
+                $newCellClass = "normal-cell";
+                switch($m['tele_defense_time']){ 
+                    case 1:
+                      $newCellClass = "minor-caution-cell";
+                      break;
+                    case 2:
+                      $newCellClass = "minor-good-cell";
+                      break;
+                    case 3:
+                      $newCellClass = "good-cell";
+                      break; 
+                }?>
+                <td class = '<?=$newCellClass?>'>
                    <?php switch($m['tele_defense_time']){ 
                     case 0: ?>
                       0%
                       <?php break;
                     case 1: ?>
                       <25%
-                      <?php break;
+                      <?php $newCellClass = "minor-caution-cell";
+                      break;
                     case 2: ?>
                       ~50%
-                      <?php break;
+                      <?php $newCellClass = "minor-good-cell";
+                      break;
                     case 3: ?>
                       >75%
-                    <?php break; ?>
+                    <?php $newCellClass = "good-cell";
+                    break; ?>
                 <?php } ?>
                 </td>
               <?php } ?>
@@ -572,7 +617,7 @@ class TeamInfoTemplate extends Template {
               <th class="vertical" >Defense Rating</td>
                 <?php foreach($d['matches'] as $m) { 
                    if($m['defense_rating']>0){ ?>
-                    <td><?=$m['defense_rating']?></td>
+                    <td class = '<?=ratingsColor($m['defense_rating'])?>'><?=$m['defense_rating']?></td>
                     <?php }
                     else{ ?>
                     <td class="">N/A</td>
@@ -583,7 +628,14 @@ class TeamInfoTemplate extends Template {
             <tr>
               <th class="vertical" >Balls Blocked</td>
                 <?php foreach($d['matches'] as $m) { ?> 
-                  <td><?=$m['tele_block']?></td>
+                  <?php
+                    $newCellClass = "normal-cell";
+                    if($m['tele_block']>=2)
+                      $newCellClass='uber-good-cell';
+                    else if($m['catch']==1)
+                      $newCellClass='good-cell';
+                  ?>
+                  <td class = '<?=$newCellClass?>'><?=$m['tele_block']?></td>
                 <?php } ?>
               </tr>
             <tr>
@@ -591,7 +643,7 @@ class TeamInfoTemplate extends Template {
               <th class="vertical" >Driving</td>
                 <?php foreach($d['matches'] as $m) { 
                    if($m['driving_rating']>0){ ?>
-                    <td><?=$m['driving_rating']?></td>
+                    <td class = '<?=ratingsColor($m['driving_rating'])?>'><?=$m['driving_rating']?></td>
                     <?php }
                     else{ ?>
                     <td class="">N/A</td>
@@ -603,7 +655,7 @@ class TeamInfoTemplate extends Template {
               <th class="vertical" >Pushing</td>
                 <?php foreach($d['matches'] as $m) { 
                    if($m['pushing_rating']>0){ ?>
-                    <td><?=$m['pushing_rating']?></td>
+                    <td class = '<?=ratingsColor($m['pushing_rating'])?>'><?=$m['pushing_rating']?></td>
                     <?php }
                     else{ ?>
                     <td class="">N/A</td>
@@ -652,26 +704,50 @@ class TeamInfoTemplate extends Template {
 				  </thead>
 				  <tr>
             <th class="vertical" >Tipped</td>
-            <?php foreach($d['matches'] as $m) { ?> 
-              <td><?=$m['tipped']?></td>
+            <?php foreach($d['matches'] as $m) { ?>
+              <?php
+                $newCellClass = "normal-cell";
+                if($m['tipped']>=1)
+                  $newCellClass='bad-cell';
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['tipped']?></td>
              <?php } ?>
 				  </tr>
           <tr>
             <th class="vertical" >Mech. Failure</td>
             <?php foreach($d['matches'] as $m) { ?> 
-              <td><?=$m['broke_down']?></td>
+              <?php
+                $newCellClass = "normal-cell";
+                if($m['broke_down']>=1)
+                  $newCellClass='bad-cell';
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['broke_down']?></td>
              <?php } ?>
 				  </tr>
           <tr>
             <th class="vertical" >Lost Com</td>
             <?php foreach($d['matches'] as $m) { ?> 
-              <td><?=$m['lost_comms']?></td>
+              <?php
+                $newCellClass = "normal-cell";
+                if($m['lost_comms']>=1)
+                  $newCellClass='bad-cell';
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['lost_comms']?></td>
              <?php } ?>
 				  </tr>
           <tr>
             <th class="vertical" >Fouls(normal/tech)</td>
-            <?php foreach($d['matches'] as $m) { ?> 
-              <td><?=$m['fouls']?> / <?=$m['tech_fouls']?></td>
+            <?php foreach($d['matches'] as $m) { ?>
+              <?php
+                $newCellClass = "normal-cell";
+                if($m['tech_fouls']*2+$m['fouls']>=4)
+                  $newCellClass='uber-bad-cell';
+                else if($m['tech_fouls']>=1||$m['fouls']>=2)
+                  $newCellClass='bad-cell';
+                else if($m['fouls']>=1)
+                  $newCellClass='caution-cell';
+              ?>
+              <td class = '<?=$newCellClass?>'><?=$m['fouls']?> / <?=$m['tech_fouls']?></td>
              <?php } ?>
 				  </tr>
 				</table>
