@@ -10,6 +10,8 @@ class TeamInfoTemplate extends Template {
   $d = $this->data['data'];
   ?>
   <?php
+    //Function that returns a CSS class for a td that colors cells based off of successes and failures of something.
+    //mostly intended for use when their is potential for one success per cycle.
     function standardColor($success,$fails){
       $shots =$success+$fails;
       if($shots>0){
@@ -47,6 +49,7 @@ class TeamInfoTemplate extends Template {
         return "normal-cell";
       }
     }
+    //Function that returns a CSS class for a td that colors cells based off of a 1-9 rating
     function ratingsColor($rating){
       switch($rating){
         case 1:
@@ -88,8 +91,9 @@ class TeamInfoTemplate extends Template {
     <br>
     <a href="<?='/team_pics/' . $d['team_number'] . '.jpg' ?>" target="_blank">Robot Image Pic</a>
     <br>
-  <?php } ?>
+  <?php }?>
   <br>
+  
   <div class="info-bar-holder">
 	<div class="bar-group">
 		<div class="info-bar" id="auto-bar">
