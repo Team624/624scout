@@ -163,7 +163,6 @@ class DatabaseModel {
       return $ret;
     }
     
-    
     public function setSchedule($schedule) {
       self::$conn->beginTransaction();
       $dropState = self::$conn->prepare('DELETE FROM schedule');
@@ -248,7 +247,13 @@ class DatabaseModel {
       return $data;
       
     }
-    
+    public function getRegionalAverages(){
+      $fileRoot = $GLOBALS['fileRoot'];
+      self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
+      $sql = file_get_contents($fileRoot . 'regionalAvergesQuery.sql');
+      $query = self::$conn->prepare($sql);
+      
+    }
     public function getAllTeamData() {
       $fileRoot = $GLOBALS['fileRoot'];
       $sql = file_get_contents($fileRoot . 'TeamsQuery.sql');

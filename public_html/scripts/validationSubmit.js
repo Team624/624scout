@@ -8,7 +8,7 @@ $(document).ready(function() {
     $.post('/?controller=loginer&action=login', $('#password').val(), function(dat) {
       window.setTimeout(function() {
         location.reload(true); 
-      }, 10);
+      }, 500);
     }).fail(function(dat) {
       alertify.error(dat.responseText);
       console.log(dat.responseText);

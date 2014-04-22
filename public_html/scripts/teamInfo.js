@@ -17,6 +17,8 @@ function loadTeamInfo(){
 var team = $('#searchTeam').val();
     $.get('/?controller=teamInfo&action=getInfo&team='+team, function(res) {
       $('#teamDisplay').html(res);
+      var stateObj = { pageTeam: team };
+      history.pushState(stateObj, "loadTeam", "?controller=teamInfo&action=display&team="+team);
       swipeifyStuff();
     }).fail(function(res) {
       alertify.error(res);
@@ -25,7 +27,7 @@ var team = $('#searchTeam').val();
 function swipeifyStuff(){
  /* var hammer_options = {swipe_velocity: 0.4};
 
-    new Hammer($('.info-bar'), { drag_lock_to_axis: true }).on("dragleft dragright swipeleft swiperight", function(ev){
+    new Hammer($('.info-bar:not(.no-stuff)'), { drag_lock_to_axis: true }).on("dragleft dragright swipeleft swiperight", function(ev){
   //  alert(ev.type);
   //  alert(ev.gesture.deltaX);
       if($('#auto-gippies').css('display') != "none"){

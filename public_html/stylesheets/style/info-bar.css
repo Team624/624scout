@@ -105,7 +105,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b9b9b', end
     border-bottom-right-radius: 0px;
 }
 .matchByMatch th{
-  background: #BDB;
+  background: #CCC;
   text-align:center;
 }
 .matchByMatch  th.vertical {
@@ -131,4 +131,36 @@ tr.spacer-row{
 }
 .no-stuff.info-bar .info-title{
   font-size:20px;
+}
+td.minor-caution-cell{
+  background: #BB6;
+}
+td.caution-cell{
+  background: #EE7;
+}
+td.good-cell{
+  background: #6E6;
+}
+td.minor-good-cell{
+  background: #9B7;
+}
+td.uber-good-cell{
+  background: #0F0;
+}
+td.bad-cell{
+  background: #E77;
+}
+td.blue-cell{
+  background: #0AF;
+}
+td.purple-cell{
+  background: #F0F;
+}
+td.hotGoal-cell{
+  /*text-decoration:underline;*/
+  box-shadow: inset 0 0 0px 2px #FF0;
+  /*color:yellow;*/
+}
+td.uber-bad-cell{
+  background: #F00;
 }
