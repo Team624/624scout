@@ -27,7 +27,7 @@ var team = $('#searchTeam').val();
 function swipeifyStuff(){
   var hammer_options = {swipe_velocity: 0.4};
 
-    new Hammer($('.info-bar'), { drag_lock_to_axis: true }).on("dragleft dragright swipeleft swiperight", function(ev){
+    new Hammer($('.info-bar:not(.no-stuff)'), { drag_lock_to_axis: true }).on("dragleft dragright swipeleft swiperight", function(ev){
   //  alert(ev.type);
   //  alert(ev.gesture.deltaX);
       if($('#auto-gippies').css('display') != "none"){
