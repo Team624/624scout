@@ -674,10 +674,12 @@ class TeamInfoTemplate extends Template {
  <hr>
    <div class="box">
     <?php foreach($d['notes'] as $note) { ?>
+       
+        <div class="note box">
         <?php if (isset($note['match_number'])) { ?>
-          <?= $note['match_number']?>:
+         <span class="note-match box">Q<?= $note['match_number']?>:</span>
         <?php } ?>
-        <div class="note box"><?= $note['text'] ?></div>
+        <?= $note['text'] ?></div>
     <?php } ?>
    </div>
  <br>

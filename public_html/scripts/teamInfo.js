@@ -39,6 +39,7 @@ function swipeifyStuff(){
       }
     });*/
     $('.info-bar').click(function() {
+      if($('#auto-gippies').css('display') == 'none') return;
       if($(this).hasClass('onSec2')) {
         changeInfoBar(this, 1);
       } else {
