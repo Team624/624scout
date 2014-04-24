@@ -1,6 +1,6 @@
 <?php
 class FmsModel {
-  public static $EVENT_CODE = 'txho';
+  public static $EVENT_CODE = 'Curie';
   public static $trimFields = [
     'QS','assist','auto','trussCatch','teleop'
   ];
