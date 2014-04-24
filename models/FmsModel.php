@@ -32,7 +32,11 @@ class FmsModel {
       }
       $i++;
     }
-    return $rankings;
+    $ret = [];
+    $ret['rankings'] = $rankings;
+    $ret['lastPlayed'] = $rows->item(0)->nodeValue;
+ //   echo var_dump($ret);
+    return $ret;
   }
   
   public function getResults() {
