@@ -34,7 +34,7 @@ class FmsModel {
     }
     $ret = [];
     $ret['rankings'] = $rankings;
-    $ret['lastPlayed'] = $rows->item(0)->nodeValue;
+    $ret['lastPlayed'] = 'Current Match: ' . (intval(substr($rows->item(0)->nodeValue, 25))+1);
  //   echo var_dump($ret);
     return $ret;
   }
