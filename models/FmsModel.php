@@ -1,6 +1,6 @@
 <?php
 class FmsModel {
-  public static $EVENT_CODE = 'txho';
+  public static $EVENT_CODE = 'Curie';
   public static $trimFields = [
     'QS','assist','auto','trussCatch','teleop'
   ];
@@ -32,7 +32,11 @@ class FmsModel {
       }
       $i++;
     }
-    return $rankings;
+    $ret = [];
+    $ret['rankings'] = $rankings;
+    $ret['lastPlayed'] = 'Current Match: ' . (intval(substr($rows->item(0)->nodeValue, 25))+1);
+ //   echo var_dump($ret);
+    return $ret;
   }
   
   public function getResults() {
