@@ -2,6 +2,7 @@
 
 class SubmitController extends Controller {
   public function submit() {
+    if(isset($_SESSION['nNAndE']) && $_SESSION['nNAndE']==FALSE){
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     /*error_log(var_dump($obj),3,"c:/wamp/logs/php_error.log");*/
@@ -18,9 +19,14 @@ class SubmitController extends Controller {
       }
       (new ErrorView(500, 'Internal Server Error', $msg))->render();
     }
+    }
+    else{ 
+    (new ErrorView(500, 'request can not be processed at this time'))->render();
+    }
   }
   
   public function update() {
+    if(isset($_SESSION['nNAndE']) && $_SESSION['nNAndE']==FALSE){
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     /*ob_start();
@@ -39,5 +45,9 @@ class SubmitController extends Controller {
       }
       (new ErrorView(500, 'Internal Server Error', $msg))->render();
     }
+    }
+    else{
+    (new ErrorView(500, 'request can not be processed at this time'))->render();
+    } 
   }
 }?>

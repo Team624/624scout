@@ -767,6 +767,7 @@ class TeamInfoTemplate extends Template {
     <?php } ?>
 	  </div>
 	</div>
+  <?php if(isset($_SESSION['nNAndE']) && $_SESSION['nNAndE']==FALSE){ ?>
  <div class="sec-title"> Notes </div>
  <hr>
    <div class="box">
@@ -778,6 +779,7 @@ class TeamInfoTemplate extends Template {
     <?php } ?>
    </div>
  <br>
+ <?php } ?>
 <br>
    <div class="sec-title"> Raw Data </div>
     <hr>
