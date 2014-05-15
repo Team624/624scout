@@ -22,8 +22,8 @@ class MenuTemplate extends Template {
           <?php if(isset($_SESSION['setup']) && $_SESSION['setup']==TRUE){ ?>
             <?php if(isset($_SESSION['nNAndE']) && $_SESSION['nNAndE']==FALSE){ ?>
               <li><a href="/?controller=setup&amp;action=display">Setup</a></li>
-              <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
             <?php } ?>
+            <li><a href="/?controller=page&amp;action=rawData">Raw Data</a></li>
           <?php } ?>
           <?php if(isset($_SESSION['entry']) && $_SESSION['entry']==TRUE){ ?>
             <li><a href="/?controller=page&amp;action=noteEntry">Note Entry</a></li>
