@@ -56,11 +56,19 @@ else{
         $_SESSION['valid'] = TRUE;
         $_SESSION['entry'] = FALSE;
         $_SESSION['setup'] = FALSE;
+         $_SESSION['nNAndE'] = FALSE;
         break;
       case Session::$entererCookieCode:
         $_SESSION['valid'] = TRUE;
         $_SESSION['entry'] = TRUE;
         $_SESSION['setup'] = TRUE;
+        $_SESSION['nNAndE'] = FALSE;
+        break;
+      case Session::$pubVCookieCode:
+        $_SESSION['valid'] = TRUE;
+        $_SESSION['entry'] = TRUE;
+        $_SESSION['setup'] = TRUE;
+        $_SESSION['nNAndE'] = TRUE;
         break;
     }
   }
