@@ -35,7 +35,7 @@ class RankingsView extends PageView {
     $lastQS = 0;
     $odd = false;
     $ourAssist = 0;
-    foreach($rankings as &$rank) { //break up alternating QS values and find 624's assist
+    foreach($rankings['rankings'] as &$rank) { //break up alternating QS values and find 624's assist
       if($rank['QS'] !== $lastQS) {
        $odd = !$odd;
       }
@@ -45,12 +45,12 @@ class RankingsView extends PageView {
       if($rank['team'] == 624) $ourAssist = $rank['assist'];
     }
     $maxPlayed = 0;
-    foreach($rankings as &$rank) { //find the highest num of matches played
+    foreach($rankings['rankings'] as &$rank) { //find the highest num of matches played
       if($rank['played'] > $maxPlayed) {
         $maxPlayed = $rank['played'];
       }
     }
-    foreach($rankings as &$rank) { //find teams that have played fewer than max matches
+    foreach($rankings['rankings'] as &$rank) { //find teams that have played fewer than max matches
       if($rank['played'] < $maxPlayed) {
         $rank['lessThanMax'] = true;
       } else {
@@ -58,7 +58,8 @@ class RankingsView extends PageView {
       }
     }
     $template = new RankingsTemplate();
-    $template->set('rankings', $rankings);
+    $template->set('rankings', $rankings['rankings']);
+    $template->set('lastPlayed', $rankings['lastPlayed']);
     $template->set('624assist', $ourAssist);
     $template->render();
   }

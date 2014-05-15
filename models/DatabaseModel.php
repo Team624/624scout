@@ -130,6 +130,12 @@ class DatabaseModel {
       FROM schedule
       LEFT JOIN match_data ON match_data.match_number = schedule.match_number
       GROUP BY schedule.match_number";
+      /*
+      R1.name,
+        R2.name
+      INNER JOIN teams AS R1 ON schedule.red_1 = teams.number
+      INNER JOIN teams AS R2 ON schedule.red_2 = teams.number
+      */
       $stmt = self::$conn->prepare($sql);
       $stmt->execute();
       $res = $stmt->fetchAll(PDO::FETCH_ASSOC);

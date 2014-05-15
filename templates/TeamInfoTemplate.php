@@ -87,9 +87,9 @@ class TeamInfoTemplate extends Template {
     Team <?=$this->data['team']?> - <?=$d['name']?>
    </div>
   <div> <b><?=$d['matches_played']?></b> matches actually played, <b><?=$d['no_show']?></b> no-shows </div>
-    <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.jpg')) { ?>
+    <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/team_pics/' . $d['team_number'] . '.JPG')) { ?>
     <br>
-    <a href="<?='/team_pics/' . $d['team_number'] . '.jpg' ?>" target="_blank">Robot Image Pic</a>
+    <a href="<?='/team_pics/' . $d['team_number'] . '.JPG' ?>" target="_blank">Robot Image Pic</a>
     <br>
   <?php }?>
   <br>

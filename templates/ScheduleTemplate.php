@@ -4,11 +4,13 @@ class ScheduleTemplate extends Template {
 
   public function __construct() {
     $this->keys[]='schedule';
+    $this->keys[]='lastPlayed';
   }
   public function render() {
   $s = $this->data['schedule'];
   ?>
    Match Schedule
+   <div><?=$this->data['lastPlayed']?></div>
    <div class="schedule-holder">
      <table class="schedule">
     <tr>

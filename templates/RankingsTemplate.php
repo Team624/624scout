@@ -5,9 +5,11 @@ class RankingsTemplate extends Template {
   public function __construct() {
     $this->keys[] = 'rankings';
     $this->keys[] = '624assist';
+    $this->keys[] = 'lastPlayed';
   }
   public function render() { ?>
     Rankings
+    <div><?=$this->data['lastPlayed']?></div>
     <table class="rankings">
       <tr>
         <th>Seed</th>
