@@ -64,4 +64,9 @@ class FmsModel {
     }
     return $results;
   }
+  
+  public function getLastMatchPlayed() {
+    $results = getResults();
+    
+  }
 }

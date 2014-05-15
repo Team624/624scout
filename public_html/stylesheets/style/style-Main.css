@@ -243,7 +243,12 @@ input.num {
   background-color:#d8d8d8;
 }
 .note.box {
-  display: inline-block;
+  display: block;
+}
+.note-match {
+  background: #ecc;
+  padding: 2px;
+  margin: 0;
 }
 .cycle.form-row {
   display: inline-block;
@@ -547,4 +552,8 @@ input.password{
   bottom: 50px;
   text-align: center;
 }
-
+.championSwag{
+  
+  font-size:30px;
+  color: rgb(06,240,00);
+}
