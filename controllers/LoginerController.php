@@ -25,7 +25,7 @@ class LoginerController extends Controller {
       $_SESSION['setup'] = TRUE;
 	    $_SESSION['nNAndE'] = TRUE;
       setcookie("youReal", Session::$pubVCookieCode, time()+259200);
-      (new ErrorView(200, 'OK', 'Login'))->render();
+      (new ErrorView(200, 'Error', 'Notice'))->render();
     }
     else{
       (new ErrorView(500, 'Error', "Incorrect Password"))->render();
