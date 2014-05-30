@@ -19,13 +19,13 @@ class LoginerController extends Controller {
       setcookie("youReal", Session::$entererCookieCode, time()+259200);
       (new ErrorView(200, 'OK', 'Login'))->render();
     }
-    else if($pw=="624pubV"){
+    else if($pw=="public"){
       $_SESSION['valid'] = TRUE;
       $_SESSION['entry'] = TRUE;
       $_SESSION['setup'] = TRUE;
 	    $_SESSION['nNAndE'] = TRUE;
       setcookie("youReal", Session::$pubVCookieCode, time()+259200);
-      (new ErrorView(200, 'Error', "It is working"))->render();
+      (new ErrorView(500, 'Error', "It is wokring"))->render();
     }
     else{
       (new ErrorView(500, 'Error', "Incorrect Password"))->render();
