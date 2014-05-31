@@ -12,6 +12,9 @@ $(document).ready(function() {
     }).fail(function(dat) {
       alertify.error(dat.responseText);
       console.log(dat.responseText);
+      window.setTimeout(function() {
+        location.reload(true); 
+      }, 100);
       $('#password').val('');
       
     });
