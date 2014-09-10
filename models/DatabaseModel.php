@@ -305,13 +305,6 @@ class DatabaseModel {
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function getRawCycleData() {
-      $sql = 'SELECT cycles.* FROM cycles INNER JOIN match_data ON match_data.id = cycles.match_data_id ORDER BY match_number';
-      $query = self::$conn->prepare($sql);
-     // $query->bindValue(':team', $team);
-      $query->execute();
-      return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function submitNote($data) {
       $sql = 'INSERT INTO notes (team, text) VALUES (:team, :text)';
